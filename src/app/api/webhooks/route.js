@@ -1,6 +1,6 @@
 import { Webhook } from 'svix';
 import { headers } from 'next/headers';
-import { createOrUpdateUser, deleteUser } from '@/utils/actions/user';
+import { createOrUpdateUser, deleteUser } from '../../../utils/actions/user';
 
 export async function POST(req) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the endpoint
