@@ -1,0 +1,31 @@
+*{
+  @apply box-border
+}
+
+body{
+  @apply m-0 p-0
+}
+
+h1, h2, h3, h4, h5, h6{
+  @apply font-sora m-0
+}
+
+h1{
+  font-size: 32px;
+}
+h2{
+  font-size: 28px;
+}
+h3{
+  font-size: 24px;
+}
+p,span{
+  @apply mt-0
+}
+.text_gradient{
+  @apply bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 text-transparent bg-clip-text
+}
+
+a{
+  @apply no-underline
+}
