@@ -1,31 +1,162 @@
-*{
+/* btn-theme for theme buttons
+btn-theme-outline for theme buttons with outline
+badge-theme for badges
+badge-theme-sm for small badges
+invert-gray-text for grayy text
+border-theme for border color
+bg-invert for background color */
+
+
+
+
+
+* {
   @apply box-border
 }
 
-body{
+html {
+  transition: all 0.3s ease;
+}
+
+[data-theme="dark"] {
+  transition: all 0.3s ease;
+}
+
+body {
   @apply m-0 p-0
 }
 
-h1, h2, h3, h4, h5, h6{
-  @apply font-sora m-0
+h1, h2, h3, h4, h5, h6 {
+  @apply m-0 dark:text-supernova-400 text-cgreen-500 font-sora
 }
 
-h1{
+
+
+
+
+h1 {
   font-size: 32px;
 }
-h2{
+
+h2 {
   font-size: 28px;
 }
-h3{
+
+h3 {
   font-size: 24px;
 }
-p,span{
+
+p,
+span {
   @apply mt-0
 }
-.text_gradient{
+
+.text_gradient {
   @apply bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 text-transparent bg-clip-text
 }
 
-a{
-  @apply no-underline
+a {
+  @apply no-underline text-gray-700 dark:text-gray-200
+}
+
+img {
+  @apply max-w-full object-cover h-auto
+}
+
+.head_title {
+  @apply flex justify-between items-center py-12 relative
+}
+
+.bg-invert {
+  @apply bg-white dark:bg-base-200 text-cgreen-500 dark:text-supernova-400
+}
+
+.head_title h1 {
+  @apply uppercase
+}
+
+.border-theme {
+  @apply border-cgreen-500 dark:border-supernova-400
+}
+
+
+[data-theme="light"] {
+  --background-image: url("/assets/gridlight.svg");
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --background-image: url("/assets/griddark.svg");
+}
+
+.main {
+  width: 100vw;
+  min-height: 100vh;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  padding: 120px 24px 160px 24px;
+  pointer-events: none;
+}
+
+
+.main:after {
+  content: "";
+  background-image: var(--background-image);
+  z-index: 1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  opacity: 0.1;
+  filter: invert(1);
+}
+
+.gradient {
+  height: fit-content;
+  z-index: 3;
+  width: 100%;
+  max-width: 640px;
+  background-image: radial-gradient(at 27% 37%,
+      hsla(215, 98%, 61%, 1) 0px,
+      transparent 0%),
+    radial-gradient(at 97% 21%, hsla(125, 98%, 72%, 1) 0px, transparent 50%),
+    radial-gradient(at 52% 99%, hsla(354, 98%, 61%, 1) 0px, transparent 50%),
+    radial-gradient(at 10% 29%, hsla(256, 96%, 67%, 1) 0px, transparent 50%),
+    radial-gradient(at 97% 96%, hsla(38, 60%, 74%, 1) 0px, transparent 50%),
+    radial-gradient(at 33% 50%, hsla(222, 67%, 73%, 1) 0px, transparent 50%),
+    radial-gradient(at 79% 53%, hsla(343, 68%, 79%, 1) 0px, transparent 50%);
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  filter: blur(100px) saturate(150%);
+  top: 80px;
+  opacity: 0.15;
+}
+
+/* .cl-button__signOut{
+  @apply !hidden;
+} */
+
+.invert-gray-text {
+  @apply text-gray-600 dark:text-gray-300
+}
+
+.btn-theme {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors dark:focus:ring-supernova-300 focus:ring-cgreen-300 bg-cgreen-500 text-gray-100 dark:text-gray-700 dark:bg-supernova-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 relative hover:bg-green-800 h-10 px-4 py-2
+}
+
+.btn-theme-outline {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors dark:focus:ring-supernova-300 focus:ring-cgreen-300 bg-transparent text-cgreen-500 dark:text-supernova-400 dark:bg-transparent focus-visible:outline-none focus-visible:ring-2 border border-cgreen-400 dark:border-supernova-400 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 relative hover:bg-green-800 dark:hover:bg-supernova-400 hover:text-gray-100 dark:hover:text-gray-700 h-10 px-4 py-2
+}
+
+.badge-theme {
+  @apply text-sm text-primary font-medium tracking-tight bg-primary/10 px-4 py-2 rounded-full
+}
+.badge-error{
+  @apply text-sm text-red-600 font-medium tracking-tight bg-red-700/10 px-4 py-2 rounded-full
+}
+.badge-theme-sm {
+  @apply text-sm text-primary font-medium tracking-tight bg-primary/10 px-2 py-1 rounded-full mb-2 inline-block
 }

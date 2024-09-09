@@ -13,12 +13,12 @@ export const connect = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URI, {
       dbName: 'next-store',
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
     });
     console.log('MongoDB connected');
     initialized = true;
   } catch (error) {
-    console.log('MongoDB connection error:', error);
+    console.error('MongoDB connection error:', error);
+    console.error('Connection string:', process.env.MONGODB_URI);
+    throw error; // Re-throw the error to be caught by the calling function
   }
 };
