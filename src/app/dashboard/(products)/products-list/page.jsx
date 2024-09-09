@@ -16,12 +16,15 @@ export default async function Products({ searchParams }) {
 	return (
 		<div>
 			<Breadcrumbs base="Dashboard" parent="Products" parentLink="" child="" />
-			<Title title="Products List" />
+			<div className="flex justify-between items-center">
+				<Title title="Products List" />
+				<Link className="btn-theme" href={"/dashboard/add-product"}>Add new product</Link>
+			</div>
 			<Search placeholder="Search for a product..." count={count} />
 			<div className="overflow-x-auto">
 				<table className="table">
 					{/* head */}
-					<thead>
+					<thead className="bg-invert">
 						<tr>
 							<th>
 								<label>

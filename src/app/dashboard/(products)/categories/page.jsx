@@ -149,10 +149,10 @@ export default function Categories() {
 				</Button>
 			</div>
 
-			<div className="overflow-x-auto">
+			<div className="overflow-x-auto container mx-auto">
 				<table className="table">
 					{/* head */}
-					<thead>
+					<thead className="bg-invert">
 						<tr>
 							<th>
 								<label>
