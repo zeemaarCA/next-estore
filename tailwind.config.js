@@ -91,6 +91,6 @@ module.exports = {
 
 		},
   },
-  plugins: [require("@tailwindcss/typography"), require("daisyui"), require("tailwindcss-animate")],
+  plugins: [require("@tailwindcss/typography"), require("daisyui")],
 };
 
