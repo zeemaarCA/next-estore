@@ -50,8 +50,8 @@ export default function AddToCartButton({
 			});
 
 			const data = await res.json();
-			console.log("data", data);
-			console.log(newProduct);
+			// console.log("data", data);
+			// console.log(newProduct);
 
 			if (res.ok) {
 				if (newProduct) {
@@ -83,7 +83,6 @@ export default function AddToCartButton({
 			{loading ? (
 				<>
 					<span className="loading loading-spinner"></span>
-					Loading...
 				</>
 			) : added ? (
 				<>

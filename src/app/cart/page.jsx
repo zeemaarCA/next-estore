@@ -6,9 +6,13 @@ export const metadata = {
 import { auth } from "@clerk/nextjs/server";
 import CartPage from "@components/cart/CartPage";
 import { fetchCart } from "@utils/actions/data";
+import { redirect } from "next/navigation";
 
 export default async function Cart() {
 	const { userId } = auth();
+	if (!userId) {
+		redirect("/");
+	}
 	try {
 		const cartfromserver = await fetchCart(userId);
 		if (!cartfromserver) {
@@ -18,7 +22,7 @@ export default async function Cart() {
 		return (
 			<>
 				{cartfromserver === null ? (
-					<div className="container mx-auto mt-10">
+					<div className="container mx-auto px-4 mt-10">
 						<div className="flex justify-center">
 							<h1 className="font-semibold text-2xl">Your cart is empty</h1>
 						</div>

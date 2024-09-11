@@ -21,8 +21,8 @@ export default async function Products({ searchParams }) {
 				<Link className="btn-theme" href={"/dashboard/add-product"}>Add new product</Link>
 			</div>
 			<Search placeholder="Search for a product..." count={count} />
-			<div className="overflow-x-auto">
-				<table className="table">
+			<div className="overflow-x-auto rounded-lg">
+				<table className="table border border-gray-200 dark:border-gray-700">
 					{/* head */}
 					<thead className="bg-invert">
 						<tr>
@@ -39,7 +39,7 @@ export default async function Products({ searchParams }) {
 							<th>Actions</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody className="bg-white dark:bg-base-100">
 						{products.map((product) => (
 							<tr key={product.id} className="hover">
 								<th>
@@ -72,7 +72,7 @@ export default async function Products({ searchParams }) {
 								<td className="flex relative top-[9px] gap-1 flex-nowrap">
 									<Link
 										href={`/dashboard/update-product/${product.id}`}
-										className="btn btn-accent btn-sm"
+										className="btn btn-secondary btn-sm"
 									>
 										Edit
 									</Link>

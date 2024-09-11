@@ -7,16 +7,18 @@ import Products from "@components/Products";
 import { fetchSiteProducts } from "@utils/actions/data";
 
 export default async function Home() {
-  // Fetch products data
-  const {plainProducts} = await fetchSiteProducts();
+	// Fetch products data
+	const { plainProducts } = await fetchSiteProducts();
 
-  return (
-    <>
-      <Hero />
-      <Categories />
-      <Products products={plainProducts} />
-      <About />
-      <Blogs />
-    </>
-  );
+	return (
+		<>
+			<div className="container mx-auto px-4">
+				<Hero />
+				<Categories />
+				<Products products={plainProducts} />
+				<About />
+				<Blogs />
+			</div>
+		</>
+	);
 }

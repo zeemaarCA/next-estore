@@ -19,9 +19,6 @@ export const GET = async (request, { params }) => {
 export const PATCH = async (request, { params }) => {
     const { name, price, category, isAvailable, productImage, description } = await request.json();
 
-    console.log("Request Body:", { name, price, category, isAvailable, productImage, description });
-    console.log("Request Params:", params.id);
-
     try {
         await connect();
 

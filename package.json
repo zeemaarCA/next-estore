@@ -12,6 +12,7 @@
   "dependencies": {
     "@clerk/nextjs": "^5.3.7",
     "@clerk/themes": "^2.1.25",
+    "@react-google-maps/api": "^2.19.3",
     "@reduxjs/toolkit": "^2.2.7",
     "clsx": "^2.1.1",
     "firebase": "^10.13.1",

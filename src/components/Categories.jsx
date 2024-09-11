@@ -9,17 +9,17 @@ import SectionTitle from "./SectionTitle";
 export default function Categories() {
 	return (
 		<>
-			<div className="container mx-auto my-8 px-8 md:px-0">
+			<div className="">
 				<SectionTitle
 					title="Categories"
 					linkText="Show more"
 					link="/categories"
 				/>
-				<div className="grid grid-cols-12 gap-4">
-					<div className="relative col-span-12 sm:col-span-6 lg:col-span-4">
+				<div className="grid grid-cols-12 grid-rows-6 gap-4">
+					<div className="relative col-span-12 sm:col-span-6 lg:col-span-6 lg:row-span-6 h-[350px] lg:h-[720px]">
 						<Link href="/shop">
 							<Image
-								className="w-full rounded-md h-[350px]"
+								className="w-full rounded-md h-full"
 								src={carpet}
 								alt="carpet"
 								width={300}
@@ -31,7 +31,7 @@ export default function Categories() {
 							</div>
 						</Link>
 					</div>
-					<div className="relative col-span-12 sm:col-span-6 lg:col-span-4">
+					<div className="relative col-span-12 sm:col-span-6 lg:col-span-6 lg:row-span-3 lg:col-start-7">
 						<Link href="/shop">
 							<Image
 								className="w-full rounded-md h-[350px]"
@@ -46,7 +46,7 @@ export default function Categories() {
 							</div>
 						</Link>
 					</div>
-					<div className="relative col-span-12 sm:col-span-6 lg:col-span-4">
+					<div className="relative col-span-12 sm:col-span-6 lg:col-span-6 lg:row-span-3 lg:col-start-7 lg:row-start-4">
 						<Link href="/shop">
 							<Image
 								className="w-full rounded-md h-[350px]"

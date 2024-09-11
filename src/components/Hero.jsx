@@ -8,21 +8,19 @@ export default function Hero() {
 			<section className="relative flex items-center justify-center border-b">
 				<div className="relative items-center w-full py-12 lg:py-20">
 					<div className="text-center">
-						<span className="badge-theme">
-							Ultimate Shopping Experience
-						</span>
+						<span className="badge-theme select-none">Ultimate Shopping Experience</span>
 
-						<h1 className="text-gray-600 dark:text-gray-300 mt-8 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium leading-none">
+						<h1 className="text-gray-600 dark:text-gray-300 mt-8 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium leading-none select-none">
 							Summer Collection{" "}
 							<span className="block text-primary">Now Available.</span>
 						</h1>
 
-						<p className="max-w-xl mx-auto mt-4 text-base font-light lg:text-lg text-muted-foreground tracking-tighter">
+						<p className="max-w-xl mx-auto mt-4 text-base font-light lg:text-lg text-muted-foreground tracking-tighter select-none">
 							Explore our collection of summer clothing and accessories. Get
 							your hands on the latest trends and styles with Decora.
 						</p>
 						<div className="flex items-center gap-x-5 w-full justify-center mt-5 relative z-10">
-							<Link href="/shop" className="btn-theme">
+							<Link href="/shop" className="btn-theme select-none">
 								Shop Now
 								<svg
 									className="w-5 h-5 ml-2 -mr-1"
@@ -37,7 +35,7 @@ export default function Hero() {
 									/>
 								</svg>
 							</Link>
-							<Link href="/shop" className="btn-theme-outline">
+							<Link href="/shop" className="btn-theme-outline select-none">
 								Contact
 							</Link>
 						</div>
@@ -101,11 +99,11 @@ export default function Hero() {
 						</svg>
 
 						<Image
-              src={banner}
-              alt="Hero image"
-              priority
-              className="relative object-cover w-full max-w-screen-lg mx-auto border rounded-lg shadow-2xl lg:rounded-2xl"
-            />
+							src={banner}
+							alt="Hero image"
+							priority
+							className="relative object-cover w-full max-w-screen-lg mx-auto border rounded-lg shadow-2xl lg:rounded-2xl"
+						/>
 					</div>
 				</div>
 			</section>

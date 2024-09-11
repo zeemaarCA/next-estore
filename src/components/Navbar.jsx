@@ -11,6 +11,7 @@ import { PiShoppingCartDuotone } from "react-icons/pi";
 import { ThemeToggle } from "@components/ThemeToggle";
 import { useSelector, useDispatch } from "react-redux";
 import { useUser } from "@clerk/clerk-react";
+import { fetchCart } from "@utils/actions/data";
 import {
 	SignedIn,
 	SignedOut,
@@ -40,7 +41,8 @@ export default function Navbar() {
 	const logo = theme === "dark" ? logoDark : logoLight;
 	const dispatch = useDispatch();
 
-	useEffect(() => {
+// store user data in redux
+useEffect(() => {
     if (isSignedIn && user && !currentUser) {
       const userData = {
         id: user.id,
@@ -59,7 +61,18 @@ export default function Navbar() {
 			dispatch(clearCart());
 		}
 	}, [isSignedIn, currentUser, dispatch]);
+	// store user data in redux
 
+	// fetch cart data from server
+	useEffect(() => {
+		if (isSignedIn && user) {
+			fetchCart(user.id).then((cart) => {
+				if (cart) {
+					// console.log("cart", cart.items);
+					dispatch(setCartItems(cart.items));				}
+			});
+		}
+	}, [isSignedIn, user, dispatch]);
 
 	// console.log("Current user from Redux:", currentUser);
 
@@ -170,7 +183,7 @@ export default function Navbar() {
 				<SignedOut>
 
 					<SignInButton>
-						<button className="btn-theme">
+						<button className="btn-theme flex gap-2">
 							<FaRegUser />
 							Sign in
 						</button>

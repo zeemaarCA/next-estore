@@ -51,6 +51,7 @@ export default function CartItem({
 								className="mx-2 border text-center w-8"
 								type="text"
 								value={item.quantity.$numberInt || item.quantity}
+								readOnly
 							/>
 							<button
 								onClick={() => handleUpdateQuantity(item.id, item.quantity + 1)}

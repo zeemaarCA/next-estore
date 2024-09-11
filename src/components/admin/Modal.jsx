@@ -27,7 +27,7 @@ export default function Modal({ isModalOpen, setIsModalOpen, categories, setCate
 								<div className="bg-white p-6">
 									<div className="flex flex-col gap-5">
 										<h4 className="text-lg font-bold leading-8 text-gray-900 text-center">
-											Ask a Category
+											Add a Category
 										</h4>
 										<form onSubmit={handleSubmit} className="flex flex-col gap-4">
 											<div className="relative">

@@ -11,7 +11,7 @@ export default function Products({ products }) {
 	return (
 		<>
 
-			<div className="container mx-auto my-8 px-8 md:px-0">
+			<div className="">
 				<SectionTitle
 					title="Latest Products"
 					link="/shop"

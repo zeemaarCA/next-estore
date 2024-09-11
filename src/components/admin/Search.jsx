@@ -23,7 +23,7 @@ const Search = ({ placeholder, count }) => {
 	}, 300);
 
 	return (
-		<div className="flex flex-col gap-y-3 md:flex-row justify-between items-center border-b border-theme pb-4">
+		<div className="flex flex-col gap-y-3 md:flex-row justify-between items-center pb-4">
 			<div>
 				<label className="input input-bordered flex items-center gap-2">
 					<input

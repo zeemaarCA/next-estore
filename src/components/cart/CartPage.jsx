@@ -86,7 +86,7 @@ export default function CartPage({ cartfromserver }) {
 	return (
 		<>
 			{cartItems.length > 0 ? (
-				<div className="container mx-auto mt-10">
+				<div className="container mx-auto px-4 mt-10">
 					<div className="flex flex-col md:flex-row flex-wrap shadow-md my-10">
 						<div className="w-full md:w-3/4 bg-invert px-10 py-10">
 							<div className="flex justify-between border-b pb-8">
@@ -151,7 +151,7 @@ export default function CartPage({ cartfromserver }) {
 									<option>Greedo</option>
 								</select>
 							</div>
-							<div className="py-10">
+							<div className="pt-10 pb-5">
 								<label
 									htmlFor="promo"
 									className="font-semibold inline-block mb-3 text-sm uppercase"
@@ -161,16 +161,16 @@ export default function CartPage({ cartfromserver }) {
 								<input
 									type="text"
 									placeholder="Type here"
-									className="input input-bordered w-full max-w-xs"
+									className="input input-bordered w-full"
 								/>
 							</div>
-							<button className="btn-theme">Apply</button>
+							<button className="btn-theme w-full">Apply</button>
 							<div className="border-t mt-8">
 								<div className="flex font-semibold justify-between py-6 text-sm uppercase">
 									<span>Total cost</span>
 									<span>${calculateTotalPrice()}</span>
 								</div>
-								<button className="btn-theme w-full">Checkout</button>
+								<Link href={"/checkout"} className="btn-theme w-full">Checkout</Link>
 							</div>
 						</div>
 					</div>

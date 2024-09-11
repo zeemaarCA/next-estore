@@ -5,7 +5,7 @@ export default function Blogs() {
 	return (
 		<>
 			<section className="py-24 ">
-				<div className="mx-auto container px-8 md:px-0">
+				<div className="">
 					<SectionTitle
 						title="Latest Blogs"
 						linkText="Show more"

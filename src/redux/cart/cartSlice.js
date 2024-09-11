@@ -11,15 +11,11 @@ const cartSlice = createSlice({
   reducers: {
     setLoading(state, action) {
       state.loading = action.payload;
-      console.log("Current State Items:", state.items);
-      console.log("Action Payload:", action.payload);
     },
     setCartItems(state, action) {
       state.items = action.payload;
     },
     addItem(state, action) {
-      console.log("Current State Items:", state.items);
-      console.log("Action Payload:", action.payload);
       const item = action.payload;
       const existingItemIndex = state.items.findIndex((i) => i.id === item.id);
       if (existingItemIndex >= 0) {

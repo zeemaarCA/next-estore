@@ -27,6 +27,30 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    fullName: {
+      type: String,
+      default: null,
+    },
+    phone: {
+      type: String,
+      default: null,
+    },
+    city: {
+      type: String,
+      default: null,
+    },
+    country: {
+      type: String,
+      default: null,
+    },
+    address: {
+      type: String,
+      default: null,
+    },
+    isCompleted: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );

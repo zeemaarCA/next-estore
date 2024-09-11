@@ -16,6 +16,7 @@ bg-invert for background color */
 
 html {
   transition: all 0.3s ease;
+  @apply !scroll-smooth;
 }
 
 [data-theme="dark"] {
@@ -77,6 +78,10 @@ img {
 
 .border-theme {
   @apply border-cgreen-500 dark:border-supernova-400
+}
+
+.border-theme-gray {
+  @apply border-gray-300 dark:border-gray-700
 }
 
 
