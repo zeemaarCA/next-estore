@@ -1,6 +1,6 @@
 "use client";
 import useState from "react";
-import Select from "./Select";
+import SelectComponent from "./Select";
 import Input from "./Input";
 
 export default function Modal({ isModalOpen, setIsModalOpen, categories, setCategories, handleSubmit, isSubmitting, setIsSubmitting }) {
@@ -43,7 +43,7 @@ export default function Modal({ isModalOpen, setIsModalOpen, categories, setCate
 												/>
 											</div>
                       <div className="relative">
-												<Select
+												<SelectComponent
 													selectLabel="Is Active"
 													options={isAvailableOptions}
 													onChange={(value) =>

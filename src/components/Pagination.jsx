@@ -48,7 +48,7 @@ const Pagination = ({ count }) => {
       pageNumbers.push(
         <button
           key={i}
-          className={`join-item btn btn-sm ${currentPage === i ? 'btn-active' : ''}`}
+          className={`join-item btn btn-sm ${currentPage === i ? 'bg-primary text-white hover:bg-primary' : ''}`}
           onClick={() => handleChangePage(i)}
         >
           {i}

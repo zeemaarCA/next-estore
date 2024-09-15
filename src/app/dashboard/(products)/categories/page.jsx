@@ -18,7 +18,7 @@ export default function Categories() {
 	const openModal = () => {
 		setIsModalOpen(true);
 		setIsEditing(false); // Default is not editing
-		setCategories({ categoryName: "", isActive: false });
+		setCategories({ categoryName: "", isActive: "yes" });
 	};
 
 	// edit the category
@@ -55,8 +55,6 @@ export default function Categories() {
 			if (response.ok) {
 				const updatedCategory = await response.json();
 
-				console.log("Updated Category:", updatedCategory);
-
 				if (isEditing) {
 					// Update the category data with the new edited data
 					setCategoryData((prevData) =>
@@ -73,7 +71,7 @@ export default function Categories() {
 				}
 
 				// Clear the form fields
-				setCategories({ categoryName: "", isActive: false });
+				setCategories({ categoryName: "", isActive: "yes" });
 				// Close the modal
 				setIsModalOpen(false);
 				// Reset selected category

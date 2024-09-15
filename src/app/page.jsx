@@ -4,11 +4,13 @@ import Blogs from "@components/Blogs";
 import Categories from "@components/Categories";
 import Hero from "@components/Hero";
 import Products from "@components/Products";
-import { fetchSiteProducts } from "@utils/actions/data";
+import { fetchSiteProducts } from "@utils/actions/product";
+import { fetchSiteBlogs } from "@utils/actions/blogs";
 
 export default async function Home() {
 	// Fetch products data
 	const { plainProducts } = await fetchSiteProducts();
+	const { blogs } = await fetchSiteBlogs();
 
 	return (
 		<>
@@ -17,7 +19,7 @@ export default async function Home() {
 				<Categories />
 				<Products products={plainProducts} />
 				<About />
-				<Blogs />
+				<Blogs blogs={ blogs } />
 			</div>
 		</>
 	);

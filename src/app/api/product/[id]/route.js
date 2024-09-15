@@ -45,37 +45,26 @@ export const PATCH = async (request, { params }) => {
         const oldImageUrl = existingProduct.productImage;
         const oldFileName = oldImageUrl ? oldImageUrl.split('/').pop().split('?')[0] : null;
 
-
+        const slug = name.toLowerCase().split(' ').join('-').replace(/[^a-zA-Z0-9-]/g, '');
         // Update the product with new data
         existingProduct.name = name;
         existingProduct.price = price;
         existingProduct.category = category;
+        existingProduct.slug = slug;
         existingProduct.isAvailable = isAvailable;
-        existingProduct.productImage = productImage;
         existingProduct.description = description;
 
-        // Handle the old image deletion
-        if (oldFileName) {
-            try {
-                await bucket.file(oldFileName).delete();
-            } catch (error) {
-                console.error("Error deleting old image:", error);
-            }
-        }
-        // Handle saving the new image if necessary (should be handled in the client-side code)
+        // Only update the productImage if a new one is provided
         if (productImage && productImage !== oldImageUrl) {
-            // Extract the new image file name from the new productImage URL
-            const newFileName = productImage.split('/').pop().split('?')[0];
-            try {
-                // Check if the new image file exists in Firebase Storage
-                const file = bucket.file(newFileName);
-                const [exists] = await file.exists();
-                if (!exists) {
-                    // Handle file not found (optional)
-                    console.error("New image file does not exist in Firebase Storage.");
+            existingProduct.productImage = productImage;
+
+            // Handle the old image deletion only if a new image is being set
+            if (oldFileName) {
+                try {
+                    await bucket.file(oldFileName).delete();
+                } catch (error) {
+                    console.error("Error deleting old image:", error);
                 }
-            } catch (error) {
-                console.error("Error checking new image file:", error);
             }
         }
 

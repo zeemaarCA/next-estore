@@ -1,8 +1,7 @@
 import Breadcrumbs from "@components/admin/Breadcrumbs";
 import Pagination from "@components/admin/Pagination";
 import Title from "@components/admin/Title";
-import { fetchProducts } from "@utils/actions/data";
-import { deleteProduct } from "@utils/actions/product";
+import { fetchProducts, deleteProduct } from "@utils/actions/product";
 import Search from "@components/admin/Search";
 import Image from "next/image";
 import Button from "@components/admin/Button";
@@ -68,7 +67,7 @@ export default async function Products({ searchParams }) {
 								<td>{product.category}</td>
 								<td>${product.price}</td>
 								<td>{product.isAvailable === "true" ? "Yes" : "No"}</td>
-								<td className="whitespace-nowrap">{product.createdAt?.toString().slice(4, 16)}</td>
+								<td className="whitespace-nowrap">{product.updatedAt?.toString().slice(4, 16)}</td>
 								<td className="flex relative top-[9px] gap-1 flex-nowrap">
 									<Link
 										href={`/dashboard/update-product/${product.id}`}

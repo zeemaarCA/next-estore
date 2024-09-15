@@ -3,7 +3,8 @@ import mongoose from 'mongoose';
 const categorySchema = new mongoose.Schema({
   category: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   isActive: {
     type: String,

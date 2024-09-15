@@ -3,7 +3,7 @@
 import Breadcrumbs from "@components/admin/Breadcrumbs";
 import Button from "@components/admin/Button";
 import Input from "@components/admin/Input";
-import Select from "@components/admin/Select";
+import SelectComponent from "@components/admin/Select";
 import Title from "@components/admin/Title";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -26,6 +26,7 @@ export default function EditProduct({ params }) {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [file, setFile] = useState(null);
 	const [imageUploadProgress, setImageUploadProgress] = useState(null);
+	const [isFetching, setIsFetching] = useState(false);
 
 	const router = useRouter();
 
@@ -37,18 +38,21 @@ export default function EditProduct({ params }) {
 		const fetchProduct = async () => {
 			// prevent fetching the product again if it has already been fetched
 			if (fetchedRef.current) return;
-      fetchedRef.current = true;
+			fetchedRef.current = true;
 			try {
+				setIsFetching(true);
 				const response = await fetch(`/api/product/${id}`);
 				if (response.ok) {
 					const data = await response.json();
 					setFormData(data);
+					setIsFetching(false);
 				} else {
 					// Redirect to product list if the product is not found
 					router.push("/dashboard/products-list");
 					toast.error("Product not found, redirecting...");
 				}
 			} catch (error) {
+				setIsFetching(false);
 				console.log(error);
 				router.push("/dashboard/products-list");
 				toast.error("An unexpected error occurred, redirecting...");
@@ -123,6 +127,7 @@ export default function EditProduct({ params }) {
 		}
 
 		try {
+			setIsSubmitting(true);
 			const response = await fetch(`/api/product/${id}`, {
 				method: "PATCH",
 				body: JSON.stringify(formData),
@@ -136,6 +141,7 @@ export default function EditProduct({ params }) {
 			if (response.ok) {
 				toast.success("Product updated successfully");
 				router.push("/dashboard/products-list");
+				setIsSubmitting(false);
 			} else {
 				if (response.status === 404) {
 					// Redirect if product not found
@@ -143,10 +149,12 @@ export default function EditProduct({ params }) {
 					toast.error("Product not found, redirecting...");
 				} else {
 					toast.error(data.error || "Error updating product");
+					setIsSubmitting(false);
 				}
 			}
 		} catch (error) {
 			console.log(error);
+			setIsSubmitting(false);
 		} finally {
 			setIsSubmitting(false);
 		}
@@ -170,110 +178,121 @@ export default function EditProduct({ params }) {
 				<Title title="Update Product" />
 
 				<div className="product-form">
-					<form onSubmit={updateProduct}>
-						<div className="grid grid-cols-12 gap-4">
-							<div className="col-span-4">
-								<Input
-									labelText="Product Name"
-									type="text"
-									name="name"
-									placeholder="Enter product name"
-									className="input input-bordered text-gray-700 dark:text-gray-300 w-full"
-									value={formData.name || ""}
-									onChange={handleInputChange}
-								/>
-							</div>
-							<div className="col-span-4">
-								<Input
-									labelText="Product Price"
-									type="number"
-									name="price"
-									placeholder="Enter product price"
-									className="input input-bordered text-gray-700 dark:text-gray-300 w-full"
-									value={formData.price || ""}
-									onChange={handleInputChange}
-								/>
-							</div>
-							<div className="col-span-4">
-								<Input
-									labelText="Product Category"
-									type="text"
-									name="category"
-									placeholder="Enter product category"
-									className="input input-bordered text-gray-700 dark:text-gray-300 w-full"
-									value={formData.category || ""}
-									onChange={handleInputChange}
-								/>
-							</div>
-							<div className="col-span-4">
-								<Select
-									selectLabel="Availability"
-									options={isAvailableOptions}
-									name="isAvailable"
-									value={formData.isAvailable}
-									onChange={handleSelectChange}
-									placeholder="Select availability"
-								/>
-							</div>
-							<div className="col-span-6 flex justify-start items-end gap-3">
-								<Input
-									labelText="Product Image"
-									type="file"
-									accept="image/*"
-									className="file-input w-full"
-									onChange={(e) => setFile(e.target.files[0])}
-								/>
-								<Button
-									type="button"
-									onClick={handleUploadImage}
-									className="btn-theme"
-									disabled={imageUploadProgress}
-								>
-									Upload Image
-								</Button>
-							</div>
-
-							<div className="col-span-2 self-end">
-								{imageUploadProgress ? (
-									<div className="w-16 h-16">
-										<CircularProgressbar
-											value={imageUploadProgress}
-											text={`${imageUploadProgress || 0}%`}
-										/>
-									</div>
-								) : null}
-							</div>
-							<div className="col-span-6">
-								{formData.productImage && (
-									<Image
-										src={formData.productImage}
-										alt="Uploaded image"
-										className="w-full h-atuo object-contain"
-										width={300}
-										height={200}
+					{isFetching ? (
+						<div className="flex flex-col justify-center items-center">
+							Fetching Product...
+							<span className="loading loading-infinity loading-lg"></span>
+						</div>
+					) : (
+						<form onSubmit={updateProduct}>
+							<div className="grid grid-cols-12 gap-4">
+								<div className="col-span-4">
+									<Input
+										labelText="Product Name"
+										type="text"
+										name="name"
+										placeholder="Enter product name"
+										className="input input-bordered text-gray-700 dark:text-gray-300 w-full"
+										value={formData.name || ""}
+										onChange={handleInputChange}
 									/>
-								)}
+								</div>
+								<div className="col-span-4">
+									<Input
+										labelText="Product Price"
+										type="number"
+										name="price"
+										placeholder="Enter product price"
+										className="input input-bordered text-gray-700 dark:text-gray-300 w-full"
+										value={formData.price || ""}
+										onChange={handleInputChange}
+									/>
+								</div>
+								<div className="col-span-4">
+									<Input
+										labelText="Product Category"
+										type="text"
+										name="category"
+										placeholder="Enter product category"
+										className="input input-bordered text-gray-700 dark:text-gray-300 w-full"
+										value={formData.category || ""}
+										onChange={handleInputChange}
+									/>
+								</div>
+								<div className="col-span-4">
+									<SelectComponent
+										selectLabel="Availability"
+										options={isAvailableOptions}
+										name="isAvailable"
+										value={formData.isAvailable}
+										onChange={handleSelectChange}
+										placeholder="Select availability"
+									/>
+								</div>
+								<div className="col-span-6 flex justify-start items-end gap-3">
+									<Input
+										labelText="Product Image"
+										type="file"
+										accept="image/*"
+										className="file-input w-full"
+										onChange={(e) => setFile(e.target.files[0])}
+									/>
+									<Button
+										type="button"
+										onClick={handleUploadImage}
+										className="btn-theme"
+										disabled={imageUploadProgress}
+									>
+										Upload Image
+									</Button>
+								</div>
+
+								<div className="col-span-2 self-end">
+									{imageUploadProgress ? (
+										<div className="w-16 h-16">
+											<CircularProgressbar
+												value={imageUploadProgress}
+												text={`${imageUploadProgress || 0}%`}
+											/>
+										</div>
+									) : null}
+								</div>
+								<div className="col-span-6">
+									{formData.productImage && (
+										<Image
+											src={formData.productImage}
+											alt="Uploaded image"
+											className="w-full h-atuo object-contain"
+											width={300}
+											height={200}
+										/>
+									)}
+								</div>
+								<div className="col-span-12">
+									<ReactQuill
+										theme="snow"
+										placeholder="Enter product description"
+										className="h-72 mb-12 text-gray-700 dark:text-gray-300"
+										value={formData.description || ""}
+										onChange={(value) =>
+											setFormData({ ...formData, description: value })
+										}
+									/>
+								</div>
 							</div>
-							<div className="col-span-12">
-								<ReactQuill
-									theme="snow"
-									placeholder="Enter product description"
-									className="h-72 mb-12 text-gray-700 dark:text-gray-300"
-									value={formData.description || ""}
-									onChange={(value) =>
-										setFormData({ ...formData, description: value })
-									}
-								/>
-							</div>
-						</div>
-						<div className="form-btn mt-8">
+							<div className="form-btn mt-8">
 							<Button
-								type="submit"
-								className="btn-theme"
-								buttonText="Update Product"
-							/>
-						</div>
-					</form>
+                  type="submit"
+                  className="btn-theme"
+                  buttonText={isSubmitting ?
+                    <span className="loading loading-spinner loading-md"></span>
+                    : "Save Changes"
+                  }
+                  disabled={isSubmitting}
+                />
+							</div>
+						</form>
+					)}
 				</div>
 			</div>
 		</section>

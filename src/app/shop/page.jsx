@@ -1,28 +1,43 @@
 import Pagination from "@components/Pagination";
 import Search from "@components/Search";
-import Filters from "@components/Filters";
+import PriceFilter from "@components/PriceFilter";
 import SingleProduct from "@components/SingleProduct";
-import TopFilter from "@components/TopFilter";
-import { fetchSiteProducts } from "@utils/actions/data";
+import { fetchSiteProducts } from "@utils/actions/product";
+
 export const metadata = {
 	title: "Shop",
 	description:
 		"Decora Shop is a place where you can find all the products you need for your home.",
 };
+
 export default async function Shop({ searchParams }) {
-	console.log(searchParams);
 	const q = searchParams?.q || "";
 	const page = searchParams?.page ? parseInt(searchParams.page) : 1;
-	const { count, plainProducts } = await fetchSiteProducts(q, page);
+	const category = searchParams?.category || "";
+	const price = searchParams?.price || "";
+	const sort = searchParams?.sort || "newest";
+
+	const { count, plainProducts } = await fetchSiteProducts(q, page, category, price, sort);
+
 	return (
 		<>
 			<section className="py-24 relative">
 				<div className="w-full container mx-auto px-4">
-
-					<Search placeholder="Search for a product..." count={count} />
+					<div className="flex flex-col gap-3 md:flex-row justify-between items-center bg-primary/15 rounded-md p-4 mb-6 shadow-sm">
+						<PriceFilter />
+						<Search placeholder="Search for a product..." count={count} />
+					</div>
 					<div className="grid grid-cols-12 gap-6">
-						<Filters />
-						<div className="col-span-12 md:col-span-9">
+						{/* <Filters /> */}
+						<div className="col-span-12 md:col-span-12 flex justify-between items-center">
+							{count === 0 && (
+									<h5 className="text-red-600">No Products found</h5>
+								)}
+								<h5>&nbsp;</h5>
+
+							<h5 className="text-gray-600 dark:text-gray-400">Showing <span className="text-primary font-bold text-lg">{count}</span> Products</h5>
+						</div>
+						<div className="col-span-12 md:col-span-12">
 							<div className="grid grid-cols-12 gap-4">
 								{plainProducts.map((product) => (
 									<div
@@ -33,7 +48,8 @@ export default async function Shop({ searchParams }) {
 									</div>
 								))}
 							</div>
-							<Pagination count={count} />
+							{count > 12 && <Pagination count={count} />}
+
 						</div>
 					</div>
 				</div>

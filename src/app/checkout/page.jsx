@@ -15,10 +15,7 @@ export default async function Checkout() {
 				<SectionTitle title="Checkout" />
 				<div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
 					{/* Left Side: Checkout Form */}
-					<div className="bg-invert p-6 shadow-md rounded-lg">
-						<h2 className="text-base font-semibold mb-4">Please fill the form to checkout</h2>
-						<CheckoutForm />
-					</div>
+					<CheckoutForm />
 					{/* Right Side: Cart Details */}
 					<div className="bg-invert p-6 shadow-md rounded-lg">
 						<div>

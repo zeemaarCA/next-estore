@@ -6,8 +6,6 @@ export const POST = async (request) => {
 
     const slug = name.toLowerCase().split(' ').join('-').replace(/[^a-zA-Z0-9-]/g, '');
 
-    console.log(slug);
-
 
     try {
         await connect();

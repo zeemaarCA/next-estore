@@ -12,7 +12,7 @@ export default function Loader() {
 	return (
 		<div className="min-h-screen flex justify-center items-center flex-col">
 			<Image src={logo} alt="Logo" width={200} height={100} />
-			<span className="loading loading-infinity text-cgreen-500 loading-lg"></span>
+			<span className="loading loading-infinity text-primary loading-lg"></span>
 		</div>
 	);
 }

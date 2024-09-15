@@ -61,7 +61,7 @@ export default function Sidebar() {
 		{
 			title: "Blog Posts",
 			icon: <IoDocumentTextOutline className="w-5 h-5" />,
-			href: "#",
+			href: "/dashboard/blogs-list",
 		},
 	];
 

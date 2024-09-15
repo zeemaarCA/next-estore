@@ -7,6 +7,7 @@ import {
 	updateSuccess,
 	updateFailure,
 } from "@redux/user/userSlice";
+import { useAuth } from '@clerk/nextjs'
 import Input from "@components/Input";
 import Textarea from "@components/Textarea";
 import Button from "@components/Button";
@@ -16,10 +17,11 @@ import toast from "react-hot-toast";
 import { setCheckoutFormFilled } from "@redux/checkout/checkoutSlice";
 
 export default function CheckoutForm() {
+	const { userId } = useAuth()
 	const dispatch = useDispatch();
 	const router = useRouter();
 	const currentUser = useSelector((state) => state.user.currentUser);
-	const userId = currentUser?.clerkId;
+
 
 	const [formData, setFormData] = useState({});
 	const [isSubmitting, setIsSubmitting] = useState(false);
@@ -80,9 +82,11 @@ export default function CheckoutForm() {
 				dispatch(updateFailure(data.message));
 				// Show the error message from the backend if available
 				toast.error(data.message || "Error updating your details");
+				setIsProcessingPayment(false);
 			}
 		} catch (error) {
 			console.log(error);
+			setIsSubmitting(false);
 		} finally {
 			setIsSubmitting(false);
 		}
@@ -96,77 +100,84 @@ export default function CheckoutForm() {
 					<span className="loading loading-infinity loading-lg"></span>
 				</div>
 			) : (
-				<form className="space-y-4" onSubmit={handleSubmit}>
-					<div>
-						<Input
-							labelText="Full Name"
-							type="text"
-							className=""
-							value={formData.fullName}
-							onChange={(e) =>
-								setFormData({ ...formData, fullName: e.target.value })
-							}
-							placeholder="Enter your full name"
-						/>
-					</div>
-					<div>
-						<Input
-							labelText="Phone"
-							type="tel"
-							className=""
-							value={formData.phone}
-							onChange={(e) =>
-								setFormData({ ...formData, phone: e.target.value })
-							}
-							placeholder="Enter your phone number"
-						/>
-					</div>
-					<div className="flex justify-between items-center gap-2">
-						<div className="w-full">
+				<div className="bg-invert p-6 shadow-md rounded-lg">
+					<h2 className="text-base font-semibold mb-4">
+						{currentUser.isCompleted === true
+							? "Pleae verify your details"
+							: "Please fill the form to checkout"}
+					</h2>
+					<form className="space-y-4" onSubmit={handleSubmit}>
+						<div>
 							<Input
-								labelText="City"
+								labelText="Full Name"
 								type="text"
 								className=""
-								value={formData.city}
+								value={formData.fullName}
 								onChange={(e) =>
-									setFormData({ ...formData, city: e.target.value })
+									setFormData({ ...formData, fullName: e.target.value })
 								}
-								placeholder="Enter your city"
+								placeholder="Enter your full name"
 							/>
 						</div>
-						<div className="w-full">
+						<div>
 							<Input
-								labelText="Country"
-								type="text"
+								labelText="Phone"
+								type="tel"
 								className=""
-								value={formData.country}
+								value={formData.phone}
 								onChange={(e) =>
-									setFormData({ ...formData, country: e.target.value })
+									setFormData({ ...formData, phone: e.target.value })
 								}
-								placeholder="Enter your country"
+								placeholder="Enter your phone number"
 							/>
 						</div>
-					</div>
-					<div>
-						<Textarea
-							labelText="Address"
-							className=""
-							placeholder="Enter your address"
-							rows="3"
-							value={formData.address}
-							onChange={(e) =>
-								setFormData({ ...formData, address: e.target.value })
-							}
-						/>
-					</div>
-					<Button type="submit" className="w-full">
-						{isSubmitting ? (
-							<span className="loading loading-spinner"></span>
-						) : (
-							"Proceed to payment"
-						)}
-					</Button>
-				</form>
+						<div className="flex justify-between items-center gap-2">
+							<div className="w-full">
+								<Input
+									labelText="City"
+									type="text"
+									className=""
+									value={formData.city}
+									onChange={(e) =>
+										setFormData({ ...formData, city: e.target.value })
+									}
+									placeholder="Enter your city"
+								/>
+							</div>
+							<div className="w-full">
+								<Input
+									labelText="Country"
+									type="text"
+									className=""
+									value={formData.country}
+									onChange={(e) =>
+										setFormData({ ...formData, country: e.target.value })
+									}
+									placeholder="Enter your country"
+								/>
+							</div>
+						</div>
+						<div>
+							<Textarea
+								labelText="Address"
+								className="invert-gray-text"
+								placeholder="Enter your address"
+								rows="3"
+								value={formData.address}
+								onChange={(e) =>
+									setFormData({ ...formData, address: e.target.value })
+								}
+							/>
+						</div>
+						<Button type="submit" className="w-full">
+							{isSubmitting ? (
+								<span className="loading loading-spinner"></span>
+							) : (
+								"Proceed to payment"
+							)}
+						</Button>
+					</form>
+				</div>
 			)}
 		</>
 	);

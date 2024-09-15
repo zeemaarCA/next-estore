@@ -28,7 +28,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  @apply m-0 dark:text-supernova-400 text-cgreen-500 font-sora
+  @apply m-0 text-primary font-sora
 }
 
 
@@ -69,7 +69,7 @@ img {
 }
 
 .bg-invert {
-  @apply bg-white dark:bg-base-200 text-cgreen-500 dark:text-supernova-400
+  @apply bg-white dark:bg-base-200 text-primary
 }
 
 .head_title h1 {
@@ -149,11 +149,11 @@ img {
 }
 
 .btn-theme {
-  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors dark:focus:ring-supernova-300 focus:ring-cgreen-300 bg-cgreen-500 text-gray-100 dark:text-gray-700 dark:bg-supernova-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 relative hover:bg-green-800 h-10 px-4 py-2
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus:ring-primary/50 bg-primary text-gray-100 dark:text-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 relative hover:bg-cgreen-800 dark:hover:bg-supernova-500 h-10 px-4 py-2
 }
 
 .btn-theme-outline {
-  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors dark:focus:ring-supernova-300 focus:ring-cgreen-300 bg-transparent text-cgreen-500 dark:text-supernova-400 dark:bg-transparent focus-visible:outline-none focus-visible:ring-2 border border-cgreen-400 dark:border-supernova-400 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 relative hover:bg-green-800 dark:hover:bg-supernova-400 hover:text-gray-100 dark:hover:text-gray-700 h-10 px-4 py-2
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus:ring-primary/50 bg-transparent text-primary dark:bg-transparent focus-visible:outline-none focus-visible:ring-2 border border-primary focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 relative hover:bg-primary dark:hover:bg-supernova-500 hover:text-gray-100 dark:hover:text-gray-700 h-10 px-4 py-2
 }
 
 .badge-theme {
@@ -163,5 +163,9 @@ img {
   @apply text-sm text-red-600 font-medium tracking-tight bg-red-700/10 px-4 py-2 rounded-full
 }
 .badge-theme-sm {
-  @apply text-sm text-primary font-medium tracking-tight bg-primary/10 px-2 py-1 rounded-full mb-2 inline-block
+  @apply text-sm text-primary font-medium tracking-tight bg-primary/20 px-2 py-1 rounded-full mb-2 inline-block
+}
+
+.react-select__control{
+  @apply h-[47px] !rounded-lg
 }

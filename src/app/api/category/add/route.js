@@ -1,4 +1,4 @@
-import Product from "@utils/models/category.model";
+import Category from "@utils/models/category.model";
 import { connect } from "@utils/mongodb/mongoose";
 import { revalidatePath } from "next/cache";
 
@@ -7,7 +7,14 @@ export const POST = async (request) => {
 
   try {
     await connect();
-    const newCategory = new Product({
+
+    // Check if the category already exists
+    const existingCategory = await Category.findOne({ category: category });
+    if (existingCategory) {
+      return new Response(JSON.stringify({ message: "Category already exists" }), { status: 400 });
+    }
+
+    const newCategory = new Category({
       category,
       isActive,
     });

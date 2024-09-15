@@ -1,5 +1,5 @@
 import ProductQtyWrapper from "@components/ProductQtyWrapper";
-import { fetchProduct } from "@utils/actions/data";
+import { fetchProduct } from "@utils/actions/product";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 // import ReactImageGallery from "react-image-gallery";
@@ -29,7 +29,7 @@ export async function generateMetadata({ params }) {
 export default async function ProductPage({ params }) {
 	const { slug } = params;
 	try {
-		await new Promise((resolve) => setTimeout(resolve, 1000));
+		await new Promise((resolve) => setTimeout(resolve, 2000));
 		const product = await fetchProduct(slug);
 
 		if (!product) {
@@ -58,7 +58,7 @@ export default async function ProductPage({ params }) {
 							Availability:{" "}
 							<span className="text-green-600">
 								{product.isAvailable === "true" ? (
-									<span className="text-cgreen-500">In Stock</span>
+									<span className="text-primary">In Stock</span>
 								) : (
 									<span className="text-red-500">Out of stock</span>
 								)}{" "}
@@ -71,9 +71,9 @@ export default async function ProductPage({ params }) {
 							Category: <span className="font-normal">{product.category}</span>
 						</p>
 						<p className="font-bold">
-							Product ID: <span className="font-normal">{product.id}</span>
+							Product ID: <span className="font-normal">{product._id}</span>
 						</p>
-						<p className="mt-4 text-4xl font-bold text-violet-900">
+						<p className="mt-4 text-4xl font-bold text-primary">
 							${product.price}
 							{/* <span className="text-xs text-gray-400 line-through">
 							$300

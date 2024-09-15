@@ -35,7 +35,7 @@ export default function Footer() {
 					<div className="flex space-x-10 justify-center items-center mb-14">
 						<a
 							href="#"
-							className="block text-gray-900 dark:text-gray-300 transition-all duration-500 hover:text-cgreen-500 dark:hover:text-supernova-400"
+							className="block text-gray-900 dark:text-gray-300 transition-all duration-500 hover:text-primary"
 						>
 							<svg
 								className="w-[1.688rem] h-[1.688rem]"
@@ -51,7 +51,7 @@ export default function Footer() {
 						</a>
 						<a
 							href="#"
-							className="block text-gray-900 dark:text-gray-300 transition-all duration-500 hover:text-cgreen-500 dark:hover:text-supernova-400"
+							className="block text-gray-900 dark:text-gray-300 transition-all duration-500 hover:text-primary"
 						>
 							<svg
 								className="w-[1.688rem] h-[1.688rem] "
@@ -67,7 +67,7 @@ export default function Footer() {
 						</a>
 						<a
 							href="#"
-							className="block text-gray-900 dark:text-gray-300 transition-all duration-500 hover:text-cgreen-500 dark:hover:text-supernova-400"
+							className="block text-gray-900 dark:text-gray-300 transition-all duration-500 hover:text-primary"
 						>
 							<svg
 								className="w-[0.938rem] h-[1.625rem]"
@@ -83,7 +83,7 @@ export default function Footer() {
 						</a>
 						<a
 							href="#"
-							className="block text-gray-900 dark:text-gray-300 transition-all duration-500 hover:text-cgreen-500 dark:hover:text-supernova-400"
+							className="block text-gray-900 dark:text-gray-300 transition-all duration-500 hover:text-primary"
 						>
 							<svg
 								className="w-[1.875rem] h-[1.375rem]"

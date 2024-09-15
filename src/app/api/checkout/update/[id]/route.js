@@ -8,12 +8,10 @@ export const PATCH = async (request, { params }) => {
 
   if (!fullName || !phone || !city || !country || !address) {
     return new Response(
-      JSON.stringify({ error: "Missing required fields" }),
+      JSON.stringify({ message: "Missing required fields" }),
       { status: 400, headers: { 'Content-Type': 'application/json' } }
     );
   }
-
-  console.log("Request Body:", { fullName, phone, city, country, address, isCompleted });
 
   try {
     await connect();
@@ -21,7 +19,7 @@ export const PATCH = async (request, { params }) => {
     if (!params.id) {
       // return new Response("User ID not provided", { status: 400 });
       return new Response(
-        JSON.stringify({ error: "User ID not provided" }),
+        JSON.stringify({ message: "User ID not provided" }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
     }
@@ -32,7 +30,7 @@ export const PATCH = async (request, { params }) => {
     if (!existingUser) {
       // return new Response("User not found", { status: 404 });
       return new Response(
-        JSON.stringify({ error: "User not found" }),
+        JSON.stringify({ message: "User not found" }),
         { status: 404, headers: { 'Content-Type': 'application/json' } }
       );
     }
@@ -60,7 +58,7 @@ export const PATCH = async (request, { params }) => {
   } catch (error) {
     console.error("Error updating user:", error);
     return new Response(
-      JSON.stringify({ error: "Error saving user details" }),
+      JSON.stringify({ message: "Error saving user details" }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
   }

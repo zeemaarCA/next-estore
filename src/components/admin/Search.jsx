@@ -29,7 +29,7 @@ const Search = ({ placeholder, count }) => {
 					<input
 						type="text"
 						className="grow"
-						placeholder="Search for products"
+						placeholder={placeholder}
 						onChange={handleSearch}
 					/>
 					<svg
@@ -47,7 +47,7 @@ const Search = ({ placeholder, count }) => {
 				</label>
 			</div>
 			<div>
-				<h5 className="text-gray-600 dark:text-gray-400">Showing <span className="text-cgreen-500 dark:text-supernova-400 font-bold text-lg">{count}</span> Products</h5>
+				<h5 className="text-gray-600 dark:text-gray-400">Showing <span className="text-primary font-bold text-lg">{count}</span> Products</h5>
 			</div>
 		</div>
 	);

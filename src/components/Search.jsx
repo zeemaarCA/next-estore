@@ -23,20 +23,19 @@ const Search = ({ placeholder, count }) => {
 	}, 300);
 
 	return (
-		<div className="flex flex-col gap-3 md:flex-row justify-end items-center pb-4">
+		<div className="flex flex-col w-full md:w-auto">
 			<div>
-				<label className="input input-bordered flex items-center gap-2">
+				<label className="relative input input-bordered h-11 flex items-center gap-2">
 					<input
 						type="text"
-						className="grow"
-						placeholder="Search for products"
+						placeholder={placeholder}
 						onChange={handleSearch}
 					/>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						viewBox="0 0 16 16"
 						fill="currentColor"
-						className="h-4 w-4 opacity-70"
+						className="h-4 w-4 opacity-70 absolute right-2"
 					>
 						<path
 							fillRule="evenodd"
@@ -46,9 +45,7 @@ const Search = ({ placeholder, count }) => {
 					</svg>
 				</label>
 			</div>
-			<div>
-				<h5 className="text-gray-600 dark:text-gray-400">Showing <span className="text-cgreen-500 dark:text-supernova-400 font-bold text-lg">{count}</span> Products</h5>
-			</div>
+
 		</div>
 	);
 };

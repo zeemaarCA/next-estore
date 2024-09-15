@@ -1,8 +1,22 @@
+"use client";
+
 import Link from "next/link";
 import banner from "../../public/assets/banner/banner.jpg";
 import Image from "next/image";
+import { motion } from "framer-motion"
+
+const iconVariants = {
+	default: { rotate: 0 },
+	hover: { x: -40, duration: 0.5, opacity: 1 },
+};
+
+const textMotion = {
+	default: { x: 0, opacity: 1 },
+	hover: { x: -70, opacity: 0 },
+};
 
 export default function Hero() {
+
 	return (
 		<>
 			<section className="relative flex items-center justify-center border-b">
@@ -10,32 +24,44 @@ export default function Hero() {
 					<div className="text-center">
 						<span className="badge-theme select-none">Ultimate Shopping Experience</span>
 
-						<h1 className="text-gray-600 dark:text-gray-300 mt-8 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium leading-none select-none">
-							Summer Collection{" "}
+						<h1 className="text-gray-600 dark:text-gray-300 mt-8 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium leading-none select-none drop-shadow-md">
+							Latest Collection{" "}
 							<span className="block text-primary">Now Available.</span>
 						</h1>
 
 						<p className="max-w-xl mx-auto mt-4 text-base font-light lg:text-lg text-muted-foreground tracking-tighter select-none">
-							Explore our collection of summer clothing and accessories. Get
-							your hands on the latest trends and styles with Decora.
+							Explore our collection of latest smart phones and accessories. Get
+							your hands on the latest trends and products with Decora.
 						</p>
 						<div className="flex items-center gap-x-5 w-full justify-center mt-5 relative z-10">
-							<Link href="/shop" className="btn-theme select-none">
-								Shop Now
-								<svg
-									className="w-5 h-5 ml-2 -mr-1"
-									fill="currentColor"
-									viewBox="0 0 20 20"
-									xmlns="http://www.w3.org/2000/svg"
-								>
-									<path
-										fillRule="evenodd"
-										d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-										clipRule="evenodd"
-									/>
-								</svg>
-							</Link>
-							<Link href="/shop" className="btn-theme-outline select-none">
+							<motion.div
+								initial="default" whileHover="hover"
+							>
+
+								<Link href="/shop" className="btn-theme select-none shadow-md overflow-hidden">
+									<motion.span variants={textMotion}>
+									Shop Now
+									</motion.span>
+									<motion.div
+										variants={iconVariants}
+									>
+
+										<svg
+											className="w-5 h-5 ml-2 -mr-1"
+											fill="currentColor"
+											viewBox="0 0 20 20"
+											xmlns="http://www.w3.org/2000/svg"
+										>
+											<path
+												fillRule="evenodd"
+												d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+												clipRule="evenodd"
+											/>
+										</svg>
+									</motion.div>
+								</Link>
+							</motion.div>
+							<Link href="/contact" className="btn-theme-outline select-none shadow-md">
 								Contact
 							</Link>
 						</div>

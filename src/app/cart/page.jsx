@@ -5,7 +5,7 @@ export const metadata = {
 
 import { auth } from "@clerk/nextjs/server";
 import CartPage from "@components/cart/CartPage";
-import { fetchCart } from "@utils/actions/data";
+import { fetchCart } from "@utils/actions/cart";
 import { redirect } from "next/navigation";
 
 export default async function Cart() {
