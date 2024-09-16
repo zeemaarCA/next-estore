@@ -66,12 +66,6 @@ export async function POST(req) {
         image_url,
         email_addresses,
         username,
-        fullName,
-        phone,
-        city,
-        country,
-        address,
-        isCompleted
       );
       return new Response('User is created or updated', {
         status: 200,
