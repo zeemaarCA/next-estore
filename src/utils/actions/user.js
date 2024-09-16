@@ -1,20 +1,6 @@
 import User from '@utils/models/user.model';
 import { connect } from '@utils/mongodb/mongoose';
 
-export const fetchedUser = async (id) => {
-  try {
-    await connect(); // Connect to MongoDB only if not already connected
-    const userData = await User.findOne({ clerkId: id }).lean();
-    if (userData) {
-      // Convert ObjectId to string and dates to ISO strings
-      const serializableUserData = JSON.parse(JSON.stringify(userData));
-      return serializableUserData;
-    }
-  } catch (error) {
-    console.error('Error fetching user:', error);
-    throw error;
-  }
-};
 
 
 export const createOrUpdateUser = async (
