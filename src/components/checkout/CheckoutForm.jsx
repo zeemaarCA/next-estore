@@ -6,6 +6,7 @@ import {
 	updateStart,
 	updateSuccess,
 	updateFailure,
+	signInSuccess,
 } from "@redux/user/userSlice";
 import { useAuth } from '@clerk/nextjs'
 import Input from "@components/Input";
@@ -16,11 +17,13 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { setCheckoutFormFilled } from "@redux/checkout/checkoutSlice";
 
-export default function CheckoutForm() {
+export default function CheckoutForm({ userDataForRedux }) {
 	const { userId } = useAuth()
-	const dispatch = useDispatch();
-	const router = useRouter();
 	const currentUser = useSelector((state) => state.user.currentUser);
+	const dispatch = useDispatch();
+
+
+	const router = useRouter();
 
 
 	const [formData, setFormData] = useState({});
@@ -102,7 +105,7 @@ export default function CheckoutForm() {
 			) : (
 				<div className="bg-invert p-6 shadow-md rounded-lg">
 					<h2 className="text-base font-semibold mb-4">
-						{currentUser.isCompleted === true
+						{currentUser?.isCompleted === true
 							? "Pleae verify your details"
 							: "Please fill the form to checkout"}
 					</h2>

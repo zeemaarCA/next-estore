@@ -27,7 +27,7 @@ import {
 } from "@redux/cart/cartSlice";
 import logoLight from "../../public/assets/logo-light.svg";
 import logoDark from "../../public/assets/logo-dark.svg";
-import { signInSuccess, signoutSuccess } from "@redux/user/userSlice";
+import { signInStart, signInSuccess, signoutSuccess } from "@redux/user/userSlice";
 import { useEffect, useState } from "react";
 
 export default function Navbar() {
@@ -42,6 +42,7 @@ export default function Navbar() {
 	const { theme } = useTheme();
 	const logo = theme === "dark" ? logoDark : logoLight;
 	const dispatch = useDispatch();
+	// console.log(user.id)
 
 	useEffect(() => {
 		const handleRouteChangeStart = () => setLoading(true);
@@ -59,18 +60,41 @@ export default function Navbar() {
 	}, [router]);
 
 	// Store user data in redux
+	// useEffect(() => {
+	// 	if (isSignedIn && user && !currentUser) {
+	// 		const userData = {
+	// 			id: user.id,
+	// 			fullName: user.fullName,
+	// 			emailAddress: user.emailAddresses[0].emailAddress,
+	// 			username: user.username,
+	// 			imageUrl: user.imageUrl,
+	// 		};
+	// 		dispatch(signInSuccess(userData));
+	// 	}
+	// }, [isSignedIn, user, dispatch, currentUser]);
+
+
 	useEffect(() => {
-		if (isSignedIn && user && !currentUser) {
-			const userData = {
-				id: user.id,
-				fullName: user.fullName,
-				emailAddress: user.emailAddresses[0].emailAddress,
-				username: user.username,
-				imageUrl: user.imageUrl,
-			};
-			dispatch(signInSuccess(userData));
-		}
-	}, [isSignedIn, user, dispatch, currentUser]);
+    const fetchUserDetails = async () => {
+      if (isSignedIn && user && currentUser) {
+        try {
+          dispatch(signInStart());
+          const response = await fetch(`/api/users/${user.id}`);
+          if (response.ok) {
+            const dbUserData = await response.json();
+            dispatch(signInSuccess({ ...currentUser, ...dbUserData }));
+          } else {
+            throw new Error('Failed to fetch user details');
+          }
+        } catch (error) {
+          console.error("Error fetching user details:", error);
+          dispatch(updateFailure(error.message));
+        }
+      }
+    };
+
+    fetchUserDetails();
+  }, [isSignedIn, user, dispatch]);
 
 	useEffect(() => {
 		if (!isSignedIn && currentUser) {
