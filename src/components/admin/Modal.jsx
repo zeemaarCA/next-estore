@@ -3,7 +3,7 @@ import useState from "react";
 import SelectComponent from "./Select";
 import Input from "./Input";
 
-export default function Modal({ isModalOpen, setIsModalOpen, categories, setCategories, handleSubmit, isSubmitting, setIsSubmitting }) {
+export default function Modal({ isModalOpen, setIsModalOpen, categories, setCategories, handleSubmit, isSubmitting, setIsSubmitting, isLoading, setIsLoading }) {
 	const closeModal = () => {
 		setIsModalOpen(false);
   };
@@ -68,7 +68,11 @@ export default function Modal({ isModalOpen, setIsModalOpen, categories, setCate
                         data-modal-target="modalBox-3"
                         type="submit"
 											>
-												Submit
+												{isLoading ? (
+													<span className="loading loading-spinner text-white"></span>
+												) : (
+													"Save"
+												)}
 											</button>
 										</div>
 										</form>

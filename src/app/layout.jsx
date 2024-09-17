@@ -31,9 +31,6 @@ export default function RootLayout({ children }) {
 							<Loader />
 						</ClerkLoading>
 						<ClerkLoaded>
-							<div className="main">
-								<div className="gradient" />
-							</div>
 							<Toaster
 								position="bottom-right"
 								toastOptions={{
@@ -52,11 +49,9 @@ export default function RootLayout({ children }) {
 									},
 								}}
 							/>
-							<Navbar />
 							<Suspense fallback={<Loader />}>
 								<div className="flex-grow">{children}</div>
 							</Suspense>
-							<Footer />
 						</ClerkLoaded>
 					</ThemeAndClerkProvider>
 				</ReduxProvider>

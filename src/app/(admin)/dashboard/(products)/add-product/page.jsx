@@ -134,10 +134,10 @@ export default function AddProduct() {
 					child="Add Product"
 				/>
 
-				<div className="bg-invert px-4 py-8 shadow-sm mt-4 rounded-md">
+				<div className="px-4 py-8 shadow-sm mt-4 rounded-md">
 					<Title title="Add Product" />
 
-					<div className="product-form">
+					<div className="product-form px-4 py-8 bg-white dark:bg-gray-700 rounded-md">
 						<form onSubmit={handleSubmit}>
 							<div className="grid grid-cols-12 gap-4">
 								<div className="col-span-4">

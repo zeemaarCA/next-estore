@@ -2,23 +2,16 @@ import { NextResponse } from 'next/server';
 import { connect } from "@utils/mongodb/mongoose.js";
 import User from "@utils/models/user.model";
 
-export async function GET(request, { params }) {
+export const GET = async (request, { params }) => {
   try {
-    const { id } = params;
-    const db = await connect();
+    await connect()
 
-    const user = await User.findOne({ id: id });
+    const user = await User.findOne({ clerkId: params.id });
+    if (!user) return new Response("User Not Found", { status: 404 });
 
-    if (!user) {
-      return NextResponse.json({ error: 'User not found' }, { status: 404 });
-    }
+    return new Response(JSON.stringify(user), { status: 200 })
 
-    // Remove sensitive information if necessary
-    const { password, ...userWithoutPassword } = user;
-
-    return NextResponse.json(userWithoutPassword);
   } catch (error) {
-    console.error('Error fetching user:', error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    return new Response("Internal Server Error", { status: 500 });
   }
 }

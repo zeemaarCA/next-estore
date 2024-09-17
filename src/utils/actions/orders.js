@@ -71,3 +71,29 @@ export const createOrder = async (userId, paymentIntent) => {
     throw new Error("Failed to create order");
   }
 };
+
+
+export const getOrders = async (userId) => {
+  try {
+    await connect();
+    const raworders = await Order.find({ userId }).lean();
+    const orders = JSON.parse(JSON.stringify(raworders));
+    return orders;
+  } catch (err) {
+    console.error(err);
+    throw new Error("Failed to get orders");
+  }
+};
+
+
+export const getAllOrders = async () => {
+  try {
+    await connect();
+    const rawallorders = await Order.find().lean();
+    const allorders = JSON.parse(JSON.stringify(rawallorders));
+    return allorders;
+  } catch (err) {
+    console.error(err);
+    throw new Error("Failed to get orders");
+  }
+};

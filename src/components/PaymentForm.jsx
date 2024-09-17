@@ -18,18 +18,8 @@ const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY
 )
 
-export function PaymentForm({ cartItems, totalAmount, userId }) {
-  const [clientSecret, setClientSecret] = useState(null);
-
-  const createPaymentIntent = async () => {
-    const response = await fetch('/api/create-payment-intent', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ amount: totalAmount, userId }),
-    });
-    const data = await response.json();
-    setClientSecret(data.clientSecret);
-  };
+export function PaymentForm({ cartItems, clientSecret }) {
+  const totalAmount = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
   return (
     <div className="w-full mx-auto space-y-8 bg-invert p-6 shadow-md rounded-lg">
@@ -65,13 +55,10 @@ export function PaymentForm({ cartItems, totalAmount, userId }) {
           ))}
         </div>
         <div className="flex-1">
-          {clientSecret ? (
-            <Elements options={{ clientSecret }} stripe={stripePromise}>
-              <Form totalAmount={totalAmount} />
-            </Elements>
-          ) : (
-            <Button onClick={createPaymentIntent}>Proceed to Payment</Button>
-          )}
+
+          <Elements options={{ clientSecret }} stripe={stripePromise}>
+            <Form totalAmount={totalAmount} />
+          </Elements>
         </div>
       </div>
     </div>

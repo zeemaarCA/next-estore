@@ -40,7 +40,7 @@ export default async function Blogs({ searchParams }) {
 							<th>Actions</th>
 						</tr>
 					</thead>
-					<tbody className="bg-white dark:bg-base-100">
+					<tbody className="bg-white dark:bg-gray-700">
 						{blogs.length > 0 ? (
 							blogs.map((blog) => (
 								<tr key={blog.id} className="hover">

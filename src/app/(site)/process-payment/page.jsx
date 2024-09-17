@@ -1,5 +1,6 @@
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { notFound, redirect } from "next/navigation"
+import Stripe from "stripe"
 import { PaymentForm } from "@components/PaymentForm"
 import { fetchProductsInCart } from "@utils/actions/orders"
 
@@ -8,6 +9,8 @@ export const metadata = {
   description:
     "Complete your purchase by entering your payment details.",
 };
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
 export default async function Payment() {
   const { userId } = auth();
@@ -24,12 +27,21 @@ export default async function Payment() {
 
   const totalAmount = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
+  const paymentIntent = await stripe.paymentIntents.create({
+    amount: Math.round(totalAmount * 100), // Convert to cents
+    currency: "USD",
+    metadata: { userId: user.id },
+  })
+
+  if (paymentIntent.client_secret == null) {
+    throw Error("Stripe failed to create payment intent")
+  }
+
   return (
     <div className="container mx-auto px-4 my-10">
       <PaymentForm
         cartItems={cartItems}
-        totalAmount={totalAmount}
-        userId={user.id}
+        clientSecret={paymentIntent.client_secret}
       />
     </div>
   )

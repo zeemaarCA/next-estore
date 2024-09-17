@@ -38,7 +38,7 @@ export default async function Products({ searchParams }) {
 							<th>Actions</th>
 						</tr>
 					</thead>
-					<tbody className="bg-white dark:bg-base-100">
+					<tbody className="bg-white dark:bg-gray-700">
 						{products.map((product) => (
 							<tr key={product.id} className="hover">
 								<th>

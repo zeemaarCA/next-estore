@@ -174,10 +174,10 @@ export default function EditProduct({ params }) {
 				child="Update Product"
 			/>
 
-			<div className="bg-invert px-4 py-8 shadow-sm mt-4 rounded-md">
+			<div className="px-4 py-8 shadow-sm mt-4 rounded-md">
 				<Title title="Update Product" />
 
-				<div className="product-form">
+				<div className="product-form bg-white dark:bg-gray-700 px-4 py-8 rounded-md">
 					{isFetching ? (
 						<div className="flex flex-col justify-center items-center">
 							Fetching Product...

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { MdDashboard } from "react-icons/md";
 import { IoBagCheck, IoDocumentTextOutline } from "react-icons/io5";
+import { MdOutlinePayment } from "react-icons/md";
 import { PiUsersFourDuotone } from "react-icons/pi";
 import { FaBox } from "react-icons/fa";
 import { useState } from "react";
@@ -51,12 +52,17 @@ export default function Sidebar() {
 		{
 			title: "Orders",
 			icon: <IoBagCheck className="w-5 h-5" />,
-			href: "#",
+			href: "/dashboard/orders",
+		},
+		{
+			title: "Payments",
+			icon: <MdOutlinePayment className="w-5 h-5" />,
+			href: "/dashboard/payments",
 		},
 		{
 			title: "Customers",
 			icon: <PiUsersFourDuotone className="w-5 h-5" />,
-			href: "#",
+			href: "/dashboard/customers",
 		},
 		{
 			title: "Blog Posts",
@@ -73,7 +79,7 @@ export default function Sidebar() {
 					data-drawer-toggle="sidebar-multi-level-sidebar"
 					aria-controls="sidebar-multi-level-sidebar"
 					type="button"
-					className={`btn-theme mt-4 sm:!hidden`}
+					className={`btn-theme mt-12 sm:!hidden`}
 					onClick={() => setIsSidebarOpen(!isSidebarOpen)}
 				>
 					<span className="sr-only">Open sidebar</span>
@@ -94,13 +100,13 @@ export default function Sidebar() {
 			</div>
 			<aside
 				id="sidebar-multi-level-sidebar"
-				className={`fixed bottom-0 left-0 z-40 w-64 h-[calc(100vh-96px)] transition-transform -translate-x-full sm:translate-x-0 ${
+				className={`fixed bottom-0 left-0 z-40 w-64 h-[calc(100vh-65px)] transition-transform -translate-x-full sm:translate-x-0 ${
 					isSidebarOpen ? "translate-x-0" : ""
 				}`}
 				aria-label="Sidebar"
 			>
-				<div className="h-full px-3 py-4 overflow-y-auto bg-base-100 dark:bg-base-100">
-					<ul className="font-medium divide-y divide-gray-300 dark:divide-gray-600 pl-0">
+				<div className="h-full px-3 py-4 overflow-y-auto bg-white dark:bg-base-100 border-r border-gray-200 dark:border-gray-700">
+					<ul className="font-medium pl-0">
 						{navLinks.map((link) => (
 							<li key={link.title} className="py-2 list-none select-none">
 								<div
@@ -115,7 +121,7 @@ export default function Sidebar() {
 									</span>
 									{link.subLinks && (
 										<svg
-											className={`w-4 h-4 transition-transform ${
+											className={`w-6 h-6 transition-transform ${
 												openMenu === link.title ? "transform rotate-180" : ""
 											}`}
 											aria-hidden="true"

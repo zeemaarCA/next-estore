@@ -44,3 +44,27 @@ export const createPayment = async (userId, paymentIntent) => {
     throw new Error("Failed to create payment record");
   }
 };
+
+export const getPayments = async (userId) => {
+  try {
+    await connect();
+    const rawpayments = await Payment.find({ userId }).lean();
+    const payments = JSON.parse(JSON.stringify(rawpayments));
+    return payments;
+  } catch (err) {
+    console.error(err);
+    throw new Error("Failed to get payments");
+  }
+};
+
+export const getAllPayments = async () => {
+  try {
+    await connect();
+    const rawallpayments = await Payment.find().lean();
+    const allpayments = JSON.parse(JSON.stringify(rawallpayments));
+    return allpayments;
+  } catch (err) {
+    console.error(err);
+    throw new Error("Failed to get payments");
+  }
+};

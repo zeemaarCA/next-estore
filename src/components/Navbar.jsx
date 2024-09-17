@@ -42,7 +42,6 @@ export default function Navbar() {
 	const { theme } = useTheme();
 	const logo = theme === "dark" ? logoDark : logoLight;
 	const dispatch = useDispatch();
-	// console.log(user.id)
 
 	useEffect(() => {
 		const handleRouteChangeStart = () => setLoading(true);
@@ -73,28 +72,26 @@ export default function Navbar() {
 	// 	}
 	// }, [isSignedIn, user, dispatch, currentUser]);
 
-
-	useEffect(() => {
-    const fetchUserDetails = async () => {
-      if (isSignedIn && user && currentUser) {
-        try {
-          dispatch(signInStart());
-          const response = await fetch(`/api/users/${user.id}`);
-          if (response.ok) {
-            const dbUserData = await response.json();
-            dispatch(signInSuccess({ ...currentUser, ...dbUserData }));
-          } else {
-            throw new Error('Failed to fetch user details');
-          }
-        } catch (error) {
-          console.error("Error fetching user details:", error);
-          dispatch(updateFailure(error.message));
-        }
+useEffect(() => {
+  const fetchUserDetails = async () => {
+    if (isSignedIn) {
+      try {
+        dispatch(signInStart());
+        const response = await fetch(`/api/users/${user.id}`);
+				const data = await response.json();
+				dispatch(signInSuccess(data));
+        // ... rest of the code
+      } catch (error) {
+        console.error("Error fetching user details:", error);
       }
-    };
+    } else {
+      console.log("Conditions not met for fetching user details.");
+    }
+  };
 
-    fetchUserDetails();
-  }, [isSignedIn, user, dispatch]);
+  fetchUserDetails();
+}, [dispatch, user]);
+
 
 	useEffect(() => {
 		if (!isSignedIn && currentUser) {
@@ -218,6 +215,8 @@ export default function Navbar() {
 									},
 								},
 							}}
+							userProfileMode="navigation"
+							userProfileUrl="/profile"
 						/>
 					</SignedIn>
 					<SignedOut>

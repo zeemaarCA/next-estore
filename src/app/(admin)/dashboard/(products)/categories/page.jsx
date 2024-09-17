@@ -14,6 +14,7 @@ export default function Categories() {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [isEditing, setIsEditing] = useState(false);
 	const [selectedCategory, setSelectedCategory] = useState(null);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const openModal = () => {
 		setIsModalOpen(true);
@@ -35,6 +36,7 @@ export default function Categories() {
 	const handleSubmit = async (e) => {
 		e.preventDefault(); // Prevent the default form behavior
 		setIsSubmitting(true);
+		setIsLoading(true);
 
 		try {
 			const url = isEditing
@@ -54,6 +56,7 @@ export default function Categories() {
 
 			if (response.ok) {
 				const updatedCategory = await response.json();
+				setIsLoading(false);
 
 				if (isEditing) {
 					// Update the category data with the new edited data
@@ -68,6 +71,7 @@ export default function Categories() {
 				} else {
 					setCategoryData((prevData) => [...prevData, updatedCategory]);
 					toast.success("Category created successfully");
+					setIsLoading(false);
 				}
 
 				// Clear the form fields
@@ -85,6 +89,7 @@ export default function Categories() {
 			toast.error("Error updating category");
 		} finally {
 			setIsSubmitting(false);
+			setIsLoading(false);
 		}
 	};
 
@@ -147,7 +152,7 @@ export default function Categories() {
 				</Button>
 			</div>
 
-			<div className="overflow-x-auto container mx-auto">
+			<div className="overflow-x-auto container mx-auto bg-white dark:bg-base-100 relative rounded-md">
 				<table className="table">
 					{/* head */}
 					<thead className="bg-invert">
@@ -163,7 +168,7 @@ export default function Categories() {
 							<th>Actions</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody className="bg-white dark:bg-gray-700">
 						{categoryData.map((category) => (
 							<tr key={category._id} className="hover">
 								<th>
@@ -214,6 +219,7 @@ export default function Categories() {
 					categories={categories}
 					setCategories={setCategories}
 					handleSubmit={handleSubmit}
+					isLoading={isLoading}
 				/>
 			</div>
 		</>

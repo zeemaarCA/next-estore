@@ -174,10 +174,10 @@ export default function EditBlog({ params }) {
         child="Update Blog"
       />
 
-      <div className="bg-invert px-4 py-8 shadow-sm mt-4 rounded-md">
+      <div className="px-4 py-8 shadow-sm mt-4 rounded-md">
         <Title title="Update Blog" />
 
-        <div className="product-form">
+        <div className="product-form bg-white dark:bg-gray-700 px-4 py-8 rounded-md">
           {isFetching ? (
             <div className="flex flex-col justify-center items-center">
               Fetching Post...
