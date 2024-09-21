@@ -35,6 +35,19 @@ export default function Categories() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault(); // Prevent the default form behavior
+
+		if (!categories.categoryName.trim()) {
+			toast.error("Category name cannot be empty");
+			return;
+		}
+
+		// Check if the form data has changed in edit mode
+		if (isEditing && categories.categoryName === selectedCategory.category && categories.isActive === selectedCategory.isActive) {
+			toast.error("No changes made to the category");
+			return;
+		}
+
+
 		setIsSubmitting(true);
 		setIsLoading(true);
 
@@ -152,8 +165,8 @@ export default function Categories() {
 				</Button>
 			</div>
 
-			<div className="overflow-x-auto container mx-auto bg-white dark:bg-base-100 relative rounded-md">
-				<table className="table">
+			<div className="overflow-x-auto rounded-lg">
+				<table className="table border border-gray-200 dark:border-gray-700">
 					{/* head */}
 					<thead className="bg-invert">
 						<tr>

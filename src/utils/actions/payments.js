@@ -15,7 +15,7 @@ export const createPayment = async (userId, paymentIntent) => {
       return existingPayment;
     }
 
-    const user = await User.findOne({ userId: userId }).lean();
+    const user = await User.findOne({ clerkId: userId }).lean();
 
     if (!user) {
       throw new Error("User not found");

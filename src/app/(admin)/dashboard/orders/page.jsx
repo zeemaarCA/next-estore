@@ -191,7 +191,7 @@ export default function Orders() {
                           className={`badge badge-neutral gap-2 ${order.orderStatus === "Processing"
                             ? "badge-warning"
                             : order.orderStatus === "Shipped"
-                              ? "badge-info"
+                              ? "badge-accent"
                               : order.orderStatus === "Delivered"
                                 ? "badge-success"
                                 : order.orderStatus === "Cancelled"

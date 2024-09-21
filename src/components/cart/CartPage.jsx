@@ -13,6 +13,7 @@ import toast from "react-hot-toast";
 import Link from "next/link";
 import CartItem from "./CartItem";
 import { useEffect } from "react";
+import { IoBagCheck } from "react-icons/io5";
 
 export default function CartPage({ cartfromserver }) {
 	const { userId } = useAuth();
@@ -170,7 +171,7 @@ export default function CartPage({ cartfromserver }) {
 									<span>Total cost</span>
 									<span>${calculateTotalPrice()}</span>
 								</div>
-								<Link href={"/checkout"} className="btn-theme w-full">Checkout</Link>
+								<Link href={"/checkout"} className="btn-theme w-full">Checkout <IoBagCheck /></Link>
 							</div>
 						</div>
 					</div>

@@ -35,7 +35,7 @@ export default function Customers() {
       <div className="flex">
         <Title title="Customers" />
       </div>
-      <div className="payment-table bg-whitedark:bg-gray-700 relative rounded-md">
+      <div className="payment-table bg-white dark:bg-gray-700 relative rounded-md">
         {loading ? (
           <div className="flex justify-center items-center">
             <span className="loading loading-spinner text-primary"></span>
@@ -81,7 +81,7 @@ export default function Customers() {
                     <td>{customer.city || "N/A"}</td>
                     <td>{customer.country || "N/A"}</td>
                     <td>{customer.address || "N/A"}</td>
-                    <td className="flex relative gap-1 flex-nowrap items-center">
+                    <td>
                       <span className="badge badge-success">Active</span>
                     </td>
                   </tr>

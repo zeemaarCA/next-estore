@@ -3,10 +3,14 @@
 import { useSelector } from "react-redux";
 import cartSlice from "@redux/cart/cartSlice";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function CheckoutDetails() {
 	const cartItems = useSelector((state) => state.cart.items);
 	const totalQuantity = useSelector((state) => state.cart.items.length);
+
+	const router = useRouter();
+
 
 	const calculateTotalPrice = () => {
 		const totalPrice = cartItems.reduce(

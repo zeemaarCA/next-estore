@@ -25,7 +25,7 @@ const Search = ({ placeholder, count }) => {
 	return (
 		<div className="flex flex-col w-full md:w-auto">
 			<div>
-				<label className="relative input input-bordered h-11 flex items-center gap-2">
+				<label className="relative input input-bordered h-11 flex items-center justify-end gap-2">
 					<input
 						type="text"
 						placeholder={placeholder}

@@ -148,6 +148,13 @@ img {
   @apply text-gray-600 dark:text-gray-300
 }
 
+.invert-lgray-text {
+  @apply text-gray-400 dark:text-gray-300
+}
+.invert-black-text {
+  @apply text-gray-700 dark:text-gray-200
+}
+
 .btn-theme {
   @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus:ring-primary/50 bg-primary text-gray-100 dark:text-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 relative hover:bg-cgreen-800 dark:hover:bg-supernova-500 h-10 px-4 py-2
 }
@@ -166,6 +173,35 @@ img {
   @apply text-sm text-primary font-medium tracking-tight bg-primary/20 px-2 py-1 rounded-full mb-2 inline-block
 }
 
+.pill-success{
+  @apply text-xs text-green-600 font-medium tracking-tight bg-green-700/10 px-2 py-1 rounded-full
+}
+.pill-danger{
+  @apply text-xs text-red-600 font-medium tracking-tight bg-red-700/10 px-2 py-1 rounded-full
+}
+.pill-info{
+  @apply text-xs text-blue-600 font-medium tracking-tight bg-blue-700/10 px-2 py-1 rounded-full
+}
+.pill-warning{
+  @apply text-xs text-yellow-600 font-medium tracking-tight bg-yellow-700/10 px-2 py-1 rounded-full
+}
+.pill-primary{
+  @apply text-xs text-primary font-medium tracking-tight bg-primary/10 px-2 py-1 rounded-full
+}
+.pill-secondary{
+  @apply text-xs text-cyan-600 font-medium tracking-tight bg-cyan-700/10 px-2 py-1 rounded-full
+}
+.pill-neutral{
+  @apply text-xs text-indigo-600 font-medium tracking-tight bg-indigo-700/10 px-2 py-1 rounded-full
+}
+.pill-gray{
+  @apply text-xs text-gray-600 font-medium tracking-tight bg-gray-700/10 px-2 py-1 rounded-full
+}
+
 .react-select__control{
   @apply h-[47px] !rounded-lg
+}
+
+td{
+  @apply text-gray-600 dark:text-gray-300
 }

@@ -32,7 +32,7 @@ export const createOrder = async (userId, paymentIntent) => {
       return existingOrder;
     }
 
-    const user = await User.findOne({ userId: userId }).lean();
+    const user = await User.findOne({ clerkId: userId }).lean();
 
     if (!user) {
       throw new Error("User not found");
@@ -56,7 +56,7 @@ export const createOrder = async (userId, paymentIntent) => {
       amount: paymentIntent.amount,
       currency: paymentIntent.currency,
       paymentStatus: paymentIntent.status,
-      orderStatus: "pending",
+      orderStatus: "Pending",
     });
 
     await order.save();
@@ -97,3 +97,102 @@ export const getAllOrders = async () => {
     throw new Error("Failed to get orders");
   }
 };
+
+
+// get current orders after payment
+import { Types } from 'mongoose';
+
+export const getRecentOrders = async () => {
+  try {
+    await connect();
+
+    // Calculate the timestamp for one hour ago
+    const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
+
+    // Perform aggregation to join the orders with payments, users, and product images
+    const recentOrders = await Order.aggregate([
+      {
+        $match: {
+          orderStatus: "Pending",
+          createdAt: { $gte: oneHourAgo }
+        }
+      },
+      {
+        $lookup: {
+          from: 'payments',
+          localField: 'orderId',
+          foreignField: 'sessionId',
+          as: 'paymentDetails'
+        }
+      },
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'userId',
+          foreignField: 'clerkId',
+          as: 'userDetails'
+        }
+      },
+      {
+        $unwind: "$products"
+      },
+      {
+        $addFields: {
+          "products.productId": {
+            $convert: {
+              input: "$products.productId",
+              to: "objectId",
+              onError: null, // Handle cases where conversion fails
+              onNull: null
+            }
+          }
+        }
+      },
+      {
+        $lookup: {
+          from: 'products',
+          localField: 'products.productId',
+          foreignField: '_id',
+          as: 'productDetails'
+        }
+      },
+      {
+        $unwind: "$productDetails" // Ensure we have a single productDetails object
+      },
+      {
+        $project: {
+          orderId: 1,
+          "products.productId": 1,
+          "products.title": 1,
+          "products.quantity": 1,
+          "productDetails.price": 1,
+          "productDetails.productImage": 1, // Directly extract the productImage field
+          paymentDetails: { $arrayElemAt: ["$paymentDetails", 0] },
+          userDetails: { $arrayElemAt: ["$userDetails", 0] }
+        }
+      },
+      {
+        $group: {
+          _id: "$_id",
+          orderId: { $first: "$orderId" },
+          products: {
+            $push: {
+              productId: "$products.productId",
+              title: "$products.title",
+              quantity: "$products.quantity",
+              productImage: "$productDetails.productImage",
+              price: "$productDetails.price"
+            }
+          },
+          paymentDetails: { $first: "$paymentDetails" },
+          userDetails: { $first: "$userDetails" }
+        }
+      }
+    ]);
+    return recentOrders;
+  } catch (err) {
+    console.error(err);
+    throw new Error("Failed to fetch recent orders");
+  }
+};
+
