@@ -12,7 +12,15 @@ const cartItemSchema = new mongoose.Schema({
 
 const cartSchema = new mongoose.Schema({
     userId: { type: String, required: true }, // Changed to String to match Clerk ID
-    items: [cartItemSchema]
+    items: [cartItemSchema],
+    isPromoApplied: {
+        type: Boolean,
+        default: false
+    },
+    discount: {
+        type: Number,
+        default: 0
+    },
 }, { timestamps: true });
 
 const Cart = mongoose.models.Cart || mongoose.model('Cart', cartSchema);

@@ -134,7 +134,7 @@ useEffect(() => {
 			<div className="navbar container mx-auto bg-base-100">
 				<div className="navbar-start">
 					<div className="dropdown">
-						<div tabIndex={0} role="button" className="btn lg:hidden">
+						<div tabIndex={0} role="button" className="btn lg:hidden mr-[10px]">
 							<HiMenuAlt1 />
 						</div>
 						<ul className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">

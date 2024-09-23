@@ -11,6 +11,9 @@ export default function CheckoutDetails() {
 
 	const router = useRouter();
 
+	if (totalQuantity === 0) {
+		router.push("/shop");
+	}
 
 	const calculateTotalPrice = () => {
 		const totalPrice = cartItems.reduce(

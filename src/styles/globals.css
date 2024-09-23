@@ -73,7 +73,7 @@ img {
 }
 
 .head_title h1 {
-  @apply uppercase
+  @apply uppercase font-bold
 }
 
 .border-theme {

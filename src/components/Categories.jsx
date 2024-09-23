@@ -15,7 +15,7 @@ export default function Categories() {
 					linkText="Show more"
 					link="/categories"
 				/>
-				<div className="grid grid-cols-12 grid-rows-6 gap-4">
+				<div className="grid grid-cols-12 grid-rows-2 lg:grid-rows-6 gap-4">
 					<div className="relative col-span-12 sm:col-span-6 lg:col-span-6 lg:row-span-6 h-[350px] lg:h-[720px]">
 						<Link href="/shop">
 							<Image

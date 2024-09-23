@@ -28,33 +28,46 @@ export default function CheckoutForm({ userDataForRedux }) {
 
 
 	const [formData, setFormData] = useState({});
+	const [originalFormData, setOriginalFormData] = useState({});
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
 	useEffect(() => {
 		if (currentUser) {
-			// If customerData exists in Redux, update the formData state
-			setFormData({
-				fullName: currentUser.fullName || "",
-				phone: currentUser.phone || "",
-				city: currentUser.city || "",
-				country: currentUser.country || "",
-				address: currentUser.address || "",
-			});
+				// Set initial form data from currentUser and save it in originalFormData
+				const initialData = {
+						fullName: currentUser.fullName || "",
+						phone: currentUser.phone || "",
+						city: currentUser.city || "",
+						country: currentUser.country || "",
+						address: currentUser.address || ""
+				};
+				setFormData(initialData);
+				setOriginalFormData(initialData);
 		} else {
-			// If no customerData in Redux, use default values
-			setFormData({
-				fullName: "",
-				phone: "",
-				city: "",
-				country: "",
-				address: "",
-			});
+				// Default empty form if no currentUser data
+				const defaultData = {
+						fullName: "",
+						phone: "",
+						city: "",
+						country: "",
+						address: ""
+				};
+				setFormData(defaultData);
+				setOriginalFormData(defaultData);
 		}
-	}, [currentUser?.emailAddress]);
+}, [currentUser?.emailAddress]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		setIsSubmitting(true);
+
+		if (JSON.stringify(formData) === JSON.stringify(originalFormData)) {
+			router.push("/process-payment");
+			return;
+		}
+
+
 		setIsSubmitting(true);
 		setIsProcessingPayment(true);
 

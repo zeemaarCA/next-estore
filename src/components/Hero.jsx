@@ -19,20 +19,29 @@ export default function Hero() {
 
 	return (
 		<>
-			<section className="relative flex items-center justify-center border-b">
+			<section className="relative flex items-center justify-center">
 				<div className="relative items-center w-full py-12 lg:py-20">
 					<div className="text-center">
 						<span className="badge-theme select-none">Ultimate Shopping Experience</span>
 
-						<h1 className="text-gray-600 dark:text-gray-300 mt-8 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium leading-none select-none drop-shadow-md">
+						<motion.h1
+							initial={{ filter: "blur(8px) drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.1))" }}
+							animate={{ filter: "blur(0px) drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.1))" }}
+							transition={{ duration: 1 }}
+							className="text-gray-600 dark:text-gray-300 mt-8 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium leading-none select-none"
+						>
 							Latest Collection{" "}
 							<span className="block text-primary">Now Available.</span>
-						</h1>
+						</motion.h1>
 
-						<p className="max-w-xl mx-auto mt-4 text-base font-light lg:text-lg text-muted-foreground tracking-tighter select-none">
+						<motion.p
+							initial={{filter: "blur(8px)" }}
+							animate={{filter: "blur(0px)" }}
+							transition={{ duration: 1 }}
+							className="max-w-xl mx-auto mt-4 text-base font-light lg:text-lg text-muted-foreground tracking-tighter select-none">
 							Explore our collection of latest smart phones and accessories. Get
 							your hands on the latest trends and products with Decora.
-						</p>
+						</motion.p>
 						<div className="flex items-center gap-x-5 w-full justify-center mt-5 relative z-10">
 							<motion.div
 								initial="default" whileHover="hover"
@@ -40,7 +49,7 @@ export default function Hero() {
 
 								<Link href="/shop" className="btn-theme select-none shadow-md overflow-hidden">
 									<motion.span variants={textMotion}>
-									Shop Now
+										Shop Now
 									</motion.span>
 									<motion.div
 										variants={iconVariants}

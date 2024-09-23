@@ -3,6 +3,7 @@ import Search from "@components/Search";
 import PriceFilter from "@components/PriceFilter";
 import SingleProduct from "@components/SingleProduct";
 import { fetchSiteProducts } from "@utils/actions/product";
+import SectionTitle from "@components/SectionTitle";
 
 export const metadata = {
 	title: "Shop",
@@ -23,6 +24,7 @@ export default async function Shop({ searchParams }) {
 		<>
 			<section className="py-24 relative">
 				<div className="w-full container mx-auto px-4">
+					<SectionTitle title="Shop our collection" />
 					<div className="flex flex-col gap-3 md:flex-row justify-between items-center bg-primary/15 rounded-md p-4 mb-6 shadow-sm">
 						<PriceFilter />
 						<Search placeholder="Search for a product..." count={count} />

@@ -109,7 +109,9 @@ export const getUserOrderCounts = async () => {
       }
     ]);
 
-    return result;
+    const formattedResults = JSON.parse(JSON.stringify(result));
+
+    return formattedResults;
   } catch (error) {
     console.error('Error fetching user order counts:', error);
     throw error;

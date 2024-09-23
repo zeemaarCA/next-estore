@@ -12,19 +12,29 @@ import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import Link from "next/link";
 import CartItem from "./CartItem";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { IoBagCheck } from "react-icons/io5";
+import { LogsIcon } from "lucide-react";
+import { MdOutlineCelebration } from "react-icons/md";
 
 export default function CartPage({ cartfromserver }) {
 	const { userId } = useAuth();
 	const dispatch = useDispatch();
 	const cartItems = useSelector((state) => state.cart.items) || [];
 	const totalQuantity = useSelector(selectTotalQuantity);
+	const [promotionCode, setPromotionCode] = useState("");
+	const [loading, setLoading] = useState(false);
+	const [arePromoApplied, setArePromoApplied] = useState(false);
+	const [discount, setDiscount] = useState(0);
 	// console.log("cartItemsinRedux", cartItems);
 	useEffect(() => {
 		if (cartfromserver) {
 			dispatch(setCartItems(cartfromserver.items));
 		}
+		const CheckIfPromoAppliedFromServer = cartfromserver.isPromoApplied;
+		const discountFromServer = cartfromserver.discount;
+		setDiscount(discountFromServer);
+		setArePromoApplied(CheckIfPromoAppliedFromServer);
 	}, [dispatch, cartfromserver]);
 	const handleUpdateQuantity = async (itemId, newQuantity) => {
 		try {
@@ -47,6 +57,51 @@ export default function CartPage({ cartfromserver }) {
 			console.error("Error updating cart:", err);
 		}
 	};
+
+	// promotion code Logic
+
+	const applyPromotionCode = async () => {
+		if (promotionCode === "") {
+			toast.error("Please enter a promotion code");
+			return;
+		}
+
+		try {
+			setLoading(true);
+			const res = await fetch(`/api/cart/promo`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ promotionCode }),
+			});
+
+			if (!res.ok) {
+				const data = await res.json();
+				toast.error(data.message);
+				setLoading(false);
+				setArePromoApplied(false);
+				return;
+			}
+
+			const data = await res.json();
+
+			// set discount from database into state
+
+			// Update Redux with the updated cart items after applying the promo code
+			dispatch(setCartItems(data.cart.items));
+			setArePromoApplied(true);
+
+			toast.success(data.message);
+			setLoading(false);
+		} catch (err) {
+			console.error("Error applying promotion code:", err);
+			toast.error("Error applying promotion code");
+			setLoading(false);
+		}
+	};
+
+
 
 	const handleDeleteItem = async (itemId) => {
 		try {
@@ -110,6 +165,13 @@ export default function CartPage({ cartfromserver }) {
 									Total
 								</h3>
 							</div>
+							{arePromoApplied && (
+								<span className="badge-theme-sm !bg-blue-100 !text-blue-800 max-w-max !flex items-center">
+									<MdOutlineCelebration className="mr-1" />
+									Promo Code Applied - {discount}% off
+								</span>
+							)}
+
 							<CartItem
 								cartItems={cartItems}
 								handleDeleteItem={handleDeleteItem}
@@ -140,18 +202,19 @@ export default function CartPage({ cartfromserver }) {
 									${calculateTotalPrice()}
 								</span>
 							</div>
-							<div>
+							{/* <div>
 								<label className="font-medium inline-block mb-3 text-sm uppercase">
 									Shipping
 								</label>
 								<select className="select select-bordered w-full max-w-xs">
 									<option disabled selected>
-										Who shot first?
+										Select Shipping Method
 									</option>
-									<option>Han Solo</option>
-									<option>Greedo</option>
+									<option>Leopard</option>
+									<option>DHL</option>
+									<option>UPS</option>
 								</select>
-							</div>
+							</div> */}
 							<div className="pt-10 pb-5">
 								<label
 									htmlFor="promo"
@@ -161,17 +224,32 @@ export default function CartPage({ cartfromserver }) {
 								</label>
 								<input
 									type="text"
-									placeholder="Type here"
+									placeholder={arePromoApplied ? "Promo code applied" : "Code"}
+									disabled={arePromoApplied}
 									className="input input-bordered w-full"
+									onChange={(e) => setPromotionCode(e.target.value)}
 								/>
 							</div>
-							<button className="btn-theme w-full">Apply</button>
+							{loading ? (
+								<button className="btn-theme w-full" disabled><span className="loading loading-spinner"></span></button>
+							) : (
+								<button
+									className="btn-theme w-full"
+									disabled={arePromoApplied}
+										onClick={applyPromotionCode}>
+										{arePromoApplied ? "Applied" : "Apply"}
+								</button>
+							)}
 							<div className="border-t mt-8">
-								<div className="flex font-semibold justify-between py-6 text-sm uppercase">
+								<div className="flex font-semibold justify-between pt-6 pb-1 text-sm uppercase">
+									<span>Discount</span>
+									<span>{discount}%</span>
+								</div>
+								<div className="flex font-semibold justify-between py-2 text-sm uppercase mb-4">
 									<span>Total cost</span>
 									<span>${calculateTotalPrice()}</span>
 								</div>
-								<Link href={"/checkout"} className="btn-theme w-full">Checkout <IoBagCheck /></Link>
+								<Link href={"/checkout"} className="btn-theme w-full"><IoBagCheck className="w-5 h-5 mr-1" /> Checkout</Link>
 							</div>
 						</div>
 					</div>

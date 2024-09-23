@@ -130,6 +130,7 @@ export default function Dashboard() {
       setUsers(userDataForDashboard.users);
       setTotalUsers(userDataForDashboard.totalUsers);
       setLastMonthUsers(userDataForDashboard.lastMonthUsers);
+      setLoading(false);
     };
 
     fetchUserData();
@@ -142,6 +143,7 @@ export default function Dashboard() {
       setOrders(fetchedOrders.orders);
       setTotalOrders(fetchedOrders.totalOrders);
       setLastMonthOrders(fetchedOrders.lastMonthOrders);
+      setLoading(false);
     };
 
     fetchUserOrders();
@@ -155,27 +157,36 @@ export default function Dashboard() {
       setProducts(fetchedTotalProducts.products);
       setTotalProducts(fetchedTotalProducts.totalProducts);
       setLastMonthProducts(fetchedTotalProducts.lastMonthProducts);
+      setLoading(false);
     };
 
     fetchTotalProducts();
   },
     []);
 
+    useEffect(() => {
+      const fetchUserOrderCounts = async () => {
+        try {
+          setLoading(true); // Set loading to true before data fetching starts
+          const fetchedUserOrderCounts = await getUserOrderCounts();
+          setUserOrdersCounts(fetchedUserOrderCounts); // Set data
+        } catch (error) {
+          console.error("Error fetching user order counts:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchUserOrderCounts();
+    }, []);
+
+
   useEffect(() => {
     setLoading(true);
-    const fetchUserOrderCounts = async () => {
-      const fetchedUserOrderCounts = await getUserOrderCounts();
-      console.log(fetchedUserOrderCounts);
-      setUserOrdersCounts(fetchedUserOrderCounts);
-    };
-
-    fetchUserOrderCounts();
-  }, []);
-
-  useEffect(() => {
     const fetchTotalSales = async () => {
       const totalSale = await totalSalesAmount();
       setTotalSales(totalSale);
+      setLoading(false);
     };
 
     fetchTotalSales();
@@ -316,16 +327,21 @@ export default function Dashboard() {
               {userOrdersCounts.length < 0 ? (
                 <p className="text-center">No customers found</p>
               ) : (
-              <table className="table">
-                {/* head */}
-                <thead className="bg-invert">
-                  <tr>
-                    <th></th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Orders</th>
-                  </tr>
-                </thead>
+                loading ? (
+                  <div className="flex justify-center items-center min-h-24">
+                    <span className="loading loading-spinner loading-sm"></span>
+                  </div>
+                ) : (
+                  <table className="table">
+                    {/* head */}
+                    <thead className="bg-invert">
+                      <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Orders</th>
+                      </tr>
+                    </thead>
                     <tbody className="bg-invert">
                       {userOrdersCounts.map((usercount, index) => (
                         <tr key={usercount._id}>
@@ -336,7 +352,8 @@ export default function Dashboard() {
                         </tr>
                       ))}
                     </tbody>
-              </table>
+                  </table>
+                )
               )}
             </div>
 
@@ -345,44 +362,44 @@ export default function Dashboard() {
               {orders.length < 0 ? (
                 <p className="text-center">No order found</p>
               ) : (
-              <table className="table">
-                {/* head */}
-                <thead className="bg-invert">
-                  <tr>
-                    <th></th>
-                    <th>Email</th>
-                    <th>Amount</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                    <tbody className="bg-invert">
-                      {orders.map((order, index) => (
-                        <tr key={order._id}>
-                          <td>{index + 1}</td>
-                          <td>{order.email}</td>
-                          <td>{order.amount}</td>
-                          <td>
+                <table className="table">
+                  {/* head */}
+                  <thead className="bg-invert">
+                    <tr>
+                      <th></th>
+                      <th>Email</th>
+                      <th>Amount</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-invert">
+                    {orders.map((order, index) => (
+                      <tr key={order._id}>
+                        <td>{index + 1}</td>
+                        <td>{order.email}</td>
+                        <td>{order.amount}</td>
+                        <td>
                           <span
-                          className={`gap-2 ${order.orderStatus === "Processing"
-                            ? "pill-warning"
-                            : order.orderStatus === "Shipped"
-                              ? "pill-secondary"
-                              : order.orderStatus === "Delivered"
-                                ? "pill-success"
-                                : order.orderStatus === "Cancelled"
-                                  ? "pill-danger"
-                                  : order.orderStatus === "Pending"
-                                    ? "pill-gray"
-                                    : "dark"
-                            }`}
-                        >
-                          {order.orderStatus || "Processing"}
-                        </span>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-              </table>
+                            className={`gap-2 ${order.orderStatus === "Processing"
+                              ? "pill-warning"
+                              : order.orderStatus === "Shipped"
+                                ? "pill-secondary"
+                                : order.orderStatus === "Delivered"
+                                  ? "pill-success"
+                                  : order.orderStatus === "Cancelled"
+                                    ? "pill-danger"
+                                    : order.orderStatus === "Pending"
+                                      ? "pill-gray"
+                                      : "dark"
+                              }`}
+                          >
+                            {order.orderStatus || "Processing"}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               )}
             </div>
 

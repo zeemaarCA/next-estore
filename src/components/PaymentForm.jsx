@@ -23,13 +23,13 @@ export function PaymentForm({ cartItems, clientSecret }) {
 
   return (
     <div className="w-full mx-auto space-y-8 bg-invert p-6 shadow-md rounded-lg">
-      <div className="flex justify-between items-center">
-        <SectionTitle title="Confirm Payment" />
+      <div className="flex flex-col md:flex-row justify-between items-center">
+        <h1 className="uppercase text-xl md:text-2xl lg:text-3xl font-bold">Confirm Payment</h1>
         <div className="text-xl font-bold">
           Total: {formatCurrency(totalAmount)}
         </div>
       </div>
-      <div className="flex justify-between items-start gap-2">
+      <div className="flex flex-col md:flex-row justify-between items-start gap-8 md:gap-2">
         <div className="flex flex-col gap-4 flex-1">
           {cartItems.map((item) => (
             <div key={item._id} className="flex gap-4 items-center">
@@ -54,7 +54,7 @@ export function PaymentForm({ cartItems, clientSecret }) {
             </div>
           ))}
         </div>
-        <div className="flex-1">
+        <div className="flex-1 w-full md:w-auto">
 
           <Elements options={{ clientSecret }} stripe={stripePromise}>
             <Form totalAmount={totalAmount} />
