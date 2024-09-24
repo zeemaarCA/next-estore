@@ -9,7 +9,8 @@ import ThemeAndClerkProvider from "@components/ThemeAndClerkProvider";
 export default function SiteLayout({ children }) {
   return (
 
-      <ClerkLoaded>
+    <ClerkLoaded>
+      <div className="flex flex-col min-h-screen">
         <Navbar />
         <div className="main">
           <div className="gradient" />
@@ -18,7 +19,8 @@ export default function SiteLayout({ children }) {
           <div className="flex-grow">{children}</div>
         </Suspense>
         <Footer />
+      </div>
 
-      </ClerkLoaded>
+    </ClerkLoaded>
   );
 }

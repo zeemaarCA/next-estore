@@ -1,5 +1,6 @@
 "use server"
 
+import { revalidatePath } from "next/cache.js";
 import Cart from "../models/cart.model.js";
 import { connect } from "../mongodb/mongoose.js";
 
@@ -13,6 +14,7 @@ export const fetchCart = async (userId) => {
       return null;
     }
 
+    revalidatePath("/cart"); // Revalidate the cart page
     return JSON.parse(JSON.stringify(cart)); // Serialize cart for the client
   } catch (err) {
     console.error("Error fetching cart items:", err);

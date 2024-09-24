@@ -29,6 +29,7 @@ import logoLight from "../../public/assets/logo-light.svg";
 import logoDark from "../../public/assets/logo-dark.svg";
 import { signInStart, signInSuccess, signoutSuccess } from "@redux/user/userSlice";
 import { useEffect, useState } from "react";
+import { setPromo } from "@redux/promo/promoSlice";
 
 export default function Navbar() {
 	const router = useRouter();
@@ -106,6 +107,10 @@ useEffect(() => {
 			fetchCart(user.id).then((cart) => {
 				if (cart) {
 					dispatch(setCartItems(cart.items));
+					dispatch(setPromo({
+						isPromoApplied: cart.isPromoApplied,
+						discount: cart.discount,
+					}));
 				}
 			});
 		}

@@ -7,34 +7,34 @@ import {
 	updateItemQuantity,
 	selectTotalQuantity,
 } from "@redux/cart/cartSlice";
+import { setPromo } from "@redux/promo/promoSlice";
 import { useAuth } from "@clerk/nextjs";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import Link from "next/link";
 import CartItem from "./CartItem";
 import { useEffect, useState } from "react";
-import { IoBagCheck } from "react-icons/io5";
-import { LogsIcon } from "lucide-react";
+import { IoArrowBackOutline, IoBagCheck } from "react-icons/io5";
 import { MdOutlineCelebration } from "react-icons/md";
+import EmptyCart from "@components/icons/EmptyCart";
 
 export default function CartPage({ cartfromserver }) {
 	const { userId } = useAuth();
 	const dispatch = useDispatch();
 	const cartItems = useSelector((state) => state.cart.items) || [];
+	const reduxDiscount = useSelector((state) => state.promo.discount);
+	const reduxPromoStatus = useSelector((state) => state.promo.isPromoApplied);
 	const totalQuantity = useSelector(selectTotalQuantity);
 	const [promotionCode, setPromotionCode] = useState("");
 	const [loading, setLoading] = useState(false);
-	const [arePromoApplied, setArePromoApplied] = useState(false);
-	const [discount, setDiscount] = useState(0);
-	// console.log("cartItemsinRedux", cartItems);
 	useEffect(() => {
 		if (cartfromserver) {
 			dispatch(setCartItems(cartfromserver.items));
+			dispatch(setPromo({
+        isPromoApplied: cartfromserver.isPromoApplied,
+        discount: cartfromserver.discount,
+      }));
 		}
-		const CheckIfPromoAppliedFromServer = cartfromserver.isPromoApplied;
-		const discountFromServer = cartfromserver.discount;
-		setDiscount(discountFromServer);
-		setArePromoApplied(CheckIfPromoAppliedFromServer);
 	}, [dispatch, cartfromserver]);
 	const handleUpdateQuantity = async (itemId, newQuantity) => {
 		try {
@@ -70,6 +70,7 @@ export default function CartPage({ cartfromserver }) {
 			setLoading(true);
 			const res = await fetch(`/api/cart/promo`, {
 				method: "POST",
+				cache: "no-store",
 				headers: {
 					"Content-Type": "application/json",
 				},
@@ -80,7 +81,10 @@ export default function CartPage({ cartfromserver }) {
 				const data = await res.json();
 				toast.error(data.message);
 				setLoading(false);
-				setArePromoApplied(false);
+				dispatch(setPromo({
+        isPromoApplied: false,
+        discount: 0,
+      }));
 				return;
 			}
 
@@ -90,13 +94,20 @@ export default function CartPage({ cartfromserver }) {
 
 			// Update Redux with the updated cart items after applying the promo code
 			dispatch(setCartItems(data.cart.items));
-			setArePromoApplied(true);
+			dispatch(setPromo({
+        isPromoApplied: true,
+        discount: data.discount,
+      }));
 
 			toast.success(data.message);
 			setLoading(false);
 		} catch (err) {
 			console.error("Error applying promotion code:", err);
 			toast.error("Error applying promotion code");
+			dispatch(setPromo({
+        isPromoApplied: false,
+        discount: 0,
+      }));
 			setLoading(false);
 		}
 	};
@@ -139,13 +150,21 @@ export default function CartPage({ cartfromserver }) {
 		return totalPrice.toFixed(2); // Return the total price rounded to 2 decimal places
 	};
 
+	const priceBeforePromo = () => {
+		const totalPrice = cartItems.reduce(
+			(total, item) => total + (item.price / 0.9) * (item.quantity || 1),
+			0
+		);
+
+		return totalPrice.toFixed(2); // Return the total price rounded to 2 decimal places
+	};
 	return (
 		<>
 			{cartItems.length > 0 ? (
 				<div className="container mx-auto px-4 mt-10">
 					<div className="flex flex-col md:flex-row flex-wrap shadow-md my-10">
 						<div className="w-full md:w-3/4 bg-invert px-10 py-10">
-							<div className="flex justify-between border-b pb-8">
+							<div className="flex justify-between border-b border-theme-gray pb-8">
 								<h1 className="font-semibold text-2xl">Shopping Cart</h1>
 								<h2 className="font-semibold text-2xl">
 									{totalQuantity} Items
@@ -165,10 +184,10 @@ export default function CartPage({ cartfromserver }) {
 									Total
 								</h3>
 							</div>
-							{arePromoApplied && (
+							{reduxPromoStatus && (
 								<span className="badge-theme-sm !bg-blue-100 !text-blue-800 max-w-max !flex items-center">
 									<MdOutlineCelebration className="mr-1" />
-									Promo Code Applied - {discount}% off
+									Promo Code Applied - {reduxDiscount}% off
 								</span>
 							)}
 
@@ -191,30 +210,23 @@ export default function CartPage({ cartfromserver }) {
 							</Link>
 						</div>
 						<div id="summary" className="w-full md:w-1/4 px-8 py-10">
-							<h1 className="font-semibold text-2xl border-b pb-8">
+							<h1 className="font-semibold text-2xl border-b border-theme-gray pb-8">
 								Order Summary
 							</h1>
 							<div className="flex justify-between mt-10 mb-5">
 								<span className="font-semibold text-sm uppercase">
 									Items {totalQuantity}
 								</span>
-								<span className="font-semibold text-sm">
-									${calculateTotalPrice()}
-								</span>
+								{reduxPromoStatus ? (
+									<span className="font-semibold text-sm">
+										${priceBeforePromo()}
+									</span>
+								) : (
+									<span className="font-semibold text-sm">
+										${calculateTotalPrice()}
+									</span>
+								)}
 							</div>
-							{/* <div>
-								<label className="font-medium inline-block mb-3 text-sm uppercase">
-									Shipping
-								</label>
-								<select className="select select-bordered w-full max-w-xs">
-									<option disabled selected>
-										Select Shipping Method
-									</option>
-									<option>Leopard</option>
-									<option>DHL</option>
-									<option>UPS</option>
-								</select>
-							</div> */}
 							<div className="pt-10 pb-5">
 								<label
 									htmlFor="promo"
@@ -224,8 +236,8 @@ export default function CartPage({ cartfromserver }) {
 								</label>
 								<input
 									type="text"
-									placeholder={arePromoApplied ? "Promo code applied" : "Code"}
-									disabled={arePromoApplied}
+									placeholder={reduxPromoStatus ? "Promo code applied" : "Code"}
+									disabled={reduxPromoStatus}
 									className="input input-bordered w-full"
 									onChange={(e) => setPromotionCode(e.target.value)}
 								/>
@@ -235,15 +247,15 @@ export default function CartPage({ cartfromserver }) {
 							) : (
 								<button
 									className="btn-theme w-full"
-									disabled={arePromoApplied}
-										onClick={applyPromotionCode}>
-										{arePromoApplied ? "Applied" : "Apply"}
+									disabled={reduxPromoStatus}
+									onClick={applyPromotionCode}>
+									{reduxPromoStatus ? "Applied" : "Apply"}
 								</button>
 							)}
 							<div className="border-t mt-8">
 								<div className="flex font-semibold justify-between pt-6 pb-1 text-sm uppercase">
 									<span>Discount</span>
-									<span>{discount}%</span>
+									<span>{reduxDiscount}%</span>
 								</div>
 								<div className="flex font-semibold justify-between py-2 text-sm uppercase mb-4">
 									<span>Total cost</span>
@@ -255,9 +267,17 @@ export default function CartPage({ cartfromserver }) {
 					</div>
 				</div>
 			) : (
-				<div className="container mx-auto mt-10">
-					<div className="flex justify-center">
-						<h1 className="font-semibold text-2xl">Your cart is empty</h1>
+				<div className="container min-h-40 mx-auto px-4 mt-10 mb-10">
+					<div className="flex justify-center items-center flex-col space-y-6 bg-invert py-20 max-w-lg mx-auto rounded-lg shadow-md">
+						<div className="empty-cart-icon">
+							<EmptyCart />
+						</div>
+						<h1 className="font-semibold text-2xl capitalize">Your cart is empty</h1>
+						<p className="invert-gray-text">Add some items to your cart and start shopping</p>
+						<Link href="/shop" className="btn-theme-outline">
+							<IoArrowBackOutline className="w-5 h-5 mr-1" />
+							Shop Now
+						</Link>
 					</div>
 				</div>
 			)}

@@ -1,9 +1,6 @@
 import Image from "next/image";
-export default function CartItem({
-	cartItems,
-	handleDeleteItem,
-	handleUpdateQuantity,
-}) {
+export default function CartItem({cartItems,handleDeleteItem,	handleUpdateQuantity,}) {
+
 	// console.log("CartItems received:", cartItems);
 	return (
 		<>
