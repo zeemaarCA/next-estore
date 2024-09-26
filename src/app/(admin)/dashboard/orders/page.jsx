@@ -7,6 +7,7 @@ import { getAllOrders } from "@utils/actions/orders";
 import Button from "@components/admin/Button";
 import { MdDelete, MdOutlineEdit } from "react-icons/md";
 import toast from "react-hot-toast";
+import { formatPrice } from "@lib/formatters";
 
 export default function Orders() {
   const [orders, setOrders] = useState([]);
@@ -25,21 +26,6 @@ export default function Orders() {
 
     fetchOrders();
   }, []);
-
-  const formatAmount = (amount) => {
-    if (amount === undefined || amount === null) return "0";
-
-    // Convert amount to number if it's a string
-    const numericAmount =
-      typeof amount === "string" ? parseInt(amount, 10) : amount;
-
-    // Convert amount from cents to dollars (if needed) and format
-    const formattedAmount = (numericAmount / 100).toFixed(2);
-
-    // Format the amount with commas as thousand separators
-    return new Intl.NumberFormat().format(formattedAmount);
-  };
-
 
   const handleDropdownToggle = (orderId) => {
     // If the clicked dropdown is already active, close it; otherwise, open it
@@ -167,7 +153,7 @@ export default function Orders() {
                       </div>
                     </td>
                     <td>{order.paymentStatus === "succeeded" ? "Paid" : "Failed"}</td>
-                    <td className="invert-gray-text">${formatAmount(order.amount)}</td>
+                    <td className="invert-gray-text">{formatPrice(order.amount)}</td>
                     <td>
                       {activeDropdown === order._id ? (
                         <div className="max-w-md">

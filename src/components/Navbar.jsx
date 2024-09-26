@@ -10,7 +10,7 @@ import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import { PiShoppingCartDuotone } from "react-icons/pi";
 import { ThemeToggle } from "@components/ThemeToggle";
 import { useSelector, useDispatch } from "react-redux";
-import { useRouter } from "next/navigation"; // Correct import for App Router
+import { usePathname, useRouter } from "next/navigation"; // Correct import for App Router
 import { useUser } from "@clerk/clerk-react";
 import { fetchCart } from "@utils/actions/cart";
 import {
@@ -59,6 +59,15 @@ export default function Navbar() {
 		};
 	}, [router]);
 
+	const pathname = usePathname();
+
+	const isLinkActive = (href) => {
+		if (href === '/') {
+			return pathname === href;
+		}
+		return pathname.startsWith(href);
+	};
+
 	// Store user data in redux
 	// useEffect(() => {
 	// 	if (isSignedIn && user && !currentUser) {
@@ -73,25 +82,25 @@ export default function Navbar() {
 	// 	}
 	// }, [isSignedIn, user, dispatch, currentUser]);
 
-useEffect(() => {
-  const fetchUserDetails = async () => {
-    if (isSignedIn) {
-      try {
-        dispatch(signInStart());
-        const response = await fetch(`/api/users/${user.id}`);
-				const data = await response.json();
-				dispatch(signInSuccess(data));
-        // ... rest of the code
-      } catch (error) {
-        console.error("Error fetching user details:", error);
-      }
-    } else {
-      console.log("Conditions not met for fetching user details.");
-    }
-  };
+	useEffect(() => {
+		const fetchUserDetails = async () => {
+			if (isSignedIn) {
+				try {
+					dispatch(signInStart());
+					const response = await fetch(`/api/users/${user.id}`);
+					const data = await response.json();
+					dispatch(signInSuccess(data));
+					// ... rest of the code
+				} catch (error) {
+					console.error("Error fetching user details:", error);
+				}
+			} else {
+				console.log("Conditions not met for fetching user details.");
+			}
+		};
 
-  fetchUserDetails();
-}, [dispatch, user]);
+		fetchUserDetails();
+	}, [dispatch, user]);
 
 
 	useEffect(() => {
@@ -136,102 +145,125 @@ useEffect(() => {
 	return (
 		<>
 			{loading && <div className="loading-spinner">Loading...</div>}
-			<div className="navbar container mx-auto bg-base-100">
-				<div className="navbar-start">
-					<div className="dropdown">
-						<div tabIndex={0} role="button" className="btn lg:hidden mr-[10px]">
-							<HiMenuAlt1 />
+			<div className="bg-invert relative z-10">
+				<div className="navbar container mx-auto">
+					<div className="navbar-start">
+						<div className="dropdown">
+							<div tabIndex={0} role="button" className="btn lg:hidden mr-[10px]">
+								<HiMenuAlt1 />
+							</div>
+							<ul className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+								{navLinks.map((link) => (
+									<li key={link.name}>
+										{link.subLinks ? (
+											<>
+												<a>{link.name}</a>
+												<ul className="p-2">
+													{link.subLinks.map((subLink) => (
+														<li key={subLink.slug}>
+															<Link
+																href={`/categories/${subLink.slug}`}
+																className={isLinkActive(`/categories/${subLink.slug}`) ? 'active-link' : ''}
+															>
+																{subLink.name}
+															</Link>
+														</li>
+													))}
+												</ul>
+											</>
+										) : (
+											<Link
+												href={link.href}
+												prefetch={true}
+												className={isLinkActive(link.href) ? 'active-link' : ''}
+											>
+												{link.name}
+											</Link>
+										)}
+									</li>
+								))}
+							</ul>
 						</div>
-						<ul className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+						<Link href="/" className="select-none">
+							<Image priority src={logo} height={50} width={125} alt="logo" />
+						</Link>
+					</div>
+					<div className="navbar-center hidden lg:flex">
+						<ul className="menu menu-horizontal px-1">
 							{navLinks.map((link) => (
 								<li key={link.name}>
 									{link.subLinks ? (
-										<>
-											<a>{link.name}</a>
-											<ul className="p-2">
+										<details>
+											<summary className="text-gray-700 dark:text-gray-200">{link.name}</summary>
+											<ul className="p-2 w-max z-10">
 												{link.subLinks.map((subLink) => (
 													<li key={subLink.slug}>
-														<Link href={`/categories/${subLink.slug}`}>
+														<Link href={`/categories/${subLink.slug}`}
+															className={isLinkActive(`/categories/${subLink.slug}`) ? 'active-link' : ''}
+														>
 															{subLink.name}
 														</Link>
 													</li>
 												))}
 											</ul>
-										</>
+										</details>
 									) : (
-										<Link href={link.href}>{link.name}</Link>
+										<Link
+											href={link.href}
+											prefetch={true}
+											className={isLinkActive(link.href) ? 'active-link' : ''}
+										>
+											{link.name}
+										</Link>
 									)}
 								</li>
 							))}
+							{userRole === "org:admin" && (
+								<li>
+									<Link
+										href="/dashboard"
+										className={`bg-invert ${isLinkActive('/dashboard') ? 'active-link' : ''}`}
+										prefetch={true}
+									>
+										<MdOutlineAdminPanelSettings className="w-4 h-4" /> Admin
+									</Link>
+								</li>
+							)}
 						</ul>
 					</div>
-					<Link href="/" className="select-none">
-						<Image priority src={logo} height={50} width={125} alt="logo" />
-					</Link>
-				</div>
-				<div className="navbar-center hidden lg:flex">
-					<ul className="menu menu-horizontal px-1">
-						{navLinks.map((link) => (
-							<li key={link.name}>
-								{link.subLinks ? (
-									<details>
-										<summary>{link.name}</summary>
-										<ul className="p-2 w-max z-10">
-											{link.subLinks.map((subLink) => (
-												<li key={subLink.slug}>
-													<Link href={`/categories/${subLink.slug}`}>
-														{subLink.name}
-													</Link>
-												</li>
-											))}
-										</ul>
-									</details>
-								) : (
-									<Link href={link.href} prefetch={true}>{link.name}</Link>
-								)}
-							</li>
-						))}
-						{userRole === "org:admin" && (
-							<li>
-								<Link href="/dashboard" className="bg-invert" prefetch={true}>
-									<MdOutlineAdminPanelSettings className="w-4 h-4" /> Admin
-								</Link>
-							</li>
-						)}
-					</ul>
-				</div>
-				<div className="navbar-end gap-4">
-					<ThemeToggle />
-					<div className="relative">
-						<Link href="/cart">
-							<span className="absolute bg-invert h-5 w-5 flex justify-center items-center rounded-full -right-2 -top-2 select-none">
-								{totalQuantity}
-							</span>
-							<PiShoppingCartDuotone className="cart-icon w-8 h-8" />
-						</Link>
-					</div>
-					<SignedIn>
-						<UserButton
-							appearance={{
-								elements: {
-									avatarBox: {
-										width: "32px",
-										height: "32px",
+					<div className="navbar-end gap-4">
+						<ThemeToggle />
+						<div className="relative">
+							<Link href="/cart">
+								<span className="absolute bg-invert h-5 w-5 flex justify-center items-center rounded-full -right-2 -top-2 select-none">
+									{totalQuantity}
+								</span>
+								<PiShoppingCartDuotone className="cart-icon w-8 h-8" />
+							</Link>
+						</div>
+						<SignedIn>
+							<UserButton
+								appearance={{
+									elements: {
+										avatarBox: {
+											width: "32px",
+											height: "32px",
+										},
 									},
-								},
-							}}
-							userProfileMode="navigation"
-							userProfileUrl="/profile"
-						/>
-					</SignedIn>
-					<SignedOut>
-						<SignInButton>
-							<button className="btn-theme flex gap-2">
-								<FaRegUser />
-								Sign in
-							</button>
-						</SignInButton>
-					</SignedOut>
+								}}
+								userProfileMode="navigation"
+								userProfileUrl="/profile"
+							/>
+						</SignedIn>
+						<SignedOut>
+							<SignInButton>
+								<button className="btn-theme flex gap-2">
+									<FaRegUser />
+									Sign in
+								</button>
+							</SignInButton>
+						</SignedOut>
+					</div>
 				</div>
 			</div>
 		</>

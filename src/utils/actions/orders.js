@@ -55,6 +55,7 @@ export const createOrder = async (userId, paymentIntent) => {
       })),
       amount: paymentIntent.amount,
       currency: paymentIntent.currency,
+      discount: cart.discount,
       paymentStatus: paymentIntent.status,
       orderStatus: "Pending",
     });
@@ -162,6 +163,7 @@ export const getRecentOrders = async () => {
       {
         $project: {
           orderId: 1,
+          discount: 1,
           "products.productId": 1,
           "products.title": 1,
           "products.quantity": 1,
@@ -175,6 +177,7 @@ export const getRecentOrders = async () => {
         $group: {
           _id: "$_id",
           orderId: { $first: "$orderId" },
+          discount: { $first: "$discount" },
           products: {
             $push: {
               productId: "$products.productId",

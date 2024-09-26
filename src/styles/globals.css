@@ -205,3 +205,7 @@ img {
 td{
   @apply text-gray-600 dark:text-gray-300
 }
+
+.active-link{
+  @apply !text-primary font-bold
+}

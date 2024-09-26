@@ -109,15 +109,12 @@ export default function Sidebar() {
 					<ul className="font-medium pl-0">
 						{navLinks.map((link) => (
 							<li key={link.title} className="py-2 list-none select-none">
-								<div
-									className={`flex items-center justify-between p-2 cursor-pointer text-gray-700 rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 ${
+								<Link href={link.href} className={`flex items-center justify-between p-2 cursor-pointer text-gray-700 rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 ${
 										openMenu === link.title ? "block" : ""
-									}`}
-									onClick={() => toggleMenu(link.title)}
-								>
-									<span className="flex items-center space-x-2">
+									}`} onClick={() => toggleMenu(link.title)}>
+									<span className="flex items-center gap-2">
 										{link.icon}
-										<Link href={link.href}>{link.title}</Link>
+										{link.title}
 									</span>
 									{link.subLinks && (
 										<svg
@@ -136,7 +133,7 @@ export default function Sidebar() {
 											/>
 										</svg>
 									)}
-								</div>
+								</Link>
 								{link.subLinks && (
 									<ul
 										className={`mt-2 space-y-2 ml-4 pl-4 ${
@@ -144,14 +141,13 @@ export default function Sidebar() {
 										}`}
 									>
 										{link.subLinks.map((subLink) => (
-											<li key={subLink.title} className="select-none">
-												<Link
-													href={subLink.href}
-													className="block p-2 text-sm text-gray-500 rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
-												>
-													{subLink.title}
-												</Link>
-											</li>
+											<Link
+												key={subLink.title}
+												href={subLink.href}
+												className="block p-2 text-sm text-gray-500 rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
+											>
+												<li>{subLink.title}</li>
+											</Link>
 										))}
 									</ul>
 								)}

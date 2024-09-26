@@ -4,6 +4,7 @@ import { getAllPayments } from "@utils/actions/payments";
 import { useSelector } from "react-redux";
 import Breadcrumbs from "@components/admin/Breadcrumbs";
 import Title from "@components/admin/Title";
+import { formatPrice } from "@lib/formatters";
 
 export default function Payments() {
   const [payments, setPayments] = useState([]);
@@ -23,19 +24,6 @@ export default function Payments() {
     fetchPayments();
   }, [userId]);
 
-  const formatAmount = (amount) => {
-    if (amount === undefined || amount === null) return "0";
-
-    // Convert amount to number if it's a string
-    const numericAmount =
-      typeof amount === "string" ? parseInt(amount, 10) : amount;
-
-    // Convert amount from cents to dollars (if needed) and format
-    const formattedAmount = (numericAmount / 100).toFixed(2);
-
-    // Format the amount with commas as thousand separators
-    return new Intl.NumberFormat().format(formattedAmount);
-  };
   return (
     <>
       <Breadcrumbs
@@ -73,7 +61,7 @@ export default function Payments() {
                     <th>{index + 1}</th>
                     <td className="invert-gray-text">{payment.sessionId}</td>
                     <td className="invert-gray-text">{payment.email}</td>
-                    <td className="invert-gray-text">${formatAmount(payment.amount)}</td>
+                    <td className="invert-gray-text">{formatPrice(payment.amount)}</td>
                     <td className="invert-gray-text">{payment.paymentMethod}</td>
                     <td className="invert-gray-text">{payment.status}</td>
                     <td className="invert-gray-text">{new Date(payment.createdAt).toLocaleDateString()}</td>

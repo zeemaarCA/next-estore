@@ -31,6 +31,17 @@ export default async function PaymentSuccess({ searchParams }) {
 
   const orderDetails = await getRecentOrders(userId);
 
+  console.log(orderDetails)
+
+  const totalProductPrice = orderDetails.reduce((total, order) => {
+    return total + order.products.reduce((productTotal, product) => {
+      return productTotal + parseFloat(product.price);
+    }, 0);
+  }, 0);
+
+  // Format the total price
+  const formattedTotalPrice = totalProductPrice.toFixed(2);
+
   if (orderDetails.length === 0) {
     return notFound()
   }
@@ -96,7 +107,7 @@ export default async function PaymentSuccess({ searchParams }) {
                 <div className=" w-full">
                   <div className="flex items-center justify-between mb-6">
                     <p className="font-normal text-xl leading-8 invert-lgray-text">Subtotal</p>
-                    <p className="font-semibold text-xl leading-8 invert-gray-text">${order.paymentDetails.amount / 100}</p>
+                    <p className="font-semibold text-xl leading-8 invert-gray-text">${formattedTotalPrice}</p>
                   </div>
                   <div className="flex items-center justify-between mb-6">
                     <p className="font-normal text-xl leading-8 invert-lgray-text">Shipping Charge</p>
@@ -108,7 +119,7 @@ export default async function PaymentSuccess({ searchParams }) {
                   </div>
                   <div className="flex items-center justify-between mb-6">
                     <p className="font-normal text-xl leading-8 invert-lgray-text">Discount</p>
-                    <p className="font-semibold text-xl leading-8 invert-gray-text">$0.00</p>
+                    <p className="font-semibold text-xl leading-8 invert-gray-text">{order.discount}%</p>
                   </div>
                   <div className="flex items-center justify-between py-6 border-y border-gray-100">
                     <p className="font-manrope font-semibold text-2xl leading-9 invert-gray-text">Total</p>

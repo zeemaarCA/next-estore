@@ -9,6 +9,7 @@ import ReduxProvider from "@components/ReduxProvider";
 import Footer from "@components/Footer";
 import { Toaster } from "react-hot-toast";
 import { Suspense } from "react";
+import TopLoadingBar from "@components/TopLoadingBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,32 +28,34 @@ export default function RootLayout({ children }) {
 			<body className={`${inter.className} flex flex-col min-h-screen`}>
 				<ReduxProvider>
 					<ThemeAndClerkProvider>
-						<ClerkLoading>
-							<Loader />
-						</ClerkLoading>
-						<ClerkLoaded>
-							<Toaster
-								position="bottom-right"
-								toastOptions={{
-									className: "",
-									duration: 5000,
-									style: {
-										background: "#363636",
-										color: "#fff",
-									},
-									success: {
-										duration: 3000,
-										theme: {
-											primary: "green",
-											secondary: "black",
+						<TopLoadingBar>
+							<ClerkLoading>
+								<Loader />
+							</ClerkLoading>
+							<ClerkLoaded>
+								<Toaster
+									position="bottom-right"
+									toastOptions={{
+										className: "",
+										duration: 5000,
+										style: {
+											background: "#363636",
+											color: "#fff",
 										},
-									},
-								}}
-							/>
-							<Suspense fallback={<Loader />}>
-								<div className="flex-grow">{children}</div>
-							</Suspense>
-						</ClerkLoaded>
+										success: {
+											duration: 3000,
+											theme: {
+												primary: "green",
+												secondary: "black",
+											},
+										},
+									}}
+								/>
+								<Suspense fallback={<Loader />}>
+									<div className="flex-grow">{children}</div>
+								</Suspense>
+							</ClerkLoaded>
+						</TopLoadingBar>
 					</ThemeAndClerkProvider>
 				</ReduxProvider>
 			</body>

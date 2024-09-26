@@ -3,6 +3,7 @@ import { Line } from "react-chartjs-2";
 import "chart.js/auto";
 import { userData, totalSalesAmount, userOrders, gettotalProducts, getUserOrderCounts } from "@utils/actions/dashboardData";
 import { useEffect, useState } from "react";
+import { formatPrice } from "@lib/formatters";
 
 export default function Dashboard() {
   const [users, setUsers] = useState([]);
@@ -17,6 +18,7 @@ export default function Dashboard() {
   const [totalProducts, setTotalProducts] = useState(0);
   const [lastMonthProducts, setLastMonthProducts] = useState(0);
   const [userOrdersCounts, setUserOrdersCounts] = useState([]);
+
 
   const data1 = {
     labels: ["1", "2", "3", "4", "5", "6", "7"],
@@ -164,21 +166,21 @@ export default function Dashboard() {
   },
     []);
 
-    useEffect(() => {
-      const fetchUserOrderCounts = async () => {
-        try {
-          setLoading(true); // Set loading to true before data fetching starts
-          const fetchedUserOrderCounts = await getUserOrderCounts();
-          setUserOrdersCounts(fetchedUserOrderCounts); // Set data
-        } catch (error) {
-          console.error("Error fetching user order counts:", error);
-        } finally {
-          setLoading(false);
-        }
-      };
+  useEffect(() => {
+    const fetchUserOrderCounts = async () => {
+      try {
+        setLoading(true); // Set loading to true before data fetching starts
+        const fetchedUserOrderCounts = await getUserOrderCounts();
+        setUserOrdersCounts(fetchedUserOrderCounts); // Set data
+      } catch (error) {
+        console.error("Error fetching user order counts:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-      fetchUserOrderCounts();
-    }, []);
+    fetchUserOrderCounts();
+  }, []);
 
 
   useEffect(() => {
@@ -193,20 +195,6 @@ export default function Dashboard() {
   },
     []);
 
-  const formatAmount = (amount) => {
-    if (amount === undefined || amount === null) return "0";
-
-    // Convert amount to number if it's a string
-    const numericAmount =
-      typeof amount === "string" ? parseInt(amount, 10) : amount;
-
-    // Convert amount from cents to dollars (if needed) and format
-    const formattedAmount = (numericAmount / 100).toFixed(2);
-
-    // Format the amount with commas as thousand separators
-    return new Intl.NumberFormat().format(formattedAmount);
-  };
-
   return (
     <>
       <div className="bg-gray-50 dark:bg-gray-700 pb-5 relative rounded-md">
@@ -216,7 +204,7 @@ export default function Dashboard() {
               <div className="text-base invert-lgray-text">Total Sales</div>
               <div className="relative z-10 flex items-center pt-1">
                 <div className="text-2xl font-bold invert-black-text">
-                  ${formatAmount(totalSales)}
+                  {loading ? <span className="loading loading-spinner"></span> : formatPrice(totalSales)}
                 </div>
                 <span className="flex items-center px-2 py-0.5 mx-2 text-sm text-green-600 bg-green-100 rounded-full">
                   <svg
@@ -244,7 +232,7 @@ export default function Dashboard() {
               <div className="text-base invert-lgray-text">Orders</div>
               <div className="relative z-10 flex items-center pt-1">
                 <div className="text-2xl font-bold invert-black-text">
-                  {totalOrders}
+                  {loading ? <span className="loading loading-spinner"></span> : totalOrders}
                 </div>
                 <span className="flex items-center px-2 py-0.5 mx-2 text-sm text-red-600 bg-red-100 rounded-full">
                   <svg
@@ -271,7 +259,10 @@ export default function Dashboard() {
             <div className="relative p-5 pb-16 overflow-hidden bg-invert rounded-md shadow-sm">
               <div className="text-base invert-lgray-text">Customers</div>
               <div className="relative z-10 flex items-center pt-1">
-                <div className="text-2xl font-bold invert-black-text">{totalUsers}</div>
+                <div className="text-2xl font-bold invert-black-text">
+                  {loading ? <span className="loading loading-spinner"></span> :
+                    totalUsers}
+                </div>
                 <span className="flex items-center px-2 py-0.5 mx-2 text-sm text-green-600 bg-green-100 rounded-full">
                   <svg
                     className="w-4 h-4"
@@ -296,7 +287,7 @@ export default function Dashboard() {
             <div className="relative p-5 pb-16 overflow-hidden bg-invert rounded-md shadow-sm">
               <div className="text-base invert-lgray-text">Total Products</div>
               <div className="relative z-10 flex items-center pt-1">
-                <div className="text-2xl font-bold invert-black-text">{totalProducts}</div>
+                <div className="text-2xl font-bold invert-black-text">{loading ? <span className="loading loading-spinner"></span> : totalProducts}</div>
                 <span className="flex items-center px-2 py-0.5 mx-2 text-sm text-green-600 bg-green-100 rounded-full">
                   <svg
                     className="w-4 h-4"
@@ -362,44 +353,50 @@ export default function Dashboard() {
               {orders.length < 0 ? (
                 <p className="text-center">No order found</p>
               ) : (
-                <table className="table">
-                  {/* head */}
-                  <thead className="bg-invert">
-                    <tr>
-                      <th></th>
-                      <th>Email</th>
-                      <th>Amount</th>
-                      <th>Status</th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-invert">
-                    {orders.map((order, index) => (
-                      <tr key={order._id}>
-                        <td>{index + 1}</td>
-                        <td>{order.email}</td>
-                        <td>{order.amount}</td>
-                        <td>
-                          <span
-                            className={`gap-2 ${order.orderStatus === "Processing"
-                              ? "pill-warning"
-                              : order.orderStatus === "Shipped"
-                                ? "pill-secondary"
-                                : order.orderStatus === "Delivered"
-                                  ? "pill-success"
-                                  : order.orderStatus === "Cancelled"
-                                    ? "pill-danger"
-                                    : order.orderStatus === "Pending"
-                                      ? "pill-gray"
-                                      : "dark"
-                              }`}
-                          >
-                            {order.orderStatus || "Processing"}
-                          </span>
-                        </td>
+                loading ? (
+                  <div className="flex justify-center items-center min-h-24">
+                    <span className="loading loading-spinner loading-sm"></span>
+                  </div>
+                ) : (
+                  <table className="table">
+                    {/* head */}
+                    <thead className="bg-invert">
+                      <tr>
+                        <th></th>
+                        <th>Email</th>
+                        <th>Amount</th>
+                        <th>Status</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody className="bg-invert">
+                      {orders.map((order, index) => (
+                        <tr key={order._id}>
+                          <td>{index + 1}</td>
+                          <td>{order.email}</td>
+                          <td>{formatPrice(order.amount)}</td>
+                          <td>
+                            <span
+                              className={`gap-2 ${order.orderStatus === "Processing"
+                                ? "pill-warning"
+                                : order.orderStatus === "Shipped"
+                                  ? "pill-secondary"
+                                  : order.orderStatus === "Delivered"
+                                    ? "pill-success"
+                                    : order.orderStatus === "Cancelled"
+                                      ? "pill-danger"
+                                      : order.orderStatus === "Pending"
+                                        ? "pill-gray"
+                                        : "dark"
+                                }`}
+                            >
+                              {order.orderStatus || "Processing"}
+                            </span>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )
               )}
             </div>
 

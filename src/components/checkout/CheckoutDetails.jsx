@@ -4,9 +4,12 @@ import { useSelector } from "react-redux";
 import cartSlice from "@redux/cart/cartSlice";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { setPromo } from "@redux/promo/promoSlice";
 
 export default function CheckoutDetails() {
 	const cartItems = useSelector((state) => state.cart.items);
+	const reduxDiscount = useSelector((state) => state.promo.discount);
+	const reduxPromoStatus = useSelector((state) => state.promo.isPromoApplied);
 	const totalQuantity = useSelector((state) => state.cart.items.length);
 
 	const router = useRouter();
@@ -21,6 +24,15 @@ export default function CheckoutDetails() {
 			0
 		);
 		return totalPrice.toFixed(2);
+	};
+
+	const priceBeforePromo = () => {
+		const totalPrice = cartItems.reduce(
+			(total, item) => total + (item.price / 0.9) * (item.quantity || 1),
+			0
+		);
+
+		return totalPrice.toFixed(2); // Return the total price rounded to 2 decimal places
 	};
 	return (
 		<>
@@ -74,26 +86,34 @@ export default function CheckoutDetails() {
 							Subtotal
 						</p>
 						<p className="font-semibold text-base leading-8">
-							${calculateTotalPrice()}
+						{reduxPromoStatus ? (
+									<span>
+										${priceBeforePromo()}
+									</span>
+								) : (
+									<span>
+										${calculateTotalPrice()}
+									</span>
+								)}
 						</p>
 					</div>
 					<div className="flex items-center justify-between mb-3">
 						<p className="font-normal text-base leading-8 invert-gray-text">
 							Shipping Charge
 						</p>
-						<p className="font-semibold text-base leading-8">$5.00</p>
+						<p className="font-semibold text-base leading-8">0</p>
 					</div>
 					<div className="flex items-center justify-between mb-3">
 						<p className="font-normal text-base leading-8 invert-gray-text">
 							Taxes
 						</p>
-						<p className="font-semibold text-base leading-8">$0</p>
+						<p className="font-semibold text-base leading-8">0</p>
 					</div>
 					<div className="flex items-center justify-between mb-3">
 						<p className="font-normal text-base leading-8 invert-gray-text">
 							Discount
 						</p>
-						<p className="font-semibold text-base leading-8">10%</p>
+						<p className="font-semibold text-base leading-8">{reduxDiscount}%</p>
 					</div>
 					<div className="flex items-center justify-between py-6 border-t border-theme-gray">
 						<p className="font-semibold text-2xl invert-gray-text leading-9">
