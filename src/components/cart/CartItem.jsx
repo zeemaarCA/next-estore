@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { MdDeleteForever } from "react-icons/md";
 export default function CartItem({cartItems,handleDeleteItem,	handleUpdateQuantity,}) {
 
@@ -21,7 +22,7 @@ export default function CartItem({cartItems,handleDeleteItem,	handleUpdateQuanti
 							/>
 						</div>
 						<div className="flex flex-col justify-between ml-6 flex-grow">
-							<span className="font-bold text-sm">{item.title}</span>
+							<Link href={`/product/${item.slug}`}><span className="font-bold text-sm">{item.title}</span></Link>
 							<span className="badge-theme-sm max-w-max">{item.category}</span>
 							<button
 								className="font-semibold border-b border-b-transparent hover:border-b hover:border-b-red-500 text-error text-xs flex justify-start items-center max-w-max"
