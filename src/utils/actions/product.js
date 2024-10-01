@@ -24,21 +24,21 @@ export const fetchProducts = async (q, page) => {
   }
 };
 
-export const fetchSiteProducts = async (q = "", page = 1, category = "", price = "", sort = "newest") => {
+export const fetchSiteProducts = async (q = "", page = 1, category = "", price = "", sort = "newest", limit = 12, excludeProductId = null) => {
   const regex = new RegExp(q, "i");
-  const ITEM_PER_PAGE = 12;
   const filterQuery = { name: { $regex: regex } };
 
-  // If a category filter is applied
   if (category) {
-    filterQuery.category = { $regex: new RegExp(category, "i") }; // Case-insensitive match
+    filterQuery.category = { $regex: new RegExp(category, "i") };
   }
 
-  // If a price filter is applied
+  // Exclude the current product from related products
+  if (excludeProductId) {
+    filterQuery._id = { $ne: excludeProductId };
+  }
+
   if (price) {
     const [minPrice, maxPrice] = price.split("-");
-
-    // Handle different price ranges by converting the price to a number
     if (minPrice && maxPrice) {
       filterQuery.$expr = {
         $and: [
@@ -51,7 +51,6 @@ export const fetchSiteProducts = async (q = "", page = 1, category = "", price =
     }
   }
 
-  // Sort logic
   const sortOption = sort === "newest" ? { createdAt: -1 } : { createdAt: 1 };
 
   try {
@@ -59,8 +58,8 @@ export const fetchSiteProducts = async (q = "", page = 1, category = "", price =
     const count = await Product.find(filterQuery).countDocuments();
     const siteProducts = await Product.find(filterQuery)
       .sort(sortOption)
-      .limit(ITEM_PER_PAGE)
-      .skip(ITEM_PER_PAGE * (page - 1))
+      .limit(limit)
+      .skip(limit * (page - 1))
       .lean();
 
     const plainProducts = siteProducts.map((product) => ({
@@ -76,6 +75,7 @@ export const fetchSiteProducts = async (q = "", page = 1, category = "", price =
     throw new Error("Failed to fetch products");
   }
 };
+
 
 
 

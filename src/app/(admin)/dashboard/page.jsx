@@ -198,7 +198,7 @@ export default function Dashboard() {
   return (
     <>
       <div className="bg-gray-50 dark:bg-gray-700 pb-5 relative rounded-md">
-        <div className="container px-5 mx-auto my-10 py-6">
+        <div className="container my-10 py-6">
           <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
             <div className="relative p-5 pb-16 overflow-hidden bg-invert rounded-md shadow-sm">
               <div className="text-base invert-lgray-text">Total Sales</div>
@@ -311,7 +311,7 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-        <div className="container px-5 mx-auto my-10">
+        <div className=" mx-auto my-10">
           <div className="customer-card grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
             <div className="overflow-x-auto bg-invert rounded-md shadow-sm pb-4 min-h-32">
               <h3 className="p-4 text-lg font-bold">Customers</h3>

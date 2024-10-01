@@ -103,12 +103,21 @@ export default function Navbar() {
 	}, [dispatch, user]);
 
 
-	useEffect(() => {
-		if (!isSignedIn && currentUser) {
-			dispatch(signoutSuccess());
-			dispatch(clearCart());
-		}
-	}, [isSignedIn, currentUser, dispatch]);
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const redirectStatus = params.get("redirect_status");
+
+    // Check for 'succeeded' in the redirect status to clear cart
+    if (redirectStatus === "succeeded") {
+      dispatch(clearCart());
+    }
+
+    // Handle signout case
+    if (!isSignedIn && currentUser) {
+      dispatch(signoutSuccess());
+      dispatch(clearCart());
+    }
+  }, [isSignedIn, currentUser, dispatch]);
 
 	// Fetch cart data from server
 	useEffect(() => {
@@ -146,7 +155,7 @@ export default function Navbar() {
 		<>
 			{loading && <div className="loading-spinner">Loading...</div>}
 			<div className="bg-invert relative z-10">
-				<div className="navbar container mx-auto">
+				<div className="navbar container">
 					<div className="navbar-start">
 						<div className="dropdown">
 							<div tabIndex={0} role="button" className="btn lg:hidden mr-[10px]">

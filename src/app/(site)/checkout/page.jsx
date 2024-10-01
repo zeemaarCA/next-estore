@@ -23,9 +23,9 @@ export default async function Checkout() {
 	return (
 		<>
 			{/* checkout page */}
-			<section className="container mx-auto px-4 my-10">
+			<section className="container my-10">
 				<SectionTitle title="Checkout" />
-				<div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+				<div className="container grid grid-cols-1 md:grid-cols-2 gap-6">
 					{/* Left Side: Checkout Form */}
 					<CheckoutForm userDataForRedux={userDataForRedux} />
 					{/* Right Side: Cart Details */}

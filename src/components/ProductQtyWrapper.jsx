@@ -16,7 +16,7 @@ export default function ProductQtyWrapper({ product }) {
       <div className="flex">
         <ProductQty onQuantityChange={handleQuantityChange} />
       </div>
-      <div className="mt-7 flex flex-row items-center gap-6">
+      <div className="mt-7 flex flex-row items-center gap-2">
         <AddToCartButton className="btn-theme" product={product} quantity={quantity} />
         <button className="btn-theme-outline">Add to wishlist</button>
       </div>

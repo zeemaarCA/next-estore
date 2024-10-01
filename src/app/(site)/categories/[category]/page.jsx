@@ -18,7 +18,7 @@ export default async function CategoryPage({ params }) {
 	return (
 		<>
 			<section className="py-24 relative">
-				<div className="w-full container mx-auto px-4">
+				<div className="w-full container">
 					<div className="flex flex-col lg:flex-row lg:items-center max-lg:gap-4 justify-between w-full">
 						<h1 className="text-3xl font-bold capitalize">{category}</h1>
 					</div>

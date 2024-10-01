@@ -6,7 +6,7 @@ import { notFound, redirect } from "next/navigation"
 import Stripe from "stripe"
 import { createOrder, getRecentOrders } from "@/utils/actions/orders"
 import { createPayment } from "@/utils/actions/payments"
-import { formatCurrency } from "@/lib/formatters"
+import { sendOrderEmail } from "@/lib/OrderEmail"
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
@@ -22,16 +22,29 @@ export default async function PaymentSuccess({ searchParams }) {
 
   if (isSuccess) {
     try {
-      await createPayment(userId, paymentIntent)
-      await createOrder(userId, paymentIntent)
+      await createPayment(userId, paymentIntent);
+      await createOrder(userId, paymentIntent);
+
+      // Fetch order details after order creation
+      const orderDetails = await getRecentOrders(userId);
+
+      if (orderDetails.length > 0) {
+        await sendOrderEmail(orderDetails[0]); // Send the email with the first order in the array
+      } else {
+        console.error("No orders found for user.");
+      }
     } catch (error) {
-      console.error("Failed to create order or payment:", error)
+      console.error("Failed to create order or payment, or send email:", error);
     }
   }
 
-  const orderDetails = await getRecentOrders(userId);
+   // Fetch the order details again for rendering on the page
+   const orderDetails = await getRecentOrders(userId);
 
-  console.log(orderDetails)
+   if (orderDetails.length === 0) {
+     return notFound();
+   }
+
 
   const totalProductPrice = orderDetails.reduce((total, order) => {
     return total + order.products.reduce((productTotal, product) => {

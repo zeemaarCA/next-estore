@@ -38,7 +38,7 @@ export default async function Payment() {
   }
 
   return (
-    <div className="container mx-auto px-4 my-10">
+    <div className="container my-10">
       <PaymentForm
         cartItems={cartItems}
         clientSecret={paymentIntent.client_secret}

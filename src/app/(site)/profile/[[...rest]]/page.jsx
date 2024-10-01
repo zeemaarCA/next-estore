@@ -6,7 +6,7 @@ import UserPayments from "@components/UserPayments";
 export default function Profile() {
   return (
     <>
-      <div className="container mx-auto px-4 pb-12 my-10 bg-white dark:bg-base-100 relative rounded-md">
+      <div className="container pb-12 my-10 bg-white dark:bg-base-100 relative rounded-md">
         <SectionTitle title="Profile" />
         <div role="tablist" className="tabs tabs-lifted">
           <input type="radio"

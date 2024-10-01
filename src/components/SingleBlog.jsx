@@ -1,8 +1,6 @@
 import Image from "next/image";
-import blog1 from "../../public/assets/blogs/blog1.jpg";
-import blog2 from "../../public/assets/blogs/blog2.jpg";
-import blog3 from "../../public/assets/blogs/blog3.jpg";
 import Link from "next/link";
+import moment from "moment";
 export default function SingleBlog({ blog }) {
 	return (
 		<>
@@ -18,7 +16,7 @@ export default function SingleBlog({ blog }) {
 				</div>
 				<div className="p-4 lg:p-6 transition-all duration-300 group-hover:bg-gray-50 dark:group-hover:bg-base-200">
 					<span className="invert-gray-text font-medium text-sm badge-theme-sm mb-3 inline-block">
-						{blog.createdAt?.toString().slice(4, 16)}
+						{moment(blog.createdAt).format("ll")}
 					</span>
 					<Link href={`/blog/${blog.slug}`}>
 						<h4 className="text-xl text-primary font-medium leading-8 mb-5">

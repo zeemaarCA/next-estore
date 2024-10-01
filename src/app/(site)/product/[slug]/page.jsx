@@ -1,4 +1,7 @@
 import ProductQtyWrapper from "@components/ProductQtyWrapper";
+import SectionTitle from "@components/SectionTitle";
+import { fetchSiteProducts } from "@utils/actions/product";
+import SingleProduct from "@components/SingleProduct";
 import { fetchProduct } from "@utils/actions/product";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -35,15 +38,13 @@ export default async function ProductPage({ params }) {
 		if (!product) {
 			notFound();
 		}
-
-		const plusMinuceButton =
-			"flex h-8 w-8 cursor-pointer items-center justify-center border duration-100 hover:bg-neutral-100 focus:ring-2 focus:ring-gray-500 active:ring-2 active:ring-gray-500";
+		const { plainProducts } = await fetchSiteProducts("", 1, product.category, "", "newest", 4, product._id);
 
 		return (
 			<>
-				<section className="container flex-grow mx-auto max-w-[1200px] border-b py-5 lg:grid lg:grid-cols-2 lg:py-10 items-center">
+				<section className="container flex-grow max-w-[1200px] border-b py-5 lg:grid lg:grid-cols-2 lg:py-10 items-center">
 					{/* image gallery */}
-					<div className="container mx-auto px-4">
+					<div className="container">
 						<Image
 							src={product.productImage}
 							alt={product.name}
@@ -91,6 +92,23 @@ export default async function ProductPage({ params }) {
 						</div>
 					</div>
 				</section>
+				{/* related products */}
+				{
+					plainProducts.length > 0 &&
+					<div className="container mb-10">
+						<SectionTitle title="Related Products" />
+						<div className="grid grid-cols-12 gap-4">
+							{plainProducts.map((product) => (
+								<div key={product._id} className={`group my-2 flex w-full flex-col overflow-hidden rounded-lg border border-gray-100 dark:border-gray-500 bg-white dark:bg-neutral shadow-md col-span-12 sm:col-span-6 lg:col-span-3 xl:col-span-3`}>
+									<SingleProduct product={product} />
+								</div>
+							))}
+						</div>
+					</div>
+				}
+
+				{/* related products */}
+
 			</>
 		);
 	} catch (error) {
@@ -98,3 +116,5 @@ export default async function ProductPage({ params }) {
 		notFound();
 	}
 }
+
+

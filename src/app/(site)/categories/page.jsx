@@ -10,7 +10,7 @@ export default async function Categories() {
 	const response = await fetch("https://fakestoreapi.com/products/categories");
 	const categories = await response.json();
 	return (
-		<div className="container mx-auto ">
+		<div className="container">
 			<SectionTitle
 				title="Categories"
 				link="/categories"

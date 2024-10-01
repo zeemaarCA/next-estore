@@ -11,12 +11,12 @@ import Category from "@components/Category";
 
 export default async function Home() {
 	// Fetch products data
-	const { plainProducts } = await fetchSiteProducts();
+	const { plainProducts } = await fetchSiteProducts("", 1, "", "", "newest", 8);
 	const { blogs } = await fetchSiteBlogs();
 
 	return (
 		<>
-			<div className="container mx-auto px-4">
+			<div className="container px-4">
 				<Hero />
 				<Category />
 				{/* <TextRevealDemo /> */}

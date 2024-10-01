@@ -25,7 +25,7 @@ export default async function Cart() {
 		return (
 			<>
 				{cartfromserver === null ? (
-					<div className="container min-h-40 mx-auto px-4 mt-10 mb-10">
+					<div className="container min-h-40 mt-10 mb-10">
 						<div className="flex justify-center items-center flex-col space-y-6 bg-invert py-20 max-w-lg mx-auto rounded-lg shadow-md">
 							<div className="empty-cart-icon">
 								<EmptyCart />

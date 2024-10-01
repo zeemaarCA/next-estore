@@ -1,7 +1,7 @@
 export default function Loading() {
 	return (
 		<div className="container">
-			<section class="container flex-grow mx-auto max-w-[1200px] border-b py-5 lg:grid lg:grid-cols-2 lg:py-10 items-center animate-pulse">
+			<section class="container flex-grow max-w-[1200px] border-b py-5 lg:grid lg:grid-cols-2 lg:py-10 items-center animate-pulse">
 				<div class="w-full h-64 skeleton"></div>
 
 				<div class="px-5 lg:px-5">

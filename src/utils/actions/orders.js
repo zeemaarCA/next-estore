@@ -63,7 +63,8 @@ export const createOrder = async (userId, paymentIntent) => {
     await order.save();
 
     // Clear the cart after creating the order
-    await Cart.findOneAndUpdate({ userId }, { $set: { items: [] } });
+    await Cart.deleteOne({ userId });
+    // await sendOrderEmail(order);
 
     revalidatePath('/orders');
     return order;

@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { getOrders } from "@utils/actions/orders";
 import { useSelector } from "react-redux";
+import moment from "moment";
 
 export default function UserOrders() {
 
@@ -92,7 +93,7 @@ export default function UserOrders() {
                         {order.orderStatus || "Processing"}
                       </span>
                     </td>
-                    <td className="invert-gray-text">{new Date(order.createdAt).toLocaleDateString()}</td>
+                    <td className="invert-gray-text">{moment(order.createdAt).format('LLL')}</td>
                   </tr>
                 ))}
               </tbody>

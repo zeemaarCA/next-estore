@@ -7,7 +7,8 @@ export default function TopLoadingBar({ children }) {
       {children}
       <ProgressBar
         height="4px"
-        color="#f8c617"
+        // color="#f8c617"
+        color="#FF0000"
         options={{ showSpinner: false }}
         shallowRouting
       />

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { MdDeleteForever } from "react-icons/md";
 export default function CartItem({cartItems,handleDeleteItem,	handleUpdateQuantity,}) {
 
 	// console.log("CartItems received:", cartItems);
@@ -10,7 +11,7 @@ export default function CartItem({cartItems,handleDeleteItem,	handleUpdateQuanti
 					className="flex flex-col md:flex-row items-center hover:bg-gray-100 dark:hover:bg-base-100 -mx-8 px-6 py-5"
 				>
 					<div className="flex w-full md:w-2/5">
-						<div className="w-20">
+						<div className="">
 							<Image
 								className="h-24 w-16 max-w-max"
 								src={item.image}
@@ -19,14 +20,14 @@ export default function CartItem({cartItems,handleDeleteItem,	handleUpdateQuanti
 								height={80}
 							/>
 						</div>
-						<div className="flex flex-col justify-between ml-4 flex-grow">
+						<div className="flex flex-col justify-between ml-6 flex-grow">
 							<span className="font-bold text-sm">{item.title}</span>
 							<span className="badge-theme-sm max-w-max">{item.category}</span>
 							<button
-								className="font-semibold border-b hover:border-b border-b-red-500 text-error text-xs flex justify-start max-w-max"
+								className="font-semibold border-b border-b-transparent hover:border-b hover:border-b-red-500 text-error text-xs flex justify-start items-center max-w-max"
 								onClick={() => handleDeleteItem(item.id)}
 							>
-								Remove
+								<MdDeleteForever className="w-5 h-5" /> Remove
 							</button>
 						</div>
 					</div>

@@ -18,12 +18,12 @@ export default async function Shop({ searchParams }) {
 	const price = searchParams?.price || "";
 	const sort = searchParams?.sort || "newest";
 
-	const { count, plainProducts } = await fetchSiteProducts(q, page, category, price, sort);
+	const { count, plainProducts } = await fetchSiteProducts(q, page, category, price, sort, 12);
 
 	return (
 		<>
 			<section className="py-24 relative">
-				<div className="w-full container mx-auto px-4">
+				<div className="w-full container">
 					<SectionTitle title="Shop our collection" />
 					<div className="flex flex-col gap-3 md:flex-row justify-between items-center bg-primary/15 rounded-md p-4 mb-6 shadow-sm">
 						<PriceFilter />

@@ -17,7 +17,7 @@ export default async function Blogs({ searchParams }) {
 
 	return (
 		<section className="py-24 relative">
-			<div className="w-full container mx-auto px-4">
+			<div className="w-full container">
 				<div className="flex justify-end">
 					<Search placeholder="Search for a blog..." count={count} />
 				</div>

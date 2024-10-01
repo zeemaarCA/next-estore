@@ -1,4 +1,5 @@
 import { fetchBlog } from "@utils/actions/blogs";
+import moment from "moment";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -54,6 +55,12 @@ export default async function Blog({ params }) {
                 <Link href=""><BsLinkedin className="w-6 h-6 cursor-pointer text-gray-100 dark:text-gray-200"/></Link>
               </div>
             </div>
+            <div className="mt-4">
+          <div className="flex justify-between items-center">
+            <div><span className="text-white">Category: {blog.category}</span></div>
+            <div><span className="text-white">{moment(blog.createdAt).format('ll')}</span></div>
+          </div>
+        </div>
           </div>
         </section>
 
@@ -74,7 +81,9 @@ export default async function Blog({ params }) {
               __html: blog.content || 'No content available'
             }} />
             </div>
-          </div>
+        </div>
+
+
 
 
       </>

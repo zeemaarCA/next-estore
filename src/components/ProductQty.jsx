@@ -6,7 +6,7 @@ export default function ProductQty({ onQuantityChange }) {
   const [quantity, setQuantity] = useState(1);
 
   const plusMinuceButton =
-    "flex h-8 w-8 cursor-pointer items-center justify-center border duration-100 hover:bg-neutral-100 focus:ring-2 focus:ring-gray-500 active:ring-2 active:ring-gray-500";
+    "flex h-8 w-8 bg-[#e3e3e3] cursor-pointer items-center justify-center border duration-100 hover:bg-neutral-100 focus:ring-2 focus:ring-gray-500 active:ring-2 active:ring-gray-500";
 
   const handleIncrement = () => {
     const newQuantity = quantity + 1;
@@ -24,11 +24,11 @@ export default function ProductQty({ onQuantityChange }) {
 
   return (
     <>
-      <button className={`${plusMinuceButton}`} onClick={handleDecrement}>−</button>
+      <button className={`${plusMinuceButton} rounded-tl-md rounded-bl-md`} onClick={handleDecrement}>−</button>
       <div className="flex h-8 w-8 cursor-text items-center justify-center border-t border-b active:ring-gray-500">
         {quantity}
       </div>
-      <button className={`${plusMinuceButton}`} onClick={handleIncrement}>+</button>
+      <button className={`${plusMinuceButton} rounded-tr-md rounded-br-md`} onClick={handleIncrement}>+</button>
     </>
   );
 }

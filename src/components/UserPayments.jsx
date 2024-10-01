@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { getPayments } from "@utils/actions/payments";
 import { useSelector } from "react-redux";
+import moment from "moment";
 
 export default function UserPayments() {
 
@@ -67,7 +68,7 @@ export default function UserPayments() {
                     <td className="invert-gray-text">${formatAmount(payment.amount)}</td>
                     <td className="invert-gray-text">{payment.paymentMethod}</td>
                     <td className="invert-gray-text">{payment.status}</td>
-                    <td className="invert-gray-text">{new Date(payment.createdAt).toLocaleDateString()}</td>
+                    <td className="invert-gray-text">{moment(payment.createdAt).format('LLL')}</td>
                   </tr>
                 ))}
               </tbody>
