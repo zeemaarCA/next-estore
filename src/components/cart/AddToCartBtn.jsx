@@ -4,8 +4,8 @@ import { useState } from "react";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { IoBagCheck } from "react-icons/io5";
 import toast from "react-hot-toast";
-import { useDispatch } from "react-redux";
-import { addItem } from "@redux/cart/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem, setCartItems } from "@redux/cart/cartSlice";
 import { useAuth } from "@clerk/nextjs";
 
 /* eslint-disable react/prop-types */
@@ -20,6 +20,7 @@ export default function AddToCartButton({
 	const [loading, setLoading] = useState(isLoading || false);
 	const [added, setAdded] = useState(isAdded || false);
 	const dispatch = useDispatch();
+	const cartItems = useSelector((state) => state.cart.items) || [];
 
 	const handleAddToCart = async () => {
 		if (!userId) {
@@ -56,6 +57,11 @@ export default function AddToCartButton({
 			if (res.ok) {
 				if (newProduct) {
 					dispatch(addItem(newProduct));
+					// Create a new array with the updated cart items
+					const updatedCartItems = [...cartItems, newProduct];
+
+					// Update the cart items in Redux state
+					dispatch(setCartItems(updatedCartItems));
 				} else {
 					console.error("Error adding to dispatch:", data);
 				}
@@ -86,7 +92,7 @@ export default function AddToCartButton({
 				</>
 			) : added ? (
 				<>
-					<IoBagCheck className="mr-2 h-5 w-5"/> Added
+					<IoBagCheck className="mr-2 h-5 w-5" /> Added
 				</>
 			) : (
 				<>

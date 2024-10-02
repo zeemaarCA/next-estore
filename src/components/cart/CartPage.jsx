@@ -27,15 +27,15 @@ export default function CartPage({ cartfromserver }) {
 	const totalQuantity = useSelector(selectTotalQuantity);
 	const [promotionCode, setPromotionCode] = useState("");
 	const [loading, setLoading] = useState(false);
-	useEffect(() => {
-		if (cartfromserver) {
-			dispatch(setCartItems(cartfromserver.items));
-			dispatch(setPromo({
-        isPromoApplied: cartfromserver.isPromoApplied,
-        discount: cartfromserver.discount,
-      }));
-		}
-	}, [dispatch, cartfromserver]);
+	// useEffect(() => {
+	// 	if (cartfromserver) {
+	// 		dispatch(setCartItems(cartfromserver.items));
+	// 		dispatch(setPromo({
+  //       isPromoApplied: cartfromserver.isPromoApplied,
+  //       discount: cartfromserver.discount,
+  //     }));
+	// 	}
+	// }, [dispatch, cartfromserver]);
 	const handleUpdateQuantity = async (itemId, newQuantity) => {
 		try {
 			// Send the PATCH request to update the cart
