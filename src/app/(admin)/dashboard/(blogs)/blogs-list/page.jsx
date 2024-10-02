@@ -24,7 +24,7 @@ export default async function Blogs({ searchParams }) {
 			</div>
 			<Search placeholder="Search for a blog..." count={count} />
 			<div className="overflow-x-auto rounded-lg">
-				<table className="table border border-gray-200 dark:border-gray-700">
+				<table className="table border border-slate-200 dark:border-slate-700">
 					{/* head */}
 					<thead className="bg-invert">
 						<tr>
@@ -40,7 +40,7 @@ export default async function Blogs({ searchParams }) {
 							<th>Actions</th>
 						</tr>
 					</thead>
-					<tbody className="bg-white dark:bg-gray-700">
+					<tbody className="bg-white dark:bg-slate-700">
 						{blogs.length > 0 ? (
 							blogs.map((blog) => (
 								<tr key={blog.id} className="hover">

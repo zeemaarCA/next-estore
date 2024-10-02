@@ -20,7 +20,7 @@ export default function TopFilter() {
 					</svg>
 					<select
 						id="Offer"
-						className="h-12 border border-gray-300 text-gray-900 pl-11 text-base font-normal leading-7 rounded-full block w-full py-2.5 px-4 appearance-none relative focus:outline-none bg-white transition-all duration-500 hover:border-gray-400 hover:bg-gray-50 focus-within:bg-gray-50"
+						className="h-12 border border-slate-300 text-slate-900 pl-11 text-base font-normal leading-7 rounded-full block w-full py-2.5 px-4 appearance-none relative focus:outline-none bg-white transition-all duration-500 hover:border-slate-400 hover:bg-slate-50 focus-within:bg-slate-50"
 					>
 						<option selected>Sort by time(high to low)</option>
 						<option value="option 1">option 1</option>

@@ -25,7 +25,7 @@ export default function Modal({ isModalOpen, setIsModalOpen, categories, setCate
 							<div className="opacity-1 ease-out sm:max-w-sm sm:w-full m-5 relative top-1/2 -translate-y-1/2 sm:mx-auto modal-open:opacity-100 transition-all modal-open:duration-500">
 								<div className="bg-white p-6">
 									<div className="flex flex-col gap-5">
-										<h4 className="text-lg font-bold leading-8 text-gray-900 text-center">
+										<h4 className="text-lg font-bold leading-8 text-slate-900 text-center">
 											Add a Category
 										</h4>
 										<form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -35,7 +35,7 @@ export default function Modal({ isModalOpen, setIsModalOpen, categories, setCate
 													type="text"
 													value={categories.categoryName}
 													id="default-search"
-													className="block w-full  pl-4 pr-3.5 py-2.5 text-sm font-normal shadow-xs text-gray-900 bg-transparent border border-gray-200 rounded-lg placeholder-gray-400 focus:outline-none leading-relaxed"
+													className="block w-full  pl-4 pr-3.5 py-2.5 text-sm font-normal shadow-xs text-slate-900 bg-transparent border border-slate-200 rounded-lg placeholder-slate-400 focus:outline-none leading-relaxed"
 													placeholder="Your Category name"
 													onChange={(e) => setCategories({ ...categories, categoryName: e.target.value })}
 													required
@@ -54,7 +54,7 @@ export default function Modal({ isModalOpen, setIsModalOpen, categories, setCate
 											</div>
 											<div className="flex items-center justify-end gap-4">
 												<button
-													className="py-2.5 px-9 rounded-lg border border-gray-200 text-sm font-medium text-gray-900 transition-all duration-300 hover:bg-gray-100 hover:border-gray-100 close-modal-button"
+													className="py-2.5 px-9 rounded-lg border border-slate-200 text-sm font-medium text-slate-900 transition-all duration-300 hover:bg-slate-100 hover:border-slate-100 close-modal-button"
 													data-pd-overlay="#modalBox-3"
 													data-modal-target="modalBox-3"
 													onClick={closeModal}

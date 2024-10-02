@@ -9,7 +9,7 @@ export default function CartItem({cartItems,handleDeleteItem,	handleUpdateQuanti
 			{cartItems.map((item) => (
 				<div
 					key={item.id}
-					className="flex flex-col md:flex-row items-center hover:bg-gray-100 dark:hover:bg-base-100 -mx-8 px-6 py-5"
+					className="flex flex-col md:flex-row items-center hover:bg-slate-100 dark:hover:bg-base-100 -mx-8 px-6 py-5"
 				>
 					<div className="flex w-full md:w-2/5">
 						<div className="">
@@ -40,7 +40,7 @@ export default function CartItem({cartItems,handleDeleteItem,	handleUpdateQuanti
 								}
 							>
 								<svg
-									className="fill-current text-gray-600 w-3"
+									className="fill-current text-slate-600 w-3"
 									viewBox="0 0 448 512"
 								>
 									<path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
@@ -56,14 +56,14 @@ export default function CartItem({cartItems,handleDeleteItem,	handleUpdateQuanti
 								onClick={() => handleUpdateQuantity(item.id, item.quantity + 1)}
 							>
 								<svg
-									className="fill-current text-gray-600 w-3"
+									className="fill-current text-slate-600 w-3"
 									viewBox="0 0 448 512"
 								>
 									<path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
 								</svg>
 							</button>
 						</div>
-						<span className="text-center invert-gray-text w-1/5 font-semibold text-sm">
+						<span className="text-center invert-slate-text w-1/5 font-semibold text-sm">
 							${item.price.$numberDouble || item.price}
 						</span>
 						<span className="text-center w-1/5 font-semibold text-sm">

@@ -35,7 +35,7 @@ export default function Customers() {
       <div className="flex">
         <Title title="Customers" />
       </div>
-      <div className="payment-table bg-white dark:bg-gray-700 relative rounded-md">
+      <div className="payment-table bg-white dark:bg-slate-700 relative rounded-md">
         {loading ? (
           <div className="flex justify-center items-center">
             <span className="loading loading-spinner text-primary"></span>
@@ -55,11 +55,11 @@ export default function Customers() {
                   <th>Actions</th>
                 </tr>
               </thead>
-              <tbody className="bg-white dark:bg-gray-700">
+              <tbody className="bg-white dark:bg-slate-700">
                 {customers.map((customer, index) => (
-                  <tr key={customer._id} className="hover:bg-gray-50 dark:hover:bg-gray-800">
+                  <tr key={customer._id} className="hover:bg-slate-50 dark:hover:bg-slate-800">
                     <th>{index + 1}</th>
-                    <td className="invert-gray-text">
+                    <td className="invert-slate-text">
                       <div className="flex items-center gap-3">
                         <div className="avatar">
                           <div className="mask mask-squircle h-12 w-12">

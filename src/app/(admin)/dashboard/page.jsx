@@ -197,11 +197,11 @@ export default function Dashboard() {
 
   return (
     <>
-      <div className="bg-gray-50 dark:bg-gray-700 pb-5 relative rounded-md">
+      <div className="bg-slate-50 dark:bg-slate-700 pb-5 relative rounded-md">
         <div className="container my-10 py-6">
           <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
             <div className="relative p-5 pb-16 overflow-hidden bg-invert rounded-md shadow-sm">
-              <div className="text-base invert-lgray-text">Total Sales</div>
+              <div className="text-base invert-lslate-text">Total Sales</div>
               <div className="relative z-10 flex items-center pt-1">
                 <div className="text-2xl font-bold invert-black-text">
                   {loading ? <span className="loading loading-spinner"></span> : formatPrice(totalSales)}
@@ -229,7 +229,7 @@ export default function Dashboard() {
               </div>
             </div>
             <div className="relative p-5 pb-16 overflow-hidden bg-invert rounded-md shadow-sm">
-              <div className="text-base invert-lgray-text">Orders</div>
+              <div className="text-base invert-lslate-text">Orders</div>
               <div className="relative z-10 flex items-center pt-1">
                 <div className="text-2xl font-bold invert-black-text">
                   {loading ? <span className="loading loading-spinner"></span> : totalOrders}
@@ -257,7 +257,7 @@ export default function Dashboard() {
               </div>
             </div>
             <div className="relative p-5 pb-16 overflow-hidden bg-invert rounded-md shadow-sm">
-              <div className="text-base invert-lgray-text">Customers</div>
+              <div className="text-base invert-lslate-text">Customers</div>
               <div className="relative z-10 flex items-center pt-1">
                 <div className="text-2xl font-bold invert-black-text">
                   {loading ? <span className="loading loading-spinner"></span> :
@@ -285,7 +285,7 @@ export default function Dashboard() {
               </div>
             </div>
             <div className="relative p-5 pb-16 overflow-hidden bg-invert rounded-md shadow-sm">
-              <div className="text-base invert-lgray-text">Total Products</div>
+              <div className="text-base invert-lslate-text">Total Products</div>
               <div className="relative z-10 flex items-center pt-1">
                 <div className="text-2xl font-bold invert-black-text">{loading ? <span className="loading loading-spinner"></span> : totalProducts}</div>
                 <span className="flex items-center px-2 py-0.5 mx-2 text-sm text-green-600 bg-green-100 rounded-full">
@@ -385,7 +385,7 @@ export default function Dashboard() {
                                     : order.orderStatus === "Cancelled"
                                       ? "pill-danger"
                                       : order.orderStatus === "Pending"
-                                        ? "pill-gray"
+                                        ? "pill-slate"
                                         : "dark"
                                 }`}
                             >

@@ -9,7 +9,7 @@ export default function Input({
   disabled,
 }) {
   // Default Tailwind classes for the input
-  const defaultClasses = "input w-full invert-gray-text";
+  const defaultClasses = "input w-full invert-slate-text";
 
   return (
     <>

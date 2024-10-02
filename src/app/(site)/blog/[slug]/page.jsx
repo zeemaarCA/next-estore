@@ -50,9 +50,9 @@ export default async function Blog({ params }) {
                 <p className="font-normal text-lg leading-7 text-white">Admin, Chief Legal Officer</p>
               </div>
               <div className="flex items-center gap-5">
-                <Link href=""><BsTwitterX className="w-6 h-6 cursor-pointer text-gray-100 dark:text-gray-200"/></Link>
-                <Link href=""><BsFacebook className="w-6 h-6 cursor-pointer text-gray-100 dark:text-gray-200"/></Link>
-                <Link href=""><BsLinkedin className="w-6 h-6 cursor-pointer text-gray-100 dark:text-gray-200"/></Link>
+                <Link href=""><BsTwitterX className="w-6 h-6 cursor-pointer text-slate-100 dark:text-slate-200"/></Link>
+                <Link href=""><BsFacebook className="w-6 h-6 cursor-pointer text-slate-100 dark:text-slate-200"/></Link>
+                <Link href=""><BsLinkedin className="w-6 h-6 cursor-pointer text-slate-100 dark:text-slate-200"/></Link>
               </div>
             </div>
             <div className="mt-4">

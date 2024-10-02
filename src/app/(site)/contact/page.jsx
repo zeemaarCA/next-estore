@@ -30,7 +30,7 @@ export default function Contact() {
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
 					{/* Contact Information */}
 					<div className="bg-primary/20 rounded-lg shadow-md p-6 z-[1]">
-						<h2 className="text-2xl font-bold invert-gray-text mb-6">
+						<h2 className="text-2xl font-bold invert-slate-text mb-6">
 							Get in Touch
 						</h2>
 						<div className="space-y-4">
@@ -41,8 +41,8 @@ export default function Contact() {
 									</div>
 								</div>
 								<div className="ml-4">
-									<p className="text-lg font-medium invert-gray-text">Email</p>
-									<p className="invert-gray-text">contact@example.com</p>
+									<p className="text-lg font-medium invert-slate-text">Email</p>
+									<p className="invert-slate-text">contact@example.com</p>
 								</div>
 							</div>
 							<div className="flex items-center">
@@ -52,8 +52,8 @@ export default function Contact() {
 									</div>
 								</div>
 								<div className="ml-4">
-									<p className="text-lg font-medium invert-gray-text">Phone</p>
-									<p className="invert-gray-text">+1 (555) 123-4567</p>
+									<p className="text-lg font-medium invert-slate-text">Phone</p>
+									<p className="invert-slate-text">+1 (555) 123-4567</p>
 								</div>
 							</div>
 							<div className="flex items-center">
@@ -63,10 +63,10 @@ export default function Contact() {
 									</div>
 								</div>
 								<div className="ml-4">
-									<p className="text-lg font-medium invert-gray-text">
+									<p className="text-lg font-medium invert-slate-text">
 										Location
 									</p>
-									<p className="invert-gray-text">123 Main St, City, Country</p>
+									<p className="invert-slate-text">123 Main St, City, Country</p>
 								</div>
 							</div>
 						</div>
@@ -74,7 +74,7 @@ export default function Contact() {
 
 					{/* Contact Form */}
 					<div className="bg-primary/20 rounded-lg shadow-md p-6 z-[1]">
-						<h2 className="text-2xl font-bold invert-gray-text mb-6">
+						<h2 className="text-2xl font-bold invert-slate-text mb-6">
 							Send us a Message
 						</h2>
 						<form className="space-y-4">
@@ -132,13 +132,13 @@ export default function Contact() {
 
 				{/* Map Section */}
 				<div className="bg-invert rounded-lg shadow-md">
-					<h2 className="text-2xl font-bold invert-gray-text mb-6">
+					<h2 className="text-2xl font-bold invert-slate-text mb-6">
 						Our Location
 					</h2>
           <div className="aspect-w-16 aspect-h-9">
             {/* Placeholder for the map
             card is not being accepted in google
-						<div className="w-full h-full bg-gray-300 rounded-lg flex items-center justify-center">
+						<div className="w-full h-full bg-slate-300 rounded-lg flex items-center justify-center">
 							<MapProvider>
 								<MapComponent />
               </MapProvider>

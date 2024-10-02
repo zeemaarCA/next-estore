@@ -76,18 +76,18 @@ export default async function ProductPage({ params }) {
 						</p>
 						<p className="mt-4 text-4xl font-bold text-primary">
 							${product.price}
-							{/* <span className="text-xs text-gray-400 line-through">
+							{/* <span className="text-xs text-slate-400 line-through">
 							$300
 						</span> */}
 						</p>
 						<div
-							className="pt-5 text-sm leading-5 text-gray-500"
+							className="pt-5 text-sm leading-5 text-slate-500"
 							dangerouslySetInnerHTML={{
 								__html: product && product.description,
 							}}
 						></div>
 						<div className="mt-6">
-							<p className="pb-2 text-xs text-gray-500">Quantity</p>
+							<p className="pb-2 text-xs text-slate-500">Quantity</p>
 							<ProductQtyWrapper product={product} />
 						</div>
 					</div>
@@ -99,7 +99,7 @@ export default async function ProductPage({ params }) {
 						<SectionTitle title="Related Products" />
 						<div className="grid grid-cols-12 gap-4">
 							{plainProducts.map((product) => (
-								<div key={product._id} className={`group my-2 flex w-full flex-col overflow-hidden rounded-lg border border-gray-100 dark:border-gray-500 bg-white dark:bg-neutral shadow-md col-span-12 sm:col-span-6 lg:col-span-3 xl:col-span-3`}>
+								<div key={product._id} className={`group my-2 flex w-full flex-col overflow-hidden rounded-lg border border-slate-100 dark:border-slate-500 bg-white dark:bg-neutral shadow-md col-span-12 sm:col-span-6 lg:col-span-3 xl:col-span-3`}>
 									<SingleProduct product={product} />
 								</div>
 							))}

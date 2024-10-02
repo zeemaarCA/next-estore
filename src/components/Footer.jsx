@@ -23,10 +23,10 @@ export default function Footer() {
           <Link href="/" className="flex justify-center ">
             <Image src={logo} alt="logo" width={125} height={50} />
 					</Link>
-          <ul className="text-lg flex items-center justify-center flex-col gap-7 md:flex-row md:gap-12 transition-all duration-500 py-16 mb-10 border-b border-gray-200">
+          <ul className="text-lg flex items-center justify-center flex-col gap-7 md:flex-row md:gap-12 transition-all duration-500 py-16 mb-10 border-b border-slate-200">
             {navLinks.map((link) => (
               <li key={link.name}>
-                <Link href={link.href} className="text-gray-800 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-400">
+                <Link href={link.href} className="text-slate-800 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-400">
                   {link.name}
                 </Link>
               </li>
@@ -35,7 +35,7 @@ export default function Footer() {
 					<div className="flex space-x-10 justify-center items-center mb-14">
 						<a
 							href="#"
-							className="block text-gray-900 dark:text-gray-300 transition-all duration-500 hover:text-primary"
+							className="block text-slate-900 dark:text-slate-300 transition-all duration-500 hover:text-primary"
 						>
 							<svg
 								className="w-[1.688rem] h-[1.688rem]"
@@ -51,7 +51,7 @@ export default function Footer() {
 						</a>
 						<a
 							href="#"
-							className="block text-gray-900 dark:text-gray-300 transition-all duration-500 hover:text-primary"
+							className="block text-slate-900 dark:text-slate-300 transition-all duration-500 hover:text-primary"
 						>
 							<svg
 								className="w-[1.688rem] h-[1.688rem] "
@@ -67,7 +67,7 @@ export default function Footer() {
 						</a>
 						<a
 							href="#"
-							className="block text-gray-900 dark:text-gray-300 transition-all duration-500 hover:text-primary"
+							className="block text-slate-900 dark:text-slate-300 transition-all duration-500 hover:text-primary"
 						>
 							<svg
 								className="w-[0.938rem] h-[1.625rem]"
@@ -83,7 +83,7 @@ export default function Footer() {
 						</a>
 						<a
 							href="#"
-							className="block text-gray-900 dark:text-gray-300 transition-all duration-500 hover:text-primary"
+							className="block text-slate-900 dark:text-slate-300 transition-all duration-500 hover:text-primary"
 						>
 							<svg
 								className="w-[1.875rem] h-[1.375rem]"
@@ -100,7 +100,7 @@ export default function Footer() {
 							</svg>
 						</a>
 					</div>
-					<span className="text-lg text-gray-500 text-center block">
+					<span className="text-lg text-slate-500 text-center block">
 						©<a href="https://decore.io/">Decore.</a> 2024, All rights
 						reserved.
 					</span>

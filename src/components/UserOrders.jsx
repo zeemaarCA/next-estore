@@ -63,8 +63,8 @@ export default function UserOrders() {
                   <tr key={order._id}>
                     <th>{index + 1}</th>
                     <td>
-                      <span className="bg-gray-300 rounded-full p-1 dark:bg-gray-700"><strong>OrderId</strong>: {order.orderId}</span>
-                      <div className="invert-gray-text divide-y divide-gray-500 dark:divide-gray-700">
+                      <span className="bg-slate-300 rounded-full p-1 dark:bg-slate-700"><strong>OrderId</strong>: {order.orderId}</span>
+                      <div className="invert-slate-text divide-y divide-slate-500 dark:divide-slate-700">
                         {order.products.map((product, productIndex) => (
                           <div key={productIndex} className="py-2 flex">
                             <span className="line-clamp-1">(x{product.quantity}) {product.title}
@@ -74,7 +74,7 @@ export default function UserOrders() {
                       </div>
                     </td>
                     <td>{order.paymentStatus === "succeeded" ? "Paid" : "Failed"}</td>
-                    <td className="invert-gray-text">${formatAmount(order.amount)}</td>
+                    <td className="invert-slate-text">${formatAmount(order.amount)}</td>
                     <td>
                       <span
                         className={`badge gap-2 ${order.orderStatus === "Processing"
@@ -93,7 +93,7 @@ export default function UserOrders() {
                         {order.orderStatus || "Processing"}
                       </span>
                     </td>
-                    <td className="invert-gray-text">{moment(order.createdAt).format('LLL')}</td>
+                    <td className="invert-slate-text">{moment(order.createdAt).format('LLL')}</td>
                   </tr>
                 ))}
               </tbody>

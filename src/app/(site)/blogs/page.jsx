@@ -27,7 +27,7 @@ export default async function Blogs({ searchParams }) {
 							{blogs.map((blog) => (
 								<div
 									key={blog._id}
-									className={`group my-2 flex w-full flex-col overflow-hidden rounded-lg border border-gray-100 dark:border-gray-500 bg-white dark:bg-neutral shadow-md col-span-12 sm:col-span-6 md:col-span-6 lg:col-span-4 xl:col-span-4`}
+									className={`group my-2 flex w-full flex-col overflow-hidden rounded-lg border border-slate-100 dark:border-slate-500 bg-white dark:bg-neutral shadow-md col-span-12 sm:col-span-6 md:col-span-6 lg:col-span-4 xl:col-span-4`}
 								>
 									<SingleBlog blog={blog} />
 								</div>

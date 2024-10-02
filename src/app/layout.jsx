@@ -1,12 +1,11 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import "@styles/globals.css";
+import "@styles/grid.css";
 import { ClerkLoaded, ClerkLoading } from "@clerk/nextjs";
-import Navbar from "@components/Navbar";
 import Loader from "@components/Loader";
 import ThemeAndClerkProvider from "@components/ThemeAndClerkProvider";
 import ReduxProvider from "@components/ReduxProvider";
-import Footer from "@components/Footer";
 import { Toaster } from "react-hot-toast";
 import { Suspense } from "react";
 import TopLoadingBar from "@components/TopLoadingBar";

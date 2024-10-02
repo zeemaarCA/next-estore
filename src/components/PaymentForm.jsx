@@ -47,7 +47,7 @@ export function PaymentForm({ cartItems, clientSecret }) {
                   {formatCurrency(item.price)}
                 </div>
                 <h3 className="text-sm font-bold">{item.title}</h3>
-                <div className="invert-gray-text">
+                <div className="invert-slate-text">
                   Quantity: {item.quantity}
                 </div>
               </div>

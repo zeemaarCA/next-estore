@@ -166,7 +166,7 @@ export default function Categories() {
 			</div>
 
 			<div className="overflow-x-auto rounded-lg">
-				<table className="table border border-gray-200 dark:border-gray-700">
+				<table className="table border border-slate-200 dark:border-slate-700">
 					{/* head */}
 					<thead className="bg-invert">
 						<tr>
@@ -181,7 +181,7 @@ export default function Categories() {
 							<th>Actions</th>
 						</tr>
 					</thead>
-					<tbody className="bg-white dark:bg-gray-700">
+					<tbody className="bg-white dark:bg-slate-700">
 						{categoryData.map((category) => (
 							<tr key={category._id} className="hover">
 								<th>

@@ -35,7 +35,7 @@ export default function Payments() {
       <div className="flex">
         <Title title="User Payments" />
       </div>
-      <div className="payment-table bg-whitedark:bg-gray-700 relative rounded-md">
+      <div className="payment-table bg-whitedark:bg-slate-700 relative rounded-md">
         {loading ? (
           <div className="flex justify-center items-center">
             <span className="loading loading-spinner text-primary"></span>
@@ -55,16 +55,16 @@ export default function Payments() {
                   <th>Payment Date</th>
                 </tr>
               </thead>
-              <tbody className="bg-white dark:bg-gray-700">
+              <tbody className="bg-white dark:bg-slate-700">
                 {payments.map((payment, index) => (
-                  <tr key={payment._id} className="hover:bg-gray-50 dark:hover:bg-gray-800">
+                  <tr key={payment._id} className="hover:bg-slate-50 dark:hover:bg-slate-800">
                     <th>{index + 1}</th>
-                    <td className="invert-gray-text">{payment.sessionId}</td>
-                    <td className="invert-gray-text">{payment.email}</td>
-                    <td className="invert-gray-text">{formatPrice(payment.amount)}</td>
-                    <td className="invert-gray-text">{payment.paymentMethod}</td>
-                    <td className="invert-gray-text">{payment.status}</td>
-                    <td className="invert-gray-text">{new Date(payment.createdAt).toLocaleDateString()}</td>
+                    <td className="invert-slate-text">{payment.sessionId}</td>
+                    <td className="invert-slate-text">{payment.email}</td>
+                    <td className="invert-slate-text">{formatPrice(payment.amount)}</td>
+                    <td className="invert-slate-text">{payment.paymentMethod}</td>
+                    <td className="invert-slate-text">{payment.status}</td>
+                    <td className="invert-slate-text">{new Date(payment.createdAt).toLocaleDateString()}</td>
                   </tr>
                 ))}
               </tbody>

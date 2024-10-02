@@ -105,11 +105,11 @@ export default function Sidebar() {
 				}`}
 				aria-label="Sidebar"
 			>
-				<div className="h-full px-3 py-4 overflow-y-auto bg-white dark:bg-base-100 border-r border-gray-200 dark:border-gray-700">
+				<div className="h-full px-3 py-4 overflow-y-auto bg-white dark:bg-base-100 border-r border-slate-200 dark:border-slate-700">
 					<ul className="font-medium pl-0">
 						{navLinks.map((link) => (
 							<li key={link.title} className="py-2 list-none select-none">
-								<Link href={link.href} className={`flex items-center justify-between p-2 cursor-pointer text-gray-700 rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 ${
+								<Link href={link.href} className={`flex items-center justify-between p-2 cursor-pointer text-slate-700 rounded-lg dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 ${
 										openMenu === link.title ? "block" : ""
 									}`} onClick={() => toggleMenu(link.title)}>
 									<span className="flex items-center gap-2">
@@ -144,7 +144,7 @@ export default function Sidebar() {
 											<Link
 												key={subLink.title}
 												href={subLink.href}
-												className="block p-2 text-sm text-gray-500 rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
+												className="block p-2 text-sm text-slate-500 rounded-lg dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700"
 											>
 												<li>{subLink.title}</li>
 											</Link>

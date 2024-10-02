@@ -117,7 +117,7 @@ export default function Orders() {
       </div>
 
 
-      <div className="order-table bg-white dark:bg-gray-700 relative rounded-md">
+      <div className="order-table bg-white dark:bg-slate-700 relative rounded-md">
         {loading ? (
           <div className="flex justify-center items-center">
             <span className="loading loading-spinner text-primary"></span>
@@ -139,11 +139,11 @@ export default function Orders() {
               </thead>
               <tbody>
                 {orders.map((order, index) => (
-                  <tr key={order._id} className="hover:bg-gray-50 dark:hover:bg-gray-800">
+                  <tr key={order._id} className="hover:bg-slate-50 dark:hover:bg-slate-800">
                     <th>{index + 1}</th>
                     <td>
-                        <span className="bg-gray-300 rounded-full p-1 dark:bg-gray-700"><strong>OrderId</strong>: {order.orderId}</span>
-                      <div className="invert-gray-text divide-y divide-gray-400 dark:divide-gray-500">
+                        <span className="bg-slate-300 rounded-full p-1 dark:bg-slate-700"><strong>OrderId</strong>: {order.orderId}</span>
+                      <div className="invert-slate-text divide-y divide-slate-400 dark:divide-slate-500">
                         {order.products.map((product, productIndex) => (
                           <div key={productIndex} className="py-2 flex">
                             <span className="line-clamp-1">(x{product.quantity}) {product.title}
@@ -153,7 +153,7 @@ export default function Orders() {
                       </div>
                     </td>
                     <td>{order.paymentStatus === "succeeded" ? "Paid" : "Failed"}</td>
-                    <td className="invert-gray-text">{formatPrice(order.amount)}</td>
+                    <td className="invert-slate-text">{formatPrice(order.amount)}</td>
                     <td>
                       {activeDropdown === order._id ? (
                         <div className="max-w-md">
@@ -191,7 +191,7 @@ export default function Orders() {
                         </span>
                       )}
                     </td>
-                    <td className="invert-gray-text">{new Date(order.createdAt).toLocaleDateString()}</td>
+                    <td className="invert-slate-text">{new Date(order.createdAt).toLocaleDateString()}</td>
                     <td>
                       <div className="flex gap-2">
                         <Button

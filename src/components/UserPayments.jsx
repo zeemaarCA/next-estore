@@ -63,12 +63,12 @@ export default function UserPayments() {
                 {payments.map((payment, index) => (
                   <tr key={payment._id}>
                     <th>{index + 1}</th>
-                    <td className="invert-gray-text">{payment.sessionId}</td>
-                    <td className="invert-gray-text">{payment.email}</td>
-                    <td className="invert-gray-text">${formatAmount(payment.amount)}</td>
-                    <td className="invert-gray-text">{payment.paymentMethod}</td>
-                    <td className="invert-gray-text">{payment.status}</td>
-                    <td className="invert-gray-text">{moment(payment.createdAt).format('LLL')}</td>
+                    <td className="invert-slate-text">{payment.sessionId}</td>
+                    <td className="invert-slate-text">{payment.email}</td>
+                    <td className="invert-slate-text">${formatAmount(payment.amount)}</td>
+                    <td className="invert-slate-text">{payment.paymentMethod}</td>
+                    <td className="invert-slate-text">{payment.status}</td>
+                    <td className="invert-slate-text">{moment(payment.createdAt).format('LLL')}</td>
                   </tr>
                 ))}
               </tbody>

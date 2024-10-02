@@ -121,7 +121,7 @@ export default function AddBlog() {
 				<div className="px-4 py-8 shadow-sm mt-4 rounded-md">
 					<Title title="Add Blog" />
 
-					<div className="product-form bg-white dark:bg-gray-700 px-4 py-8 rounded-md">
+					<div className="product-form bg-white dark:bg-slate-700 px-4 py-8 rounded-md">
 						<form onSubmit={handleSubmit}>
 							<div className="grid grid-cols-12 gap-4">
                 <div className="col-span-4">
@@ -129,7 +129,7 @@ export default function AddBlog() {
                     labelText="Blog Title"
                     type="text"
                     placeholder="Enter blog title"
-                    className="input input-bordered text-gray-700 dark:text-gray-300 w-full"
+                    className="input input-bordered text-slate-700 dark:text-slate-300 w-full"
                     onChange={(e) =>
                       setFormData({ ...formData, title: e.target.value })
                     }
@@ -140,7 +140,7 @@ export default function AddBlog() {
                     labelText="Blog Category"
                     type="text"
                     placeholder="Enter blog category"
-                    className="input input-bordered text-gray-700 dark:text-gray-300 w-full"
+                    className="input input-bordered text-slate-700 dark:text-slate-300 w-full"
                     onChange={(e) =>
                       setFormData({ ...formData, category: e.target.value })
                     }
@@ -201,7 +201,7 @@ export default function AddBlog() {
 									<ReactQuill
 										theme="snow"
 										placeholder="Write something..."
-										className="h-72 mb-12 text-gray-700 dark:text-gray-300"
+										className="h-72 mb-12 text-slate-700 dark:text-slate-300"
 										value={formData.content || ""}
 										required
 										onChange={(value) =>

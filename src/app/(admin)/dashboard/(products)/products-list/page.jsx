@@ -21,7 +21,7 @@ export default async function Products({ searchParams }) {
 			</div>
 			<Search placeholder="Search for a product..." count={count} />
 			<div className="overflow-x-auto rounded-lg">
-				<table className="table border border-gray-200 dark:border-gray-700">
+				<table className="table border border-slate-200 dark:border-slate-700">
 					{/* head */}
 					<thead className="bg-invert">
 						<tr>
@@ -38,7 +38,7 @@ export default async function Products({ searchParams }) {
 							<th>Actions</th>
 						</tr>
 					</thead>
-					<tbody className="bg-white dark:bg-gray-700">
+					<tbody className="bg-white dark:bg-slate-700">
 						{products.map((product) => (
 							<tr key={product.id} className="hover">
 								<th>

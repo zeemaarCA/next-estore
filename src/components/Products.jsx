@@ -19,7 +19,7 @@ export default function Products({ products }) {
 				/>
 				<div className="grid grid-cols-12 gap-4">
 					{products.map((product) => (
-						<div key={product._id} className={`group my-2 flex w-full flex-col overflow-hidden rounded-lg border border-gray-100 dark:border-gray-500 bg-white dark:bg-neutral shadow-md col-span-12 sm:col-span-6 lg:col-span-3 xl:col-span-3`}>
+						<div key={product._id} className={`group my-2 flex w-full flex-col overflow-hidden rounded-lg border border-slate-100 dark:border-slate-500 bg-white dark:bg-neutral shadow-md col-span-12 sm:col-span-6 lg:col-span-3 xl:col-span-3`}>
 							<SingleProduct product={product} />
 						</div>
 					))}

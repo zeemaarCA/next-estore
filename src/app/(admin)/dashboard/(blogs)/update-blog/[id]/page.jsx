@@ -177,7 +177,7 @@ export default function EditBlog({ params }) {
       <div className="px-4 py-8 shadow-sm mt-4 rounded-md">
         <Title title="Update Blog" />
 
-        <div className="product-form bg-white dark:bg-gray-700 px-4 py-8 rounded-md">
+        <div className="product-form bg-white dark:bg-slate-700 px-4 py-8 rounded-md">
           {isFetching ? (
             <div className="flex flex-col justify-center items-center">
               Fetching Post...
@@ -193,7 +193,7 @@ export default function EditBlog({ params }) {
                     type="text"
                     name="title"
                     placeholder="Enter blog title"
-                    className="input input-bordered text-gray-700 dark:text-gray-300 w-full"
+                    className="input input-bordered text-slate-700 dark:text-slate-300 w-full"
                     value={formData.title || ""}
                     onChange={handleInputChange}
                   />
@@ -204,7 +204,7 @@ export default function EditBlog({ params }) {
                     type="text"
                     name="category"
                     placeholder="Enter blog category"
-                    className="input input-bordered text-gray-700 dark:text-gray-300 w-full"
+                    className="input input-bordered text-slate-700 dark:text-slate-300 w-full"
                     value={formData.category || ""}
                     onChange={handleInputChange}
                   />
@@ -263,7 +263,7 @@ export default function EditBlog({ params }) {
                   <ReactQuill
                     theme="snow"
                     placeholder="Write something..."
-                    className="h-72 mb-12 text-gray-700 dark:text-gray-300"
+                    className="h-72 mb-12 text-slate-700 dark:text-slate-300"
                     value={formData.content || ""}
                     required
                     onChange={(value) =>

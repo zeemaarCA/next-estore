@@ -164,23 +164,23 @@ export default function CartPage({ cartfromserver }) {
 				<div className="container mt-10">
 					<div className="flex flex-col md:flex-row flex-wrap shadow-md my-10">
 						<div className="w-full md:w-3/4 bg-invert px-10 py-10">
-							<div className="flex justify-between border-b border-theme-gray pb-8">
+							<div className="flex justify-between border-b border-theme-slate pb-8">
 								<h1 className="font-semibold text-2xl">Shopping Cart</h1>
 								<h2 className="font-semibold text-2xl">
 									{totalQuantity} Items
 								</h2>
 							</div>
 							<div className="mt-10 mb-5 hidden md:flex">
-								<h3 className="font-semibold invert-gray-text text-xs uppercase w-2/5">
+								<h3 className="font-semibold invert-slate-text text-xs uppercase w-2/5">
 									Product Details
 								</h3>
-								<h3 className="font-semibold invert-gray-text text-xs uppercase w-1/5 text-center">
+								<h3 className="font-semibold invert-slate-text text-xs uppercase w-1/5 text-center">
 									Quantity
 								</h3>
-								<h3 className="font-semibold invert-gray-text text-xs uppercase w-1/5 text-center">
+								<h3 className="font-semibold invert-slate-text text-xs uppercase w-1/5 text-center">
 									Price
 								</h3>
-								<h3 className="font-semibold invert-gray-text text-xs uppercase w-1/5 text-center">
+								<h3 className="font-semibold invert-slate-text text-xs uppercase w-1/5 text-center">
 									Total
 								</h3>
 							</div>
@@ -210,7 +210,7 @@ export default function CartPage({ cartfromserver }) {
 							</Link>
 						</div>
 						<div id="summary" className="w-full md:w-1/4 px-8 py-10">
-							<h1 className="font-semibold text-2xl border-b border-theme-gray pb-8">
+							<h1 className="font-semibold text-2xl border-b border-theme-slate pb-8">
 								Order Summary
 							</h1>
 							<div className="flex justify-between mt-10 mb-5">
@@ -273,7 +273,7 @@ export default function CartPage({ cartfromserver }) {
 							<EmptyCart />
 						</div>
 						<h1 className="font-semibold text-2xl capitalize">Your cart is empty</h1>
-						<p className="invert-gray-text">Add some items to your cart and start shopping</p>
+						<p className="invert-slate-text">Add some items to your cart and start shopping</p>
 						<Link href="/shop" className="btn-theme-outline">
 							<IoArrowBackOutline className="w-5 h-5 mr-1" />
 							Shop Now

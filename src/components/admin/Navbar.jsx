@@ -59,7 +59,7 @@ export default function Navbar() {
 	return (
 		<>
 			{loading && <div className="loading-spinner">Loading...</div>}
-			<div className="navbar bg-white dark:bg-base-100 fixed z-50 border-b border-gray-200 dark:border-gray-700">
+			<div className="navbar bg-white dark:bg-base-100 fixed z-50 border-b border-slate-200 dark:border-slate-700">
 				<div className="navbar-start">
 					<Link href="/" className="select-none">
 						<Image priority src={logo} height={50} width={125} alt="logo" />

@@ -177,7 +177,7 @@ export default function EditProduct({ params }) {
 			<div className="px-4 py-8 shadow-sm mt-4 rounded-md">
 				<Title title="Update Product" />
 
-				<div className="product-form bg-white dark:bg-gray-700 px-4 py-8 rounded-md">
+				<div className="product-form bg-white dark:bg-slate-700 px-4 py-8 rounded-md">
 					{isFetching ? (
 						<div className="flex flex-col justify-center items-center">
 							Fetching Product...
@@ -192,7 +192,7 @@ export default function EditProduct({ params }) {
 										type="text"
 										name="name"
 										placeholder="Enter product name"
-										className="input input-bordered text-gray-700 dark:text-gray-300 w-full"
+										className="input input-bordered text-slate-700 dark:text-slate-300 w-full"
 										value={formData.name || ""}
 										onChange={handleInputChange}
 									/>
@@ -203,7 +203,7 @@ export default function EditProduct({ params }) {
 										type="number"
 										name="price"
 										placeholder="Enter product price"
-										className="input input-bordered text-gray-700 dark:text-gray-300 w-full"
+										className="input input-bordered text-slate-700 dark:text-slate-300 w-full"
 										value={formData.price || ""}
 										onChange={handleInputChange}
 									/>
@@ -214,7 +214,7 @@ export default function EditProduct({ params }) {
 										type="text"
 										name="category"
 										placeholder="Enter product category"
-										className="input input-bordered text-gray-700 dark:text-gray-300 w-full"
+										className="input input-bordered text-slate-700 dark:text-slate-300 w-full"
 										value={formData.category || ""}
 										onChange={handleInputChange}
 									/>
@@ -272,7 +272,7 @@ export default function EditProduct({ params }) {
 									<ReactQuill
 										theme="snow"
 										placeholder="Enter product description"
-										className="h-72 mb-12 text-gray-700 dark:text-gray-300"
+										className="h-72 mb-12 text-slate-700 dark:text-slate-300"
 										value={formData.description || ""}
 										onChange={(value) =>
 											setFormData({ ...formData, description: value })

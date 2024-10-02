@@ -28,7 +28,7 @@ import {
 import logoLight from "../../public/assets/logo-light.svg";
 import logoDark from "../../public/assets/logo-dark.svg";
 import { signInStart, signInSuccess, signoutSuccess } from "@redux/user/userSlice";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { setPromo } from "@redux/promo/promoSlice";
 
 export default function Navbar() {
@@ -39,6 +39,24 @@ export default function Navbar() {
 	const userRole = checkUserRole(session);
 	const totalQuantity = useSelector(selectTotalQuantity);
 	const currentUser = useSelector(state => state.user.currentUser);
+	const [isOpen, setIsOpen] = useState(false);
+
+	// Create a reference for the details element
+	const detailsRef = useRef(null);
+
+	const handleDropdownClick = () => {
+		setIsOpen(!isOpen);
+	};
+
+	const closeDropdown = () => {
+		setIsOpen(false);
+		if (detailsRef.current) {
+			detailsRef.current.removeAttribute('open'); // Remove the open attribute
+		}
+	};
+
+
+
 
 	const { theme } = useTheme();
 	const logo = theme === "dark" ? logoDark : logoLight;
@@ -59,6 +77,7 @@ export default function Navbar() {
 		};
 	}, [router]);
 
+
 	const pathname = usePathname();
 
 	const isLinkActive = (href) => {
@@ -67,20 +86,6 @@ export default function Navbar() {
 		}
 		return pathname.startsWith(href);
 	};
-
-	// Store user data in redux
-	// useEffect(() => {
-	// 	if (isSignedIn && user && !currentUser) {
-	// 		const userData = {
-	// 			id: user.id,
-	// 			fullName: user.fullName,
-	// 			emailAddress: user.emailAddresses[0].emailAddress,
-	// 			username: user.username,
-	// 			imageUrl: user.imageUrl,
-	// 		};
-	// 		dispatch(signInSuccess(userData));
-	// 	}
-	// }, [isSignedIn, user, dispatch, currentUser]);
 
 	useEffect(() => {
 		const fetchUserDetails = async () => {
@@ -103,21 +108,21 @@ export default function Navbar() {
 	}, [dispatch, user]);
 
 
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const redirectStatus = params.get("redirect_status");
+	useEffect(() => {
+		const params = new URLSearchParams(window.location.search);
+		const redirectStatus = params.get("redirect_status");
 
-    // Check for 'succeeded' in the redirect status to clear cart
-    if (redirectStatus === "succeeded") {
-      dispatch(clearCart());
-    }
+		// Check for 'succeeded' in the redirect status to clear cart
+		if (redirectStatus === "succeeded") {
+			dispatch(clearCart());
+		}
 
-    // Handle signout case
-    if (!isSignedIn && currentUser) {
-      dispatch(signoutSuccess());
-      dispatch(clearCart());
-    }
-  }, [isSignedIn, currentUser, dispatch]);
+		// Handle signout case
+		if (!isSignedIn && currentUser) {
+			dispatch(signoutSuccess());
+			dispatch(clearCart());
+		}
+	}, [isSignedIn, currentUser, dispatch]);
 
 	// Fetch cart data from server
 	useEffect(() => {
@@ -141,9 +146,10 @@ export default function Navbar() {
 			name: "Categories",
 			href: "#",
 			subLinks: [
-				{ name: "Satim Kachmina", slug: "satim-kachmina" },
-				{ name: "Cushions", slug: "cushions" },
-				{ name: "Lamps", slug: "lamps" },
+				{ name: "Camera", slug: "camera" },
+				{ name: "Charger", slug: "charger" },
+				{ name: "Speaker", slug: "speaker" },
+				{ name: "Monitor", slug: "monitor" },
 			],
 		},
 		{ name: "About", href: "/about" },
@@ -202,25 +208,29 @@ export default function Navbar() {
 							{navLinks.map((link) => (
 								<li key={link.name}>
 									{link.subLinks ? (
-										<details>
-											<summary className="text-gray-700 dark:text-gray-200">{link.name}</summary>
-											<ul className="p-2 w-max z-10">
+										<details open={isOpen} ref={detailsRef}>
+											<summary onClick={handleDropdownClick} className="text-slate-700 dark:text-slate-200 hover:bg-slate-100 active:bg-slate-100 focus:bg-slate-100">{link.name}</summary>
+											<ul className="p-2 w-max z-10 bg-slate-50">
 												{link.subLinks.map((subLink) => (
 													<li key={subLink.slug}>
 														<Link href={`/categories/${subLink.slug}`}
-															className={isLinkActive(`/categories/${subLink.slug}`) ? 'active-link' : ''}
+															className={`${isLinkActive(`/categories/${subLink.slug}`) ? 'active-link' : ''} hover:bg-slate-100 active:bg-slate-100 focus:bg-slate-100`}
+															onClick={closeDropdown} // Close the dropdown on link click
 														>
 															{subLink.name}
 														</Link>
 													</li>
 												))}
+												<li><Link href="/categories"
+													className="hover:bg-slate-100 active:bg-slate-100 focus:bg-slate-100"
+													onClick={closeDropdown}>All Categories</Link></li>
 											</ul>
 										</details>
 									) : (
 										<Link
 											href={link.href}
 											prefetch={true}
-											className={isLinkActive(link.href) ? 'active-link' : ''}
+											className={`${isLinkActive(link.href) ? 'active-link' : ''} hover:bg-slate-100 active:bg-slate-100 focus:bg-slate-100`}
 										>
 											{link.name}
 										</Link>
@@ -231,7 +241,7 @@ export default function Navbar() {
 								<li>
 									<Link
 										href="/dashboard"
-										className={`bg-invert ${isLinkActive('/dashboard') ? 'active-link' : ''}`}
+										className={`bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 ${isLinkActive('/dashboard') ? 'active-link' : ''}`}
 										prefetch={true}
 									>
 										<MdOutlineAdminPanelSettings className="w-4 h-4" /> Admin

@@ -51,7 +51,10 @@ export default function Category() {
         <div className="category-list grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {categoryData.map((category) => (
             <div key={category._id} className="category-item bg-primary/10 px-4 py-3 rounded-lg border border-primary/20 hover:bg-primary/20 text-center">
-              <Link href={`/shop?category=${category.category}`}>
+              {/* <Link href={`/shop?category=${category.category}`}>
+                <h3 className="capitalize font-medium text-base md:text-xl">{category.category}</h3>
+              </Link> */}
+              <Link href={`/categories/${category.category}`}>
                 <h3 className="capitalize font-medium text-base md:text-xl">{category.category}</h3>
               </Link>
             </div>

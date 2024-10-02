@@ -47,7 +47,7 @@ const Search = ({ placeholder, count }) => {
 				</label>
 			</div>
 			<div>
-				<h5 className="text-gray-600 dark:text-gray-400">Showing <span className="text-primary font-bold text-lg">{count}</span> Products</h5>
+				<h5 className="text-slate-600 dark:text-slate-400">Showing <span className="text-primary font-bold text-lg">{count}</span> Products</h5>
 			</div>
 		</div>
 	);

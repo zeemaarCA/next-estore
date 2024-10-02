@@ -137,7 +137,7 @@ export default function AddProduct() {
 				<div className="px-4 py-8 shadow-sm mt-4 rounded-md">
 					<Title title="Add Product" />
 
-					<div className="product-form px-4 py-8 bg-white dark:bg-gray-700 rounded-md">
+					<div className="product-form px-4 py-8 bg-white dark:bg-slate-700 rounded-md">
 						<form onSubmit={handleSubmit}>
 							<div className="grid grid-cols-12 gap-4">
 								<div className="col-span-4">
@@ -145,7 +145,7 @@ export default function AddProduct() {
 										labelText="Product Name"
 										type="text"
 										placeholder="Enter product name"
-										className="input input-bordered text-gray-700 dark:text-gray-300 w-full"
+										className="input input-bordered text-slate-700 dark:text-slate-300 w-full"
 										onChange={(e) =>
 											setFormData({ ...formData, name: e.target.value })
 										}
@@ -156,14 +156,14 @@ export default function AddProduct() {
 										labelText="Product Price"
 										type="text"
 										placeholder="Enter product price"
-										className="input input-bordered text-gray-700 dark:text-gray-300 w-full"
+										className="input input-bordered text-slate-700 dark:text-slate-300 w-full"
 										onChange={(e) =>
 											setFormData({ ...formData, price: e.target.value })
 										}
 									/>
 								</div>
 								<div className="col-span-4 flex flex-col justify-between">
-									<label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+									<label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
 										Choose Category
 									</label>
 									<Select
@@ -183,10 +183,10 @@ export default function AddProduct() {
 										styles={{
 											control: (baseStyles, state) => ({
 												...baseStyles,
-												borderColor: state.isFocused ? 'gray' : baseStyles.borderColor,
-												boxShadow: state.isFocused ? '0 0 0 1px gray' : baseStyles.boxShadow,
+												borderColor: state.isFocused ? 'slate' : baseStyles.borderColor,
+												boxShadow: state.isFocused ? '0 0 0 1px slate' : baseStyles.boxShadow,
 												'&:hover': {
-													borderColor: 'gray'
+													borderColor: 'slate'
 												},
 											}),
 										}}
@@ -247,7 +247,7 @@ export default function AddProduct() {
 									<ReactQuill
 										theme="snow"
 										placeholder="Write something..."
-										className="h-72 mb-12 text-gray-700 dark:text-gray-300"
+										className="h-72 mb-12 text-slate-700 dark:text-slate-300"
 										value={formData.description || ""}
 										required
 										onChange={(value) =>

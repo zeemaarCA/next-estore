@@ -25,7 +25,7 @@ export default function Categories() {
 								width={300}
 								height={300}
 							/>
-							<div className="absolute inset-0 bg-gray-700 opacity-60 rounded-md"></div>
+							<div className="absolute inset-0 bg-slate-700 opacity-60 rounded-md"></div>
 							<div className="absolute inset-0 flex items-center justify-center">
 								<h2 className="text-white text-3xl font-bold">Cushions</h2>
 							</div>
@@ -40,7 +40,7 @@ export default function Categories() {
 								width={400}
 								height={300}
 							/>
-							<div className="absolute inset-0 bg-gray-700 opacity-60 rounded-md"></div>
+							<div className="absolute inset-0 bg-slate-700 opacity-60 rounded-md"></div>
 							<div className="absolute inset-0 flex items-center justify-center">
 								<h2 className="text-white text-3xl font-bold">Carpets</h2>
 							</div>
@@ -55,7 +55,7 @@ export default function Categories() {
 								width={400}
 								height={300}
 							/>
-							<div className="absolute inset-0 bg-gray-700 opacity-60 rounded-md"></div>
+							<div className="absolute inset-0 bg-slate-700 opacity-60 rounded-md"></div>
 							<div className="absolute inset-0 flex items-center justify-center">
 								<h2 className="text-white text-3xl font-bold">Lamps</h2>
 							</div>

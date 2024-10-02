@@ -13,17 +13,17 @@ export function ThemeToggle() {
       <div>
       {theme === "dark" ? (
         <div
-          className="flex rounded-full p-2 border-2 dark:border-gray-600 border-solid cursor-pointer"
+          className="flex rounded-full p-2 border-2 dark:border-slate-600 border-solid cursor-pointer"
           onClick={() => setTheme("light")}
         >
-          <MdOutlineWbSunny className="h-4 w-4 dark:text-gray-200 sm:h-4 sm:w-4" />
+          <MdOutlineWbSunny className="h-4 w-4 dark:text-slate-200 sm:h-4 sm:w-4" />
         </div>
       ) : (
         <div
-          className="flex rounded-full p-2 border-2 border-gray-300 border-solid cursor-pointer"
+          className="flex rounded-full p-2 border-2 border-slate-300 border-solid cursor-pointer"
           onClick={() => setTheme("dark")}
         >
-          <BsFillMoonStarsFill className="h-4 w-4 text-gray-400 sm:h-4 sm:w-4" />
+          <BsFillMoonStarsFill className="h-4 w-4 text-slate-400 sm:h-4 sm:w-4" />
         </div>
       )}
     </div>

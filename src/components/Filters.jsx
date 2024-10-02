@@ -2,7 +2,7 @@ export default function Filters() {
 	return (
 		<>
 			<div className="col-span-12 md:col-span-3 w-full max-md:max-w-md max-md:mx-auto">
-				<div className="box rounded-xl border border-gray-100 dark:border-gray-500 bg-invert p-6 w-full md:max-w-sm">
+				<div className="box rounded-xl border border-slate-100 dark:border-slate-500 bg-invert p-6 w-full md:max-w-sm">
 					<h6 className="font-medium text-base leading-7 text-black mb-5">
 						Your Workspace
 					</h6>
@@ -118,8 +118,8 @@ export default function Filters() {
 						Search
 					</button>
 				</div>
-				<div className="mt-7 box rounded-xl border border-gray-100 dark:border-gray-500 bg-invert p-6 w-full md:max-w-sm">
-					<div className="flex items-center justify-between w-full pb-3 border-b border-gray-200 mb-7">
+				<div className="mt-7 box rounded-xl border border-slate-100 dark:border-slate-500 bg-invert p-6 w-full md:max-w-sm">
+					<div className="flex items-center justify-between w-full pb-3 border-b border-slate-200 mb-7">
 						<p className="font-medium text-base leading-7">Filters</p>
 						<p className="font-medium text-xs cursor-pointer">RESET</p>
 					</div>
@@ -129,7 +129,7 @@ export default function Filters() {
 						<div className="flex items-center gap-2">
 							<input
 								type="checkbox"
-								className="checkbox dark:checkbox-warning checkbox-success border border-gray-300 border-solid"
+								className="checkbox dark:checkbox-warning checkbox-success border border-slate-300 border-solid"
 							/>
 							<label
 								htmlFor="checkbox-default-1"
@@ -141,7 +141,7 @@ export default function Filters() {
 						<div className="flex items-center gap-2">
 							<input
 								type="checkbox"
-								className="checkbox dark:checkbox-warning checkbox-success border border-gray-300 border-solid"
+								className="checkbox dark:checkbox-warning checkbox-success border border-slate-300 border-solid"
 							/>
 							<label
 								htmlFor="checkbox-default-2"
@@ -153,7 +153,7 @@ export default function Filters() {
 						<div className="flex items-center gap-2">
 							<input
 								type="checkbox"
-								className="checkbox dark:checkbox-warning checkbox-success border border-gray-300 border-solid"
+								className="checkbox dark:checkbox-warning checkbox-success border border-slate-300 border-solid"
 							/>
 							<label
 								htmlFor="checkbox-default-3"

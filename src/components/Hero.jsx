@@ -28,7 +28,7 @@ export default function Hero() {
 							initial={{ filter: "blur(8px) drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.1))" }}
 							animate={{ filter: "blur(0px) drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.1))" }}
 							transition={{ duration: 1 }}
-							className="text-gray-600 dark:text-gray-300 mt-8 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium leading-none select-none"
+							className="text-slate-600 dark:text-slate-300 mt-8 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium leading-none select-none"
 						>
 							Latest Collection{" "}
 							<span className="block text-primary">Now Available.</span>

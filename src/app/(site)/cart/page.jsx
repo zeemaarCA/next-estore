@@ -31,7 +31,7 @@ export default async function Cart() {
 								<EmptyCart />
 							</div>
 							<h1 className="font-semibold text-2xl capitalize">Your cart is empty</h1>
-							<p className="invert-gray-text">Add some items to your cart and start shopping</p>
+							<p className="invert-slate-text">Add some items to your cart and start shopping</p>
 							<Link href="/shop" className="btn-theme-outline">
 								<IoArrowBackOutline className="w-5 h-5 mr-1" />
 								Shop Now

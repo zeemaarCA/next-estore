@@ -177,7 +177,7 @@ export default function CheckoutForm({ userDataForRedux }) {
 						<div>
 							<Textarea
 								labelText="Address"
-								className="invert-gray-text"
+								className="invert-slate-text"
 								placeholder="Enter your address"
 								rows="3"
 								value={formData.address}

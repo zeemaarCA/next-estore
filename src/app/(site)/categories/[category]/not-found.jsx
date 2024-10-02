@@ -12,14 +12,13 @@ export default function Notfound() {
 						Something&apos;s missing.
 					</p>
 					<p className="mb-4 text-lg font-light text-slate-500 dark:text-slate-400">
-						Sorry, we can&apos;st find that page. You&apos;sll find lots to explore on the
-						home page.
+						The Category you are looking for is not available.
 					</p>
 					<Link
-						href="#"
+						href="/shop"
 						className="btn-theme-outline !inline"
 					>
-						Back to Homepage
+						Back to Shop
 					</Link>
 				</div>
 			</div>

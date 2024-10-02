@@ -14,8 +14,8 @@ export default function SingleBlog({ blog }) {
 						height={500}
 					/>
 				</div>
-				<div className="p-4 lg:p-6 transition-all duration-300 group-hover:bg-gray-50 dark:group-hover:bg-base-200">
-					<span className="invert-gray-text font-medium text-sm badge-theme-sm mb-3 inline-block">
+				<div className="p-4 lg:p-6 transition-all duration-300 group-hover:bg-slate-50 dark:group-hover:bg-base-200">
+					<span className="invert-slate-text font-medium text-sm badge-theme-sm mb-3 inline-block">
 						{moment(blog.createdAt).format("ll")}
 					</span>
 					<Link href={`/blog/${blog.slug}`}>
@@ -24,7 +24,7 @@ export default function SingleBlog({ blog }) {
 						</h4>
 					</Link>
 					<div
-						className="invert-gray-text leading-6 mb-10"
+						className="invert-slate-text leading-6 mb-10"
 						dangerouslySetInnerHTML={{
 							__html: blog.content
 								// Remove all heading tags from the content
