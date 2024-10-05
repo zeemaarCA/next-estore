@@ -17,7 +17,7 @@ import { app } from "@utils/firebase";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { useEffect, useState, useRef } from "react";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 

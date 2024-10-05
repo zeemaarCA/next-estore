@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import Breadcrumbs from "@components/admin/Breadcrumbs";
 import Title from "@components/admin/Title";
 import { formatPrice } from "@lib/formatters";
+import moment from "moment";
 
 export default function Payments() {
   const [payments, setPayments] = useState([]);
@@ -64,7 +65,7 @@ export default function Payments() {
                     <td className="invert-slate-text">{formatPrice(payment.amount)}</td>
                     <td className="invert-slate-text">{payment.paymentMethod}</td>
                     <td className="invert-slate-text">{payment.status}</td>
-                    <td className="invert-slate-text">{new Date(payment.createdAt).toLocaleDateString()}</td>
+                    <td className="invert-slate-text">{moment(payment.createdAt).format("ll")}</td>
                   </tr>
                 ))}
               </tbody>

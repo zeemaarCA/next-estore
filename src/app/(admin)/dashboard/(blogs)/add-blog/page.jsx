@@ -20,7 +20,7 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import Image from "next/image";
 import SelectComponent from "@components/admin/Select";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import dynamic from "next/dynamic";
 import { useSelector } from "react-redux";
 

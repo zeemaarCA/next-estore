@@ -21,7 +21,7 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import Image from "next/image";
 import Select from 'react-select';
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import dynamic from "next/dynamic";
 
 export default function AddProduct() {

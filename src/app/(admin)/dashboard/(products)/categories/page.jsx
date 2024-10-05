@@ -5,7 +5,8 @@ import Button from "@components/admin/Button";
 import Modal from "@components/admin/Modal.jsx";
 import Title from "@components/admin/Title";
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
+import moment from "moment";
 
 export default function Categories() {
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -198,12 +199,7 @@ export default function Categories() {
 									)}
 								</td>
 								<td className="whitespace-nowrap">
-									{category.createdAt &&
-										new Date(category.updatedAt).toLocaleDateString("en-GB", {
-											day: "2-digit",
-											month: "short",
-											year: "numeric",
-										})}
+									{moment(category.updatedAt).format("ll")}
 								</td>
 								<td className="flex relative gap-1 flex-nowrap items-center">
 									<Button

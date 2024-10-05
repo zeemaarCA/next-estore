@@ -72,7 +72,7 @@ export const sendOrderEmail = async (orderDetails) => {
 
   // Send the email
   const info = await transporter.sendMail({
-    from: '"Your Store" <no-reply@yourstore.com>', // Sender address
+    from: '"Decora Store" <no-reply@decorastore.com>', // Sender address
     to: orderDetails.userDetails.email, // User email
     subject: "Order Confirmation - " + orderDetails.orderId, // Subject line
     html: emailContent, // HTML body

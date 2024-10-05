@@ -6,8 +6,9 @@ import { useEffect, useState } from "react";
 import { getAllOrders } from "@utils/actions/orders";
 import Button from "@components/admin/Button";
 import { MdDelete, MdOutlineEdit } from "react-icons/md";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import { formatPrice } from "@lib/formatters";
+import moment from "moment";
 
 export default function Orders() {
   const [orders, setOrders] = useState([]);
@@ -191,7 +192,7 @@ export default function Orders() {
                         </span>
                       )}
                     </td>
-                    <td className="invert-slate-text">{new Date(order.createdAt).toLocaleDateString()}</td>
+                    <td className="invert-slate-text">{moment(order.createdAt).format("ll")}</td>
                     <td>
                       <div className="flex gap-2">
                         <Button

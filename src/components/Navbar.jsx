@@ -189,7 +189,7 @@ export default function Navbar() {
 										) : (
 											<Link
 												href={link.href}
-												prefetch={true}
+
 												className={isLinkActive(link.href) ? 'active-link' : ''}
 											>
 												{link.name}
@@ -209,12 +209,12 @@ export default function Navbar() {
 								<li key={link.name}>
 									{link.subLinks ? (
 										<details open={isOpen} ref={detailsRef}>
-											<summary onClick={handleDropdownClick} className="text-slate-700 dark:text-slate-200 hover:bg-slate-100 active:bg-slate-100 focus:bg-slate-100">{link.name}</summary>
-											<ul className="p-2 w-max z-10 bg-slate-50">
+											<summary onClick={handleDropdownClick} className="text-slate-700 dark:text-slate-200 hover:bg-slate-100 active:bg-slate-100 focus:bg-slate-100 dark:hover:bg-slate-900 dark:active:bg-slate-900 dark:focus:bg-slate-900">{link.name}</summary>
+											<ul className="p-2 w-max z-10 bg-slate-50 dark:bg-slate-800">
 												{link.subLinks.map((subLink) => (
 													<li key={subLink.slug}>
 														<Link href={`/categories/${subLink.slug}`}
-															className={`${isLinkActive(`/categories/${subLink.slug}`) ? 'active-link' : ''} hover:bg-slate-100 active:bg-slate-100 focus:bg-slate-100`}
+															className={`${isLinkActive(`/categories/${subLink.slug}`) ? 'active-link' : ''} hover:bg-slate-100 active:bg-slate-100 focus:bg-slate-100 dark:hover:bg-slate-900 dark:active:bg-slate-900 dark:focus:bg-slate-900`}
 															onClick={closeDropdown} // Close the dropdown on link click
 														>
 															{subLink.name}
@@ -222,15 +222,15 @@ export default function Navbar() {
 													</li>
 												))}
 												<li><Link href="/categories"
-													className="hover:bg-slate-100 active:bg-slate-100 focus:bg-slate-100"
+													className="hover:bg-slate-100 active:bg-slate-100 focus:bg-slate-100 dark:hover:bg-slate-900 dark:active:bg-slate-900 dark:focus:bg-slate-900"
 													onClick={closeDropdown}>All Categories</Link></li>
 											</ul>
 										</details>
 									) : (
 										<Link
 											href={link.href}
-											prefetch={true}
-											className={`${isLinkActive(link.href) ? 'active-link' : ''} hover:bg-slate-100 active:bg-slate-100 focus:bg-slate-100`}
+
+											className={`${isLinkActive(link.href) ? 'active-link' : ''} hover:bg-slate-100 active:bg-slate-100 focus:bg-slate-100 dark:hover:bg-slate-900 dark:active:bg-slate-900 dark:focus:bg-slate-900`}
 										>
 											{link.name}
 										</Link>
@@ -242,7 +242,7 @@ export default function Navbar() {
 									<Link
 										href="/dashboard"
 										className={`bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 ${isLinkActive('/dashboard') ? 'active-link' : ''}`}
-										prefetch={true}
+
 									>
 										<MdOutlineAdminPanelSettings className="w-4 h-4" /> Admin
 									</Link>

@@ -6,7 +6,8 @@ import { ClerkLoaded, ClerkLoading } from "@clerk/nextjs";
 import Loader from "@components/Loader";
 import ThemeAndClerkProvider from "@components/ThemeAndClerkProvider";
 import ReduxProvider from "@components/ReduxProvider";
-import { Toaster } from "react-hot-toast";
+// import { Toaster } from "react-hot-toast";
+import {Toaster, toast} from "sonner";
 import { Suspense } from "react";
 import TopLoadingBar from "@components/TopLoadingBar";
 
@@ -34,21 +35,7 @@ export default function RootLayout({ children }) {
 							<ClerkLoaded>
 								<Toaster
 									position="bottom-right"
-									toastOptions={{
-										className: "",
-										duration: 5000,
-										style: {
-											background: "#363636",
-											color: "#fff",
-										},
-										success: {
-											duration: 3000,
-											theme: {
-												primary: "green",
-												secondary: "black",
-											},
-										},
-									}}
+									richColors
 								/>
 								<Suspense fallback={<Loader />}>
 									<div className="flex-grow">{children}</div>

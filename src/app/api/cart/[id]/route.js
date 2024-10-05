@@ -1,6 +1,7 @@
 // update cart items quantity in the database
 import Cart from "@utils/models/cart.model"; // Cart model for MongoDB schema
 import { connect } from "@utils/mongodb/mongoose"; // Function to connect to MongoDB
+import { revalidatePath } from "next/cache";
 
 export const PATCH = async (request, { params }) => {
   const { itemId, newQuantity } = await request.json();
@@ -44,7 +45,7 @@ export const PATCH = async (request, { params }) => {
 
     // Save the updated cart
     await existingCart.save();
-
+    revalidatePath("/cart");
     return new Response(
       JSON.stringify({ message: "Successfully updated the cart", cart: existingCart }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
@@ -97,7 +98,7 @@ export const DELETE = async (request, { params }) => {
 
     // Save the updated cart back to the database
     await cart.save();
-
+    revalidatePath("/cart");
     return new Response(
       JSON.stringify({ message: "Item deleted successfully" }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }

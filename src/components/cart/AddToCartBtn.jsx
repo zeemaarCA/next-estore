@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { IoBagCheck } from "react-icons/io5";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, setCartItems } from "@redux/cart/cartSlice";
 import { useAuth } from "@clerk/nextjs";

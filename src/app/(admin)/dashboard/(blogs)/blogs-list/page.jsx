@@ -6,6 +6,7 @@ import Search from "@components/admin/Search";
 import Image from "next/image";
 import Button from "@components/admin/Button";
 import Link from "next/link";
+import moment from "moment";
 
 export default async function Blogs({ searchParams }) {
 	const q = searchParams?.q || "";
@@ -70,7 +71,7 @@ export default async function Blogs({ searchParams }) {
 									<td>{blog.category}</td>
 									<td>{blog.isActive === "true" ? "Yes" : "No"}</td>
 									<td className="whitespace-nowrap">
-										{blog.createdAt?.toString().slice(4, 16)}
+										{moment(blog.createdAt).format("ll")}
 									</td>
 									<td className="flex relative top-[9px] gap-1 flex-nowrap">
 										<Link

@@ -14,7 +14,7 @@ import Textarea from "@components/Textarea";
 import Button from "@components/Button";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import { setCheckoutFormFilled } from "@redux/checkout/checkoutSlice";
 
 export default function CheckoutForm({ userDataForRedux }) {

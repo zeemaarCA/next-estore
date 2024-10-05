@@ -10,7 +10,7 @@ import {
 import { setPromo } from "@redux/promo/promoSlice";
 import { useAuth } from "@clerk/nextjs";
 import { useDispatch, useSelector } from "react-redux";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import Link from "next/link";
 import CartItem from "./CartItem";
 import { useEffect, useState } from "react";
@@ -27,6 +27,32 @@ export default function CartPage({ cartfromserver }) {
 	const totalQuantity = useSelector(selectTotalQuantity);
 	const [promotionCode, setPromotionCode] = useState("");
 	const [loading, setLoading] = useState(false);
+
+	useEffect(() => {
+		const fetchUpdatedCart = async () => {
+			try {
+				const res = await fetch(`/api/cart/getcart/${userId}`, { cache: "no-store" });
+				const updatedCart = await res.json();
+				console.log("updatedCart", updatedCart);
+
+				if (updatedCart && updatedCart.items) {
+					dispatch(setCartItems(updatedCart.items));
+					dispatch(setPromo({
+						isPromoApplied: updatedCart.isPromoApplied,
+						discount: updatedCart.discount,
+					}));
+				}
+			} catch (err) {
+				console.error("Error fetching cart data:", err);
+			}
+		};
+
+		if (userId) {
+			fetchUpdatedCart();
+		}
+	}, [dispatch, userId]);
+
+
 	// useEffect(() => {
 	// 	if (cartfromserver) {
 	// 		dispatch(setCartItems(cartfromserver.items));

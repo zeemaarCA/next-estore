@@ -6,6 +6,7 @@ import Search from "@components/admin/Search";
 import Image from "next/image";
 import Button from "@components/admin/Button";
 import Link from "next/link";
+import moment from "moment";
 
 export default async function Products({ searchParams }) {
 	const q = searchParams?.q || "";
@@ -67,7 +68,7 @@ export default async function Products({ searchParams }) {
 								<td>{product.category}</td>
 								<td>${product.price}</td>
 								<td>{product.isAvailable === "true" ? "Yes" : "No"}</td>
-								<td className="whitespace-nowrap">{product.updatedAt?.toString().slice(4, 16)}</td>
+								<td className="whitespace-nowrap">{moment(product.updatedAt).format("ll")}</td>
 								<td className="flex relative top-[9px] gap-1 flex-nowrap">
 									<Link
 										href={`/dashboard/update-product/${product.id}`}

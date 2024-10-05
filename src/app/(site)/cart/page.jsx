@@ -11,13 +11,15 @@ import EmptyCart from "@components/icons/EmptyCart";
 import Link from "next/link";
 import { IoArrowBackOutline } from "react-icons/io5";
 
+export const dynamic = "force-dynamic";
+
 export default async function Cart() {
 	const { userId } = auth();
 	if (!userId) {
 		redirect("/");
 	}
 	try {
-		const cartfromserver = await fetchCart(userId);
+		const cartfromserver = await fetchCart(userId, { cache: "no-store" });
 		if (!cartfromserver) {
 			console.log("Cart not found for user:", userId);
 		}
