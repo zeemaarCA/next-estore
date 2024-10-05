@@ -2,7 +2,7 @@ import { ClerkLoaded, ClerkLoading } from "@clerk/nextjs";
 import Navbar from "@components/admin/Navbar";
 import Loader from "@components/Loader";
 import Footer from "@components/Footer";
-import { Toaster } from "react-hot-toast";
+import { Toaster, toast } from "sonner";
 import { Suspense } from "react";
 
 export default function SiteLayout({ children }) {
@@ -14,21 +14,7 @@ export default function SiteLayout({ children }) {
       <ClerkLoaded>
         <Toaster
           position="bottom-right"
-          toastOptions={{
-            className: "",
-            duration: 5000,
-            style: {
-              background: "#363636",
-              color: "#fff",
-            },
-            success: {
-              duration: 3000,
-              theme: {
-                primary: "green",
-                secondary: "black",
-              },
-            },
-          }}
+          richColors
         />
         <Navbar />
         <Suspense fallback={<Loader />}>

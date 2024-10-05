@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useEffect, useState } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { IoChevronBack, IoChevronForward } from 'react-icons/io5';
 
 const testimonials = [
   { name: 'Emily', company: 'Health First', text: "The insights we've gained from Metric have helped us make informed decisions and grow our practice significantly." },
@@ -88,14 +88,14 @@ const TestimonialSlider = () => {
         className="absolute top-1/2 left-4 -translate-y-1/2 bg-white rounded-full p-2 shadow-md z-40"
         disabled={isAnimating}
       >
-        <ChevronLeft size={24} />
+        <IoChevronBack size={24} />
       </button>
       <button
         onClick={nextTestimonial}
         className="absolute top-1/2 right-4 -translate-y-1/2 bg-white rounded-full p-2 shadow-md z-40"
         disabled={isAnimating}
       >
-        <ChevronRight size={24} />
+        <IoChevronForward size={24} />
       </button>
     </div>
   );
