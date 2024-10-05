@@ -10,6 +10,7 @@ import {
 import { setPromo } from "@redux/promo/promoSlice";
 import { useAuth } from "@clerk/nextjs";
 import { useDispatch, useSelector } from "react-redux";
+import { usePathname } from "next/navigation";
 import { toast } from "sonner";
 import Link from "next/link";
 import CartItem from "./CartItem";
@@ -27,6 +28,8 @@ export default function CartPage({ cartfromserver }) {
 	const totalQuantity = useSelector(selectTotalQuantity);
 	const [promotionCode, setPromotionCode] = useState("");
 	const [loading, setLoading] = useState(false);
+
+	const pathname = usePathname();
 
 	useEffect(() => {
 		const fetchUpdatedCart = async () => {
@@ -47,10 +50,10 @@ export default function CartPage({ cartfromserver }) {
 			}
 		};
 
-		if (userId) {
-			fetchUpdatedCart();
-		}
-	}, [dispatch, userId]);
+		if (userId && pathname === '/cart') {
+      fetchUpdatedCart();
+    }
+	}, [pathname, dispatch, userId]);
 
 
 	// useEffect(() => {
