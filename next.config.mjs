@@ -5,6 +5,10 @@ const nextConfig = {
   },
   experimental: {
     missingSuspenseWithCSRBailout: false,
+    staleTimes: {
+      dynamic: 0,
+      static: 180,
+    },
   },
 };
 

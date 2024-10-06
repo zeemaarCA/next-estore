@@ -1,6 +1,6 @@
 import Cart from "@utils/models/cart.model.js";
 import { connect } from "@utils/mongodb/mongoose.js";
-
+export const dynamic = "force-dynamic";
 // Define the GET handler for this API route
 export async function GET(req, { params }) {
   const { id: userId } = params; // Extract userId from route params

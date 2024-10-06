@@ -19,7 +19,7 @@ export default async function Cart() {
 		redirect("/");
 	}
 	try {
-		const cartfromserver = await fetchCart(userId, { cache: "no-store" });
+		const cartfromserver = await fetchCart(userId);
 		if (!cartfromserver) {
 			console.log("Cart not found for user:", userId);
 		}

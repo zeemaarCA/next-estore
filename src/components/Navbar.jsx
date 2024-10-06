@@ -253,7 +253,7 @@ export default function Navbar() {
 					<div className="navbar-end gap-4">
 						<ThemeToggle />
 						<div className="relative">
-							<Link href="/cart">
+							<Link href="/cart" prefetch={false}>
 								<span className="absolute bg-invert h-5 w-5 flex justify-center items-center rounded-full -right-2 -top-2 select-none">
 									{totalQuantity}
 								</span>

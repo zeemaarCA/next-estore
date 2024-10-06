@@ -31,12 +31,13 @@ export default function CartPage({ cartfromserver }) {
 
 	const pathname = usePathname();
 
+	console.log("pathname", pathname);
+
 	useEffect(() => {
 		const fetchUpdatedCart = async () => {
 			try {
 				const res = await fetch(`/api/cart/getcart/${userId}`, { cache: "no-store" });
 				const updatedCart = await res.json();
-				console.log("updatedCart", updatedCart);
 
 				if (updatedCart && updatedCart.items) {
 					dispatch(setCartItems(updatedCart.items));

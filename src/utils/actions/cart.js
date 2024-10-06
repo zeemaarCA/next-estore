@@ -2,10 +2,9 @@
 
 "use server"
 
-import { revalidatePath } from "next/cache.js";
+import { revalidatePath } from 'next/cache'
 import Cart from "../models/cart.model.js";
 import { connect } from "../mongodb/mongoose.js";
-
 
 export const fetchCart = async (userId) => {
   try {
