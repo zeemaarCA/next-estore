@@ -1,9 +1,11 @@
 "use client";
 import { Line } from "react-chartjs-2";
 import "chart.js/auto";
-import { userData, totalSalesAmount, userOrders, gettotalProducts, getUserOrderCounts } from "@utils/actions/dashboardData";
+import { userData, totalSalesAmount, userOrders, gettotalProducts, getUserOrderCounts, dashBlogs, dashReviews } from "@utils/actions/dashboardData";
 import { useEffect, useState } from "react";
 import { formatPrice } from "@lib/formatters";
+import Link from "next/link";
+import moment from "moment";
 
 export default function Dashboard() {
   const [users, setUsers] = useState([]);
@@ -18,6 +20,11 @@ export default function Dashboard() {
   const [totalProducts, setTotalProducts] = useState(0);
   const [lastMonthProducts, setLastMonthProducts] = useState(0);
   const [userOrdersCounts, setUserOrdersCounts] = useState([]);
+  const [posts, setPosts] = useState([]);
+  const [totalPosts, setTotalPosts] = useState(0);
+  const [lastMonthPosts, setLastMonthPosts] = useState(0);
+  const [reviews, setReviews] = useState([]);
+
 
 
   const data1 = {
@@ -151,6 +158,35 @@ export default function Dashboard() {
     fetchUserOrders();
   }, []);
 
+
+  useEffect(() => {
+    setLoading(true);
+    const fetchBlogs = async () => {
+      const fetchedPosts = await dashBlogs();
+      setPosts(fetchedPosts.posts);
+      setTotalPosts(fetchedPosts.totalPosts);
+      setLastMonthPosts(fetchedPosts.lastMonthPosts);
+      setLoading(false);
+    };
+
+    fetchBlogs();
+  }, []);
+
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const fetchedReviews = await dashReviews(5);
+        setReviews(fetchedReviews); // Make sure you are setting reviews correctly
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false); // Set loading to false in both success and error cases
+      }
+    };
+
+    fetchReviews();
+  }, []);
 
   useEffect(() => {
     setLoading(true);
@@ -311,10 +347,13 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-        <div className=" mx-auto my-10">
+        <div className="container mx-auto my-10">
           <div className="customer-card grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
             <div className="overflow-x-auto bg-invert rounded-md shadow-sm pb-4 min-h-32">
-              <h3 className="p-4 text-lg font-bold">Customers</h3>
+            <div className="flex justify-between items-center p-4">
+                <h3 className="text-lg font-bold">Customers</h3>
+                <Link href="dashboard/customers" className="btn-theme-outline">View All</Link>
+              </div>
               {userOrdersCounts.length < 0 ? (
                 <p className="text-center">No customers found</p>
               ) : (
@@ -349,7 +388,10 @@ export default function Dashboard() {
             </div>
 
             <div className="overflow-x-auto bg-invert rounded-md shadow-sm pb-4 min-h-32">
-              <h3 className="p-4 text-lg font-bold">Orders</h3>
+              <div className="flex justify-between items-center p-4">
+                <h3 className="text-lg font-bold">Orders</h3>
+                <Link href="dashboard/orders" className="btn-theme-outline">View All</Link>
+              </div>
               {orders.length < 0 ? (
                 <p className="text-center">No order found</p>
               ) : (
@@ -392,6 +434,92 @@ export default function Dashboard() {
                               {order.orderStatus || "Processing"}
                             </span>
                           </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )
+              )}
+            </div>
+
+
+          </div>
+        </div>
+
+        <div className="container mx-auto my-10">
+          <div className="customer-card grid grid-cols-12 gap-4">
+            <div className="col-span-12 lg:col-span-4 overflow-x-auto bg-invert rounded-md shadow-sm pb-4 min-h-32">
+            <div className="flex justify-between items-center p-4">
+                <h3 className="text-lg font-bold">Blogs</h3>
+                <Link href="dashboard/blogs-list" className="btn-theme-outline">View All</Link>
+              </div>
+              {userOrdersCounts.length < 0 ? (
+                <p className="text-center">No blog post found</p>
+              ) : (
+                loading ? (
+                  <div className="flex justify-center items-center min-h-24">
+                    <span className="loading loading-spinner loading-sm"></span>
+                  </div>
+                ) : (
+                  <table className="table">
+                    {/* head */}
+                    <thead className="bg-invert">
+                      <tr>
+                        <th></th>
+                        <th>Title</th>
+                        <th>Category</th>
+                        {/* <th>Publised Date</th> */}
+                      </tr>
+                    </thead>
+                    <tbody className="bg-invert">
+                      {posts.map((post, index) => (
+                        <tr key={post._id}>
+                          <td>{index + 1}</td>
+                          <td>{post.title}</td>
+                          <td>{post.category}</td>
+                          {/* <td>{moment(post.createdAt).format("ll")}</td> */}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )
+              )}
+            </div>
+
+            <div className="col-span-12 lg:col-span-8 overflow-x-auto bg-invert rounded-md shadow-sm pb-4 min-h-32">
+              <div className="flex justify-between items-center p-4">
+                <h3 className="text-lg font-bold">Product Reviews</h3>
+                <Link href="dashboard/reviews" className="btn-theme-outline">View All</Link>
+              </div>
+              {reviews.length < 0 ? (
+                <p className="text-center">No review found</p>
+              ) : (
+                loading ? (
+                  <div className="flex justify-center items-center min-h-24">
+                    <span className="loading loading-spinner loading-sm"></span>
+                  </div>
+                ) : (
+                  <table className="table">
+                    {/* head */}
+                    <thead className="bg-invert">
+                      <tr>
+                        <th></th>
+                        <th>Product</th>
+                        <th>Name</th>
+                        <th>Review</th>
+                        <th>Rating</th>
+                        <th>Date</th>
+                      </tr>
+                    </thead>
+                    <tbody className="bg-invert">
+                      {reviews.map((review, index) => (
+                        <tr key={review._id}>
+                          <td>{index + 1}</td>
+                          <td className="">{review.productName}</td>
+                          <td>{review.userName}</td>
+                          <td>{review.reviewText}</td>
+                          <td>{review.rating}</td>
+                          <td>{moment(review.date).format("ll")}</td>
                         </tr>
                       ))}
                     </tbody>

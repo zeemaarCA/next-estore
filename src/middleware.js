@@ -6,8 +6,11 @@ const protectedRoutes = createRouteMatcher([
   '/cart',
   '/checkout',
   '/process-payment',
-  '/process-payment/success',
-  '/profile'
+  '/success',
+  '/profile',
+  '/orders',
+  '/payments',
+  '/review',
 ])
 
 export default clerkMiddleware((auth, req) => {

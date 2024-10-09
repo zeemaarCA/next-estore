@@ -143,7 +143,8 @@ export default function Orders() {
                   <tr key={order._id} className="hover:bg-slate-50 dark:hover:bg-slate-800">
                     <th>{index + 1}</th>
                     <td>
-                        <span className="bg-slate-300 rounded-full p-1 dark:bg-slate-700"><strong>OrderId</strong>: {order.orderId}</span>
+                      <span className="bg-slate-300 rounded-full py-1 dark:bg-slate-700 mr-1 px-2"><strong>OrderId</strong>: {order.orderId}</span>
+                      <span className="bg-slate-300 rounded-full py-1 px-2 dark:bg-slate-700">{order.email}</span>
                       <div className="invert-slate-text divide-y divide-slate-400 dark:divide-slate-500">
                         {order.products.map((product, productIndex) => (
                           <div key={productIndex} className="py-2 flex">

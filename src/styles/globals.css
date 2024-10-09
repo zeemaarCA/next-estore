@@ -170,7 +170,7 @@ img {
   @apply text-sm text-red-600 font-medium tracking-tight bg-red-700/10 px-4 py-2 rounded-full
 }
 .badge-theme-sm {
-  @apply text-sm text-primary font-medium tracking-tight bg-primary/20 px-2 py-1 rounded-full mb-2 inline-block
+  @apply text-xs text-primary font-medium tracking-tight bg-primary/20 px-2 py-1 rounded-full mb-2 inline-block
 }
 
 .pill-success{
@@ -208,4 +208,15 @@ td{
 
 .active-link{
   @apply !text-primary font-bold
+}
+.active-link::before{
+  content: "";
+  @apply w-1 h-1 absolute left-1/2 bottom-0 bg-primary rounded-full -translate-x-1/2
+}
+.cl-internal-phfxlr{
+  @apply mx-auto;
+}
+.table tr.hover:hover,
+.table tr.hover:nth-child(even):hover{
+  @apply bg-slate-100 dark:bg-slate-600
 }

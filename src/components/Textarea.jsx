@@ -1,6 +1,7 @@
 export default function Textarea({
   labelText,
   value,
+  defaultValue = "",
   name,
   rows,
   placeholder,
@@ -18,6 +19,7 @@ export default function Textarea({
         </div>
         <textarea
           value={value}
+          defaultValue={defaultValue}
           name={name}
           rows={rows}
           placeholder={placeholder}

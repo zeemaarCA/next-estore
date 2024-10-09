@@ -55,7 +55,17 @@ export const fetchProductsByCategory = async (q = "", page = 1, category, limit 
 };
 
 
-export const fetchSiteProducts = async (q = "", page = 1, category = "", price = "", sort = "newest", limit = 12, excludeProductId = null) => {
+import { ObjectId } from "mongodb";
+
+export const fetchSiteProducts = async (
+  q = "",
+  page = 1,
+  category = "",
+  price = "",
+  sort = "newest",
+  limit = 12,
+  excludeProductId = null
+) => {
   const regex = new RegExp(q, "i");
   const filterQuery = { name: { $regex: regex } };
 
@@ -65,7 +75,7 @@ export const fetchSiteProducts = async (q = "", page = 1, category = "", price =
 
   // Exclude the current product from related products
   if (excludeProductId) {
-    filterQuery._id = { $ne: excludeProductId };
+    filterQuery._id = { $ne: new ObjectId(excludeProductId) };
   }
 
   if (price) {
@@ -86,18 +96,53 @@ export const fetchSiteProducts = async (q = "", page = 1, category = "", price =
 
   try {
     await connect();
-    const count = await Product.find(filterQuery).countDocuments();
-    const siteProducts = await Product.find(filterQuery)
-      .sort(sortOption)
-      .limit(limit)
-      .skip(limit * (page - 1))
-      .lean();
 
+    const siteProducts = await Product.aggregate([
+      { $match: filterQuery },
+      { $sort: sortOption },
+      { $skip: limit * (page - 1) },
+      { $limit: limit },
+
+      // Lookup reviews with correct productId
+      {
+        $lookup: {
+          from: "reviews",
+          let: { productId: "$_id" },
+          pipeline: [
+            {
+              $match: {
+                $expr: { $eq: ["$productId", { $toString: "$$productId" }] } // Match by string
+              }
+            }
+          ],
+          as: "reviews"
+        }
+      },
+
+      // Add average rating calculation
+      {
+        $addFields: {
+          averageRating: {
+            $avg: "$reviews.rating"
+          },
+          totalReviews: { $size: "$reviews" }
+        }
+      }
+    ]);
+
+    const count = await Product.find(filterQuery).countDocuments();
     const plainProducts = siteProducts.map((product) => ({
       ...product,
       _id: product._id.toString(),
-      createdAt: product.createdAt.toISOString(),
-      updatedAt: product.updatedAt.toISOString(),
+      createdAt: new Date(product.createdAt).toISOString(),
+      updatedAt: new Date(product.updatedAt).toISOString(),
+      reviews: product.reviews.map((review) => ({
+        ...review,
+        _id: review._id.toString(),
+        productId: review.productId.toString(),
+        createdAt: new Date(review.createdAt).toISOString(),
+        updatedAt: new Date(review.updatedAt).toISOString(),
+      }))
     }));
 
     return { plainProducts, count };
@@ -106,6 +151,8 @@ export const fetchSiteProducts = async (q = "", page = 1, category = "", price =
     throw new Error("Failed to fetch products");
   }
 };
+
+
 
 
 

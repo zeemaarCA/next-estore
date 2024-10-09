@@ -150,7 +150,7 @@ export default async function PaymentSuccess({ searchParams }) {
             <p className="font-medium text-xl leading-8 text-primary">Team Decore</p>
           </div>
           <div className="action-btn mt-8 flex justify-center">
-            <Link href={"/profile"} className="btn-theme">Go to Orders Page</Link>
+            <Link href={"/orders"} className="btn-theme">Go to Orders Page</Link>
           </div>
         </div>
       </section>

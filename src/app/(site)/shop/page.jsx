@@ -20,6 +20,9 @@ export default async function Shop({ searchParams }) {
 
 	const { count, plainProducts } = await fetchSiteProducts(q, page, category, price, sort, 12);
 
+	console.log("plainProducts", plainProducts);
+	console.log("count", count);
+
 	return (
 		<>
 			<section className="py-24 relative">

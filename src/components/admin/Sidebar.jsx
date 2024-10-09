@@ -40,8 +40,8 @@ export default function Sidebar() {
 					href: "/dashboard/categories",
 				},
 				{
-					title: "Brands",
-					href: "#",
+					title: "Reviews",
+					href: "/dashboard/reviews",
 				},
 				{
 					title: "Collections",

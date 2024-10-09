@@ -22,10 +22,10 @@ export default function CartItem({cartItems,handleDeleteItem,	handleUpdateQuanti
 							/>
 						</div>
 						<div className="flex flex-col justify-between ml-6 flex-grow">
-							<Link href={`/product/${item.slug}`}><span className="font-bold text-sm">{item.title}</span></Link>
 							<span className="badge-theme-sm max-w-max">{item.category}</span>
+							<Link href={`/product/${item.slug}`}><span className="font-bold text-sm inline-block mb-2">{item.title}</span></Link>
 							<button
-								className="font-semibold border-b border-b-transparent hover:border-b hover:border-b-red-500 text-error text-xs flex justify-start items-center max-w-max"
+								className="relative -left-1 font-semibold border-b border-b-transparent hover:border-b hover:border-b-red-500 text-error text-xs flex justify-start items-center max-w-max"
 								onClick={() => handleDeleteItem(item.id)}
 							>
 								<MdDeleteForever className="w-5 h-5" /> Remove

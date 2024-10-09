@@ -96,7 +96,7 @@ export default async function Products({ searchParams }) {
 					</tfoot> */}
 				</table>
 			</div>
-			<Pagination count={count} />
+			{count > 12 && <Pagination count={count} />}
 		</div>
 	);
 }

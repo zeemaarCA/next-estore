@@ -4,6 +4,7 @@ import { connect } from "@utils/mongodb/mongoose.js";
 import { revalidatePath } from "next/cache";
 import Cart from "@utils/models/cart.model.js";
 import Order from "@utils/models/order.model.js";
+import Review from "@utils/models/review.model.js";
 import User from "@utils/models/user.model";
 
 export const fetchProductsInCart = async (id) => {
@@ -78,9 +79,30 @@ export const createOrder = async (userId, paymentIntent) => {
 export const getOrders = async (userId) => {
   try {
     await connect();
-    const raworders = await Order.find({ userId }).lean();
-    const orders = JSON.parse(JSON.stringify(raworders));
-    return orders;
+
+    // Fetch all orders for the user
+    const rawOrders = await Order.find({ userId }).lean();
+
+    // Fetch reviews for each product in the orders
+    const productIds = rawOrders.flatMap(order => order.products.map(p => p.productId));
+    const userReviews = await Review.find({
+      userId,
+      productId: { $in: productIds }
+    }).lean();
+
+    // Add review info and review ID to each product in the orders
+    const orders = rawOrders.map(order => ({
+      ...order,
+      products: order.products.map(product => {
+        const review = userReviews.find(review => review.productId.toString() === product.productId);
+        return {
+          ...product,
+          reviewCompleted: !!review,
+          reviewId: review ? review._id : null // Add review ID if it exists
+        };
+      })
+    }));
+    return JSON.parse(JSON.stringify(orders));
   } catch (err) {
     console.error(err);
     throw new Error("Failed to get orders");
@@ -102,7 +124,6 @@ export const getAllOrders = async () => {
 
 
 // get current orders after payment
-import { Types } from 'mongoose';
 
 export const getRecentOrders = async () => {
   try {
