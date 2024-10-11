@@ -5,11 +5,12 @@ import Title from "@components/admin/Title";
 import { reviewsPage } from "@utils/actions/dashReviews";
 import Image from "next/image";
 import moment from "moment";
+import { FaStar } from "react-icons/fa";
 
 export default async function Reviews({ searchParams }) {
   const q = searchParams?.q || "";
-	const page = searchParams?.page ? parseInt(searchParams.page) : 1;
-	const { count, reviewsData } = await reviewsPage(q, page);
+  const page = searchParams?.page ? parseInt(searchParams.page) : 1;
+  const { count, reviewsData } = await reviewsPage(q, page);
 
 
   return (
@@ -54,7 +55,14 @@ export default async function Reviews({ searchParams }) {
                   </td>
                   <td>{review.userName}</td>
                   <td>{review.reviewText}</td>
-                  <td>{review.rating}</td>
+                  <td>
+                    <div className="flex items-center gap-1">
+                      {[...Array(review.rating)].map((_, index) => (
+                        <FaStar key={index} className="text-yellow-500" />
+                      ))}
+                      <span>({review.rating})</span>
+                    </div>
+                  </td>
                   <td className="whitespace-nowrap">
                     {moment(review.createdAt).format("ll")}
                   </td>

@@ -6,7 +6,7 @@ import { fetchProduct } from "@utils/actions/product";
 import { getReviews } from "@utils/actions/reviews"
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import ReviewsSection from "@components/ReviewsSection";
+import ReviewsSection from "@components/reviews/ReviewsSection";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 // import ReactImageGallery from "react-image-gallery";
 // import Rater from "react-rater";

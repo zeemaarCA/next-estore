@@ -15,6 +15,7 @@ export const fetchProducts = async (q, page) => {
     await connect();
     const count = await Product.find({ name: { $regex: regex } }).countDocuments();
     const products = await Product.find({ name: { $regex: regex } })
+      .sort({ createdAt: -1 }) // Sort by latest products first
       .limit(ITEM_PER_PAGE)
       .skip(ITEM_PER_PAGE * (page - 1));
     return { count, products };
@@ -243,7 +244,7 @@ export const deleteProduct = async (formData) => {
 
   } catch (err) {
     console.log(err);
-    throw new Error("Failed to delete product and its image!");
+    throw new Error(err, "Failed to delete product and its image!");
   }
 
   // Revalidate the path for product list after deletion

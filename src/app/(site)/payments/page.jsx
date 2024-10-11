@@ -18,8 +18,8 @@ export default function Payments() {
           <Link href="/payments"><li className="bg-primary px-3 py-1 rounded-full text-white">Payments</li></Link>
         </ul>
       </div>
-      <div className="container bg-white dark:bg-base-100 mb-24 pb-8 rounded-lg shadow-md">
-        <SectionTitle title="Payments" />
+      <div className="container bg-white dark:bg-base-100 mb-24 pb-8 rounded-lg shadow-md relative text-center">
+        <SectionTitle title="Payment History" className={"ml-4 !justify-center"} />
         <UserPayments />
       </div>
     </>

@@ -81,7 +81,7 @@ export default function SingleReview({ reviews }) {
                   </svg>
                 ))}
               </div>
-              <p className="font-medium text-lg leading-8 text-gray-400 lg:text-center whitespace-nowrap">
+              <p className="font-medium text-sm leading-8 text-gray-400 lg:text-center whitespace-nowrap">
                 {moment(review.createdAt).fromNow()}
               </p>
             </div>

@@ -2,9 +2,10 @@
 
 import { connect } from "@utils/mongodb/mongoose.js";
 import { revalidatePath } from "next/cache";
-import Cart from "@utils/models/cart.model.js";
-import Order from "@utils/models/order.model.js";
-import Review from "@utils/models/review.model.js";
+import Cart from "@utils/models/cart.model";
+import Order from "@utils/models/order.model";
+import Product from "@utils/models/product.model";
+import Review from "@utils/models/review.model";
 import User from "@utils/models/user.model";
 
 export const fetchProductsInCart = async (id) => {
@@ -83,22 +84,44 @@ export const getOrders = async (userId) => {
     // Fetch all orders for the user
     const rawOrders = await Order.find({ userId }).lean();
 
-    // Fetch reviews for each product in the orders
+    // Fetch product IDs from the orders
     const productIds = rawOrders.flatMap(order => order.products.map(p => p.productId));
+
+    // Fetch reviews for the user on these products
     const userReviews = await Review.find({
       userId,
       productId: { $in: productIds }
     }).lean();
 
-    // Add review info and review ID to each product in the orders
+    // Fetch product details (including price and images) from Products collection
+    const products = await Product.find({
+      _id: { $in: productIds }
+    }, 'productImage price slug').lean();
+
+    // Map product details (images and prices) by productId for easy access
+    const productDetailsMap = products.reduce((map, product) => {
+      map[product._id.toString()] = {
+        productImage: product.productImage,
+        price: product.price,
+        slug: product.slug
+      };
+      return map;
+    }, {});
+
+    // Add review info, review ID, productImage, and price to each product in the orders
     const orders = rawOrders.map(order => ({
       ...order,
       products: order.products.map(product => {
         const review = userReviews.find(review => review.productId.toString() === product.productId);
+        const productDetails = productDetailsMap[product.productId] || {}; // Retrieve product details
+
         return {
           ...product,
           reviewCompleted: !!review,
-          reviewId: review ? review._id : null // Add review ID if it exists
+          reviewId: review ? review._id : null, // Add review ID if it exists
+          productImage: productDetails.productImage || null, // Add product image if it exists
+          price: productDetails.price || null, // Add product price if it exists
+          slug: productDetails.slug || null // Add product slug if it exists
         };
       })
     }));
@@ -108,6 +131,8 @@ export const getOrders = async (userId) => {
     throw new Error("Failed to get orders");
   }
 };
+
+
 
 
 export const getAllOrders = async () => {

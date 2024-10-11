@@ -75,3 +75,37 @@ export const PATCH = async (request, { params }) => {
     );
   }
 };
+
+
+export const DELETE = async (request, { params }) => {
+  try {
+    await connect();
+
+    if (!params.reviewId) {
+      // return new Response("Review ID not provided", { status: 400 });
+      return new Response(
+        JSON.stringify({ message: "Review ID not provided" }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // delete the review
+
+    const deletedReview = await Review.findByIdAndDelete(params.reviewId);
+
+    if (!deletedReview) {
+      return new Response("Review not found", { status: 404 });
+    }
+
+    return new Response(JSON.stringify({ message: "Review has been deleted" }), { status: 200 });
+
+
+
+  } catch (error) {
+    console.error("Error deleting review:", error);
+    return new Response(
+      JSON.stringify({ message: "Error deleting review" }),
+      { status: 500, headers: { 'Content-Type': 'application/json' } }
+    );
+  }
+  }

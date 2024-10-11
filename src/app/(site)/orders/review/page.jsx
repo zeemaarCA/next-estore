@@ -95,7 +95,7 @@ export default function OrderReview() {
           </div>
         </>
       ) : (
-        <section className="py-24 relative">
+        <section className="py-24 px-4 relative">
           <div className="w-full max-w-7xl mx-auto px-4 md:px-8 bg-invert py-8 rounded-lg shadow-md">
             <div className="grid grid-cols-12">
               <div className="col-span-12 md:col-span-8 md:pr-8 md:border-r border-gray-200">
@@ -103,14 +103,14 @@ export default function OrderReview() {
                   <p className="font-medium text-lg leading-8 invert-lslate-text">Order: {order.orderId}</p>
                 </div>
                 <div className="flex max-sm:flex-col items-center justify-between mb-6">
-                  <h3 className="font-bold text-2xl leading-9 line-clamp-1">{product.name}</h3>
+                  <h3 className="font-bold text-center md:text-left text-lg md:text-xl lg:text-2xl leading-9 md:line-clamp-1">{product.name}</h3>
                   <h2 className="font-bold text-2xl leading-10 invert-slate-text">${product.price}</h2>
                 </div>
                 <div className="flex max-sm:flex-col items-center justify-between mb-6">
                   <span className="invert-slate-text">Quantity: {order?.products?.find(singlep => singlep.productId === productId)?.quantity || 'Loading...'}</span>
                   <span className="invert-slate-text">Purchased On: {moment(order?.createdAt).format('LLL')}</span>
                 </div>
-                <div className="img-box w-full max-sm:mx-auto mb-12">
+                <div className="img-box w-full max-sm:mx-auto mb-6 md:mb-12 flex justify-center md:justify-start">
                   <Image src={product.productImage} alt={product.name} className="rounded-xl object-cover" width={350} height={350} />
                 </div>
                 <div className="flex items-center max-sm:flex-col md:justify-end gap-4">
@@ -127,9 +127,11 @@ export default function OrderReview() {
                   <div className="w-full">
                     <div className="flex items-center justify-between mb-5 max-md:max-w-sm max-sm:mx-auto">
                       <h3 className="font-bold text-2xl leading-9 invert-slate-text">Write a review</h3>
-                      <svg className="cursor-pointer" width={40} height={40} viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M14.0261 14.2259L25.5755 25.7753M14.0261 25.7753L25.5755 14.2259" stroke="#bbb" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
+                      <Link href="/orders">
+                        <svg className="cursor-pointer" width={40} height={40} viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M14.0261 14.2259L25.5755 25.7753M14.0261 25.7753L25.5755 14.2259" stroke="#bbb" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </Link>
                     </div>
                     <div className="flex flex-col items-center w-full max-w-sm max-sm:mx-auto gap-4">
                       <Textarea name="review" id="review" cols={30} rows={10} className="border border-slate-400 bg-invert invert-slate-text" placeholder="Enter a description..." defaultValue={""} />

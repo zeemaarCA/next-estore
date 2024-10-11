@@ -18,8 +18,8 @@ export default function Orders() {
           <Link href="/payments"><li className="px-3 py-1 rounded-full hover:bg-primary/20">Payments</li></Link>
         </ul>
       </div>
-      <div className="container bg-white dark:bg-base-100 mb-24 pb-8 rounded-lg shadow-md">
-        <SectionTitle title="Orders" />
+      <div className="container bg-white dark:bg-base-100 mb-24 pb-8 rounded-lg shadow-md relative">
+        <SectionTitle title="Order History" className={"ml-4 !justify-center !pb-0"} />
         <UserOrders />
       </div>
     </>
