@@ -10,6 +10,7 @@ import { redirect } from "next/navigation";
 import EmptyCart from "@components/icons/EmptyCart";
 import Link from "next/link";
 import { IoArrowBackOutline } from "react-icons/io5";
+import ShopSteps from "@components/ShopSteps";
 
 export const dynamic = "force-dynamic";
 
@@ -41,7 +42,10 @@ export default async function Cart() {
 						</div>
 					</div>
 				) : (
-					<CartPage cartfromserver={cartfromserver} />
+						<>
+							<ShopSteps currentStep={1} />
+							<CartPage cartfromserver={cartfromserver} />
+						</>
 				)}
 			</>
 		);

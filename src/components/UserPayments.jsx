@@ -31,7 +31,7 @@ export default function UserPayments() {
       <div className="payment-table">
         {loading ? (
           <div className="flex justify-center items-center">
-            loading...
+            <span className="loading loading-spinner loading-md"></span>
           </div>
         ) : payments.length > 0 ? (
           <div className="overflow-x-auto">

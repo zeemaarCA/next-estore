@@ -77,7 +77,7 @@ export default function ContactForm() {
   }
   return (
     <>
-      <div className=" lg:mb-0 mb-10">
+      <div className=" lg:mb-0 mb-10 bg-invert p-9 rounded-lg">
         <div className>
           <h4 className="invert-lslate-text text-base font-medium leading-6 mb-4 lg:text-left text-center">Contact Us</h4>
           <h2 className="text-priamry font-manrope text-4xl font-semibold leading-10 mb-9 lg:text-left text-center">Reach Out To Us</h2>

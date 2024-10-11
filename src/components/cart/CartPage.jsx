@@ -192,8 +192,8 @@ export default function CartPage({ cartfromserver }) {
 		<>
 			{cartItems.length > 0 ? (
 				<div className="container mt-10">
-					<div className="flex flex-col md:flex-row flex-wrap shadow-md my-10">
-						<div className="w-full md:w-3/4 bg-invert px-10 py-10">
+					<div className="flex flex-col md:flex-row flex-wrap shadow-md my-10 rounded-2xl">
+						<div className="w-full md:w-3/4 bg-invert px-10 py-10 rounded-2xl">
 							<div className="flex justify-between border-b border-theme-slate pb-8">
 								<h1 className="font-semibold text-2xl">Shopping Cart</h1>
 								<h2 className="font-semibold text-2xl">
@@ -262,7 +262,7 @@ export default function CartPage({ cartfromserver }) {
 									htmlFor="promo"
 									className="font-semibold inline-block mb-3 text-sm uppercase"
 								>
-									Promo Code
+									Have a promo code?
 								</label>
 								<input
 									type="text"

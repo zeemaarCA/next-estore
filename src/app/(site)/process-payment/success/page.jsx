@@ -1,3 +1,8 @@
+export const metadata = {
+  title: "Payment Success",
+  description: "Thank you for your payment.",
+}
+
 import { ConfettiSideCannons } from "@components/ConfettiSideCannons"
 import Image from "next/image"
 import Link from "next/link"
@@ -7,6 +12,7 @@ import Stripe from "stripe"
 import { createOrder, getRecentOrders } from "@/utils/actions/orders"
 import { createPayment } from "@/utils/actions/payments"
 import { sendOrderEmail } from "@/lib/OrderEmail"
+import ShopSteps from "@components/ShopSteps";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
@@ -63,8 +69,9 @@ export default async function PaymentSuccess({ searchParams }) {
   return (
     <>
       <ConfettiSideCannons />
-      <section className="py-24 relative">
-        <div className="w-full md:max-w-4xl px-4 md:px-5 py-6 md:py-12 lg-6 mx-auto bg-invert rounded-md shadow-md">
+      <section className="pb-24 relative">
+      <ShopSteps currentStep={4} />
+        <div className="w-full md:max-w-4xl px-4 md:px-5 py-6 md:py-12 lg-6 mx-auto bg-invert rounded-md shadow-md mt-6">
           {orderDetails.map((order) => (
             <div key={order._id}>
               <div className="flex flex-col items-center justify-center gap-4">

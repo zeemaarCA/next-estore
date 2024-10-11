@@ -3,6 +3,7 @@ import { notFound, redirect } from "next/navigation"
 import Stripe from "stripe"
 import { PaymentForm } from "@components/PaymentForm"
 import { fetchProductsInCart } from "@utils/actions/orders"
+import ShopSteps from "@components/ShopSteps";
 
 export const metadata = {
   title: "Payment",
@@ -38,7 +39,10 @@ export default async function Payment() {
   }
 
   return (
-    <div className="container my-10">
+    <div className="container mb-10">
+      <div className="mb-10">
+        <ShopSteps currentStep={3} />
+      </div>
       <PaymentForm
         cartItems={cartItems}
         clientSecret={paymentIntent.client_secret}

@@ -216,6 +216,9 @@ td{
 .cl-internal-phfxlr{
   @apply mx-auto;
 }
+.cl-internal-df7v37{
+  @apply !hidden
+}
 .table tr.hover:hover,
 .table tr.hover:nth-child(even):hover{
   @apply bg-slate-100 dark:bg-slate-600

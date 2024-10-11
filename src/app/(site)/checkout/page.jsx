@@ -8,6 +8,7 @@ import CheckoutForm from "@components/checkout/CheckoutForm";
 import SectionTitle from "@components/SectionTitle";
 import { fetchedUser } from "@utils/actions/user";
 import { auth, currentUser } from "@clerk/nextjs/server";
+import ShopSteps from "@components/ShopSteps";
 
 export default async function Checkout() {
 
@@ -23,7 +24,8 @@ export default async function Checkout() {
 	return (
 		<>
 			{/* checkout page */}
-			<section className="container my-10">
+			<section className="container mb-10">
+				<ShopSteps currentStep={2} />
 				<SectionTitle title="Checkout" />
 				<div className="container grid grid-cols-1 md:grid-cols-2 gap-6">
 					{/* Left Side: Checkout Form */}

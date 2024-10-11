@@ -212,7 +212,7 @@ export default function Navbar() {
 											<summary onClick={handleDropdownClick} className="text-slate-700 dark:text-slate-200 hover:bg-slate-100 active:bg-slate-100 focus:bg-slate-100 dark:hover:bg-slate-900 dark:active:bg-slate-900 dark:focus:bg-slate-900">{link.name}</summary>
 											<ul className="p-2 w-max z-10 bg-slate-50 dark:bg-slate-800">
 												{link.subLinks.map((subLink) => (
-													<li key={subLink.slug} className="max-w-max">
+													<li key={subLink.slug}>
 														<Link href={`/categories/${subLink.slug}`}
 															className={`${isLinkActive(`/categories/${subLink.slug}`) ? 'active-link' : ''} hover:bg-slate-100 active:bg-slate-100 focus:bg-slate-100 dark:hover:bg-slate-900 dark:active:bg-slate-900 dark:focus:bg-slate-900`}
 															onClick={closeDropdown} // Close the dropdown on link click
